@@ -1,0 +1,2657 @@
+\documentclass[12pt, titlepage, oneside]{amsbook}
+\makeatletter \@addtoreset{equation}{chapter}
+\@addtoreset{figure}{chapter} \@addtoreset{theorem}{chapter}
+\makeatother \sloppy \pagestyle{plain} \setcounter{tocdepth}{1}
+
+\renewcommand{\theequation}{\thesection.\arabic{equation}}
+
+\usepackage[russian]{babel}
+
+\usepackage{pstcol}
+\usepackage{pstricks, pst-node}
+\usepackage[matrix, arrow,curve]{xy}
+\usepackage{xypic,amscd}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{graphicx}
+\usepackage{wasysym}
+\binoppenalty=10000 \relpenalty=10000
+\parskip = 3pt
+\parindent = 0.4cm
+
+\newcommand{\Div}{\operatorname{div}}
+\newcommand{\ddef}{\operatorname{def}}
+\newcommand{\rot}{\operatorname{rot}}
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Aut}{\operatorname{Aut}}
+\newcommand{\PSL}{\operatorname{PSL}}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\Cr}{\operatorname{Cr}}
+\newcommand{\St}{\operatorname{St}}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Orb}{\operatorname{Orb}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\Bs}{\operatorname{Bs}}
+\newcommand{\mld}{\operatorname{mld}}
+\newcommand{\Irr}{\operatorname{Irr}}
+\newcommand{\cov}{\operatorname{cov}}
+\newcommand{\cor}{\operatorname{cor}}
+\newcommand{\cont}{\operatorname{cont}}
+\newcommand{\sign}{\operatorname{sign}}
+\newcommand{\mult}{\operatorname{mult}}
+\newcommand{\Sing}{\operatorname{Sing}}
+\newcommand{\Diff}{\operatorname{Diff}}
+\newcommand{\Supp}{\operatorname{Supp}}
+\newcommand{\Ext}{\operatorname{Ext}}
+\newcommand{\Exc}{\operatorname{Exc}}
+\newcommand{\Cl}{\operatorname{Cl}}
+\newcommand{\discrep}{\operatorname{discrep}}
+\newcommand{\discr}{\operatorname{discr}}
+\newcommand{\di}{\operatorname{di}}
+\newcommand{\Ime}{\operatorname{Im}}
+\newcommand{\tr}{\operatorname{tr}}
+\renewcommand\gcd{\operatorname{\text{{\rm НОД}}}\ }
+%\newcommand{\GL}{\operatorname{GL}}
+
+
+\newcommand{\muu}{{\boldsymbol{\mu}}}
+\newcommand{\OOO}{{\mathcal O}}
+\newcommand{\LL}{{\mathcal L}}
+\newcommand{\EE}{{\mathcal E}}
+\newcommand{\PP}{\mathbf{P}}
+\newcommand{\MM}{\mathbf{M}}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\HH}{\mathbb{H}}
+\newcommand{\FF}{\mathbb{F}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\AAA}{\mathfrak{A}}
+\newcommand{\DDD}{\mathfrak{D}}
+\newcommand{\SSS}{\mathfrak{S}}
+\newcommand{\MMM}{\mathfrak{M}}
+\newcommand{\RRR}{\mathfrak{R}}
+\newcommand{\BBB}{\mathfrak{B}}
+\newcommand{\aaa}{\mathfrak{a}}
+\newcommand{\bbb}{\mathfrak{b}}
+\newcommand{\ppp}{\mathfrak{p}}
+\newcommand{\mmm}{\mathfrak{m}}
+\newcommand{\DD}{\mathbb{D}}
+\newcommand{\DDDD}{\mathbf{D}}
+
+\newtheorem{theorem}{Теорема}[chapter]
+\newtheorem{proposition}[theorem]{Предложение}
+\newtheorem{lemma}[theorem]{Лемма}
+\newtheorem{corollary}[theorem]{Следствие}
+\newtheorem{claim}[theorem]{Утверждение}
+
+\theoremstyle{definition}
+\newtheorem{example}[theorem]{Пример}
+\newtheorem{definition}[theorem]{Определение}
+\newtheorem{notation}[theorem]{Обозначения}
+\newtheorem{construction}[theorem]{Конструкция}
+\newtheorem{pusto}[theorem]{}
+\newtheorem{remark}[theorem]{Замечание}
+\newtheorem{Exercise}[theorem]{Упражнение}
+\newtheorem{zero}[theorem]{}
+\newtheorem{case}[theorem]{}
+
+\theoremstyle{remark}
+
+
+\date{}
+
+\begin{document}
+
+\begin{titlepage}
+	\begin{center}
+		\large{\textbf{Лекции по курсу "Алгебра"}} \quad \\
+		\quad
+		\\ \quad
+		\\ \quad
+		\large{\textbf{Белоусов Григорий Николаевич}} \quad \\ \quad
+		
+	\end{center}
+\end{titlepage}
+
+\tableofcontents
+
+Мы будем придерживаться следующих обозначений.
+
+\begin{notation}
+	\label{not}  Мы будем придерживаться следующих обозначений:
+	\begin{itemize}
+		\item $\NN$ --- множество натуральных чисел.
+		\item $\ZZ$ --- множество целых чисел.
+		\item $\QQ$ --- множество рациональных чисел.
+		\item $\RR$ --- множество вещественных чисел.
+		\item $\forall$ --- для любого.
+		\item $\exists$ --- существует.
+		\item $\in$ --- принадлежит.
+		\item $\infty$ --- бесконечность.
+	\end{itemize}
+\end{notation}
+
+\chapter{Группы}
+
+\section{Перестановки}
+
+Рассмотрим конечное множество $\Omega$, состоящее из $n$ элементов. Занумеровав эти элементы, мы можем считать, что $\Omega=\{1,2,\ldots,n\}$. Рассмотрим взаимно однозначные (биективные) отображения $\sigma\colon\Omega\rightarrow\Omega$. Такие отображения мы будем называть \emph{перестановками} (\emph{подстановками}). Мы можем записать перестановку в виде $$\sigma=\begin{pmatrix} 1   & 2   & \cdots & n   \\
+                i_1 & i_2 & \cdots & i_n\end{pmatrix}.$$ Эта запись означает, что $\sigma(1)=i_1,\sigma(2)=i_2,\ldots,\sigma(n)=i_n$.
+
+\begin{example}
+	Вот несколько примеров подстановок.
+	$$\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                2 & 1 & 4 & 3\end{pmatrix},\quad\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                3 & 1 & 4 & 2\end{pmatrix},\quad \begin{pmatrix} 1 & 2 & 3 & 4 & 5 & 6 \\
+                6 & 4 & 2 & 3 & 5 & 1\end{pmatrix}.$$
+\end{example}
+
+Обозначим через $S_n$ --- множество всех перестановок из $n$ элементов. Заметим, что число элементов в $S_n$ равно $n!$.
+
+Пусть $\sigma,\tau\in S_n$ --- две перестановки. \emph{Произведением подстановок} $\sigma$ и $\tau$ мы будем называть композицию этих отображений, т.е. $(\sigma\tau)=\sigma(\tau(i))$. Заметим, что умножение производится с право на лево.
+
+\begin{example}
+	Пусть
+	$$\sigma=\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                2 & 1 & 4 & 3\end{pmatrix},\quad\tau=\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                3 & 1 & 4 & 2\end{pmatrix}.$$ Тогда $$\sigma\tau=\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                2 & 1 & 4 & 3\end{pmatrix}\cdot\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                3 & 1 & 4 & 2\end{pmatrix}=\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                4 & 2 & 3 & 1\end{pmatrix},$$
+	$$\tau\sigma=\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                3 & 1 & 4 & 2\end{pmatrix}\cdot \begin{pmatrix} 1 & 2 & 3 & 4 \\
+                2 & 1 & 4 & 3\end{pmatrix}=\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                1 & 3 & 2 & 4\end{pmatrix}.$$
+\end{example}
+Этот пример показывает, что в общем случае $\sigma\tau\neq\tau\sigma$, т.е. умножение перестановок не коммутативно. Однако, поскольку перестановки это отображения, то их композиция ассоциативна, т.е. $(\sigma\tau)\pi=\sigma(\tau\pi)$. В множестве перестановок $S_n$ существует единичный элемент $$e=\begin{pmatrix} 1 & 2 & \cdots & n \\
+                1 & 2 & \cdots & n\end{pmatrix}$$ такой, что $e\sigma=\sigma e=\sigma$, для любого $\sigma\in S_n$. Поскольку любая перестановка $\sigma$ это биективное отображение, то существует обратное отображение $\sigma^{-1}$ такое, что $\sigma\sigma^{-1}=\sigma^{-1}\sigma=e$.
+
+\begin{claim}
+	\label{Pod1}
+	Обратная перестановка единственна.
+\end{claim}
+
+\begin{proof}
+	Предположим противное, т.е. у $\sigma$ существуют две обратные перестановки $\sigma^{-1}$ и $\sigma'$. Тогда $$\sigma'=\sigma' e=\sigma'(\sigma\sigma^{-1})=(\sigma'\sigma)\sigma^{-1}=e\sigma^{-1}=\sigma^{-1}.$$
+\end{proof}
+
+Теперь рассмотрим другую запись перестановок. Пусть $\sigma\in S_n$. Возьмем произвольный элемент $i_1\in \Omega$. Пусть $i_2=\sigma(i_1)$, $i_3=\sigma(i_2)$ и т.д. Поскольку $\Omega$ --- конечное множество, а отображение $\sigma$ биективно (в частности инъективно), то существует $i_k$ такое, что $i_1=\sigma(i_k)$. Таким образом, мы получили цикл $$i_1\rightarrow i_2\rightarrow\cdots\rightarrow i_k\rightarrow i_1.$$ Его можно записать как $(i_1 i_2\ldots i_k)$. Более того, мы можем считать, что цикл начинается с минимального числа, т.е. $i_1$ --- минимальное число из $i_1,i_2,\ldots, i_k$. Пусть $j_1\in\Omega$ и $j_1\not\in\{i_1,i_2,\ldots,i_k\}$. Пусть $j_2=\sigma(j_1)$, $j_3=\sigma(j_2)$ и т.д. Мы снова получим цикл $(j_1 j_2\cdots j_m)$. Так как $\sigma$ биективно, то множества  $\{i_1,i_2,\ldots,i_k\}$ и  $\{j_1,j_2,\ldots,j_m\}$ не пересекаются. Продолжая этот процесс, мы получим разложение $\sigma=\sigma_1 \sigma_2\cdots \sigma_l$ в произведение попарно непересекающихся циклов. Количество элементов в цикле мы будем называть \emph{длиной} цикла. При разложении перестановке в произведения циклов, мы будем опускать циклы длины один.
+\begin{example}
+	$$\begin{pmatrix} 1 & 2 & 3 & 4 \\
+                2 & 1 & 4 & 3\end{pmatrix}=(12)(34),\quad \begin{pmatrix} 1 & 2 & 3 & 4 & 5 & 6 \\
+                6 & 4 & 2 & 3 & 5 & 1\end{pmatrix}=(16)(243).$$
+\end{example}
+
+\begin{definition}
+	Цикл длины два называется \emph{транспозицией}.
+\end{definition}
+
+Заметим, что если $\sigma$ --- транспозиция, то $\sigma^2=e$.
+
+\begin{claim}
+	\label{Pod2}
+	Любая перестановка $\sigma\in S_n$ является произведением транспозиций.
+\end{claim}
+
+\begin{proof}
+	Так как любую перестановку можно представить в виде произведения непересекающихся циклов, то достаточно доказать утверждения для одного цикла. Действительно, $$(i_1 i_2\cdots i_k)=(i_1i_2)(i_2i_3)\cdots(i_{k-1}i_k).$$
+\end{proof}
+
+\begin{theorem}
+	\label{Pod3}
+	Пусть $\sigma\in S_n$ --- перестановка. Пусть $\sigma=\tau_1\tau_2\cdots\tau_m$ --- разложение $\sigma$ в произведение транспозиций. Тогда число $\epsilon_{\sigma}=(-1)^m$ не зависит от выбора разложения.
+\end{theorem}
+
+\begin{proof}
+	Пусть существует другое разложение $\sigma=\tau'_1\tau'_2\cdots\tau'_l$. Тогда $$\tau_1\tau_2\cdots\tau_m=\tau'_1\tau'_2\cdots\tau'_l.$$ Домножим это равенство на $\tau'_l$ справа. Получим $$\tau_1\tau_2\cdots\tau_m\tau'_l=\tau'_1\tau'_2\cdots\tau'_{l-1}.$$ Продолжая этот процесс, мы получим $$\tau_1\tau_2\cdots\tau_m\tau'_l\tau'_{l-1}\cdots\tau'_1=e.$$ Таким образом, нам нужно доказать, что любое представление единичной перестановки в произведение транспозиций состоит из четного числа сомножителей. Пусть $e=\tau_1\tau_2\cdots\tau_k$. Пусть $x\in\Omega$ и $x\in\tau_p$, где $p$ --- максимальное число такое, что $x\in\tau_p$, т.е. $x\not\in \tau_{p+1},\tau_{p+2},\ldots,\tau_k$. Пусть $\tau_p=(xy)$. Рассмотрим $\tau_{p-1}$. Если $\tau_{p-1}$ не содержит ни $x$, ни $y$, то $\tau_{p-1}\tau_p=\tau_p\tau_{p-1}$. И мы можем считать $p$ на единицу меньше. Если $\tau_{p-1}=(xy)$, то $\tau_{p-1}\tau_p=e$. И мы также уменьшаем $p$. Четность при этом остается прежней. Таким образом у нас осталось два случая $\tau_{p-1}=(xz)$ и $\tau_{p-1}=(yz)$. Если $\tau_{p-1}=(xz)$, то $$\tau_{p-1}\tau_p=(xz)(xy)=(xyz)=(xy)(yz).$$ Если $\tau_{p-1}=(yz)$, то $$\tau_{p-1}\tau_p=(yz)(xy)=(xzy)=(xz)(zy).$$ Таким образом, во всех случаях мы можем уменьшить $p$. Следовательно, мы можем считать, что $x$ входит только в $\tau_1=(xy)$. Однако, в этом случае перестановка $\tau_1\tau_2\cdots\tau_k$ отображает $x$ в $y$, а следовательно $\tau_1\tau_2\cdots\tau_k\neq e$. Противоречие.
+\end{proof}
+
+\begin{corollary}
+	\label{Pod4}
+	Пусть $\sigma_1,\sigma_2\in S_n$. Тогда $$\epsilon_{\sigma_1 \sigma_2}=\epsilon_{\sigma_1}\epsilon_{\sigma_2}.$$
+\end{corollary}
+
+\begin{proof}
+	Пусть $\sigma_1=\tau_1\tau_2\cdots\tau_k$, $\sigma_2=\pi_1\pi_2\cdots\pi_m$ --- разложение перестановок в произведение транспозиций. Тогда $\epsilon_{\sigma_1}=(-1)^k$, $\epsilon_{\sigma_2}=(-1)^m$. С другой стороны, $$\sigma_1 \sigma_2=\tau_1\tau_2\cdots\tau_k\pi_1\pi_2\cdots\pi_m.$$  Следовательно, $$\epsilon_{\sigma_1 \sigma_2}=(-1)^{k+m}=(-1)^k(-1)^m=\epsilon_{\sigma_1}\epsilon_{\sigma_2}.$$
+\end{proof}
+
+\begin{definition}
+	Перестановка $\sigma\in S_n$ называется \emph{четной}, если $\epsilon_{\sigma}=1$, и \emph{нечетной}, если $\epsilon_{\sigma}=-1$. Множество четных перестановок мы будем обозначать через $A_n$.
+\end{definition}
+
+Согласно следствию \ref{Pod4} произведение двух четных и двух нечетных перестановок есть четная перестановка, а произведение четной и нечетной перестановки есть нечетная перестановка.
+
+\begin{remark}
+	\label{Pod41}
+	Заметим, что четность/нечетность перестановки мы можем определить по длине циклов в разложении. Поскольку $$(i_1i_2\cdots i_k)=(i_1i_2)(i_2i_3)\cdots (i_{k-1}i_k),$$ то циклы четной длины нечетны, а циклы нечетной длины четны. Таким образом, четность подстановки совпадает с четностью количества циклов четной длины.
+\end{remark}
+
+\begin{theorem}
+	\label{Pod5}
+	Пусть $\sigma\in A_n$ --- четная перестановка. Тогда перестановку $\sigma$ можно представить в виде произведения циклов длины три (не обязательно непересекающихся).
+\end{theorem}
+
+\begin{proof}
+	Разложим $\sigma$ в произведение непересекающихся циклов $$\sigma=(i_1i_2\cdots i_k)(j_1j_2\cdots j_l)\cdots.$$ Согласно замечанию \ref{Pod41} все циклы четной длины можно разбить на пары. Пусть $(i_1i_2\cdots i_k)(j_1j_2\cdots j_l)$ такая пара, т.е. $k$ и $l$ четные. Поскольку циклы не пересекаются, а, следовательно, их можно переставлять, мы можем предполагать, что $l\geq k$. Тогда $$(i_1i_2)(i_2i_3)\cdots (i_{k-1}i_k)(j_1j_2)(j_2j_3)\cdots (j_{l-1}j_l)=$$ $$=((i_1i_2)(j_1j_2))((i_2i_3)(j_2j_3))\cdots((i_{k-1}i_k)(j_{k-1}j_k))(j_k j_{k+1})\cdots(j_{l-1}j_l).$$ Заметим, что $(j_k j_{k+1})\cdots(j_{l-1}j_l)=(j_kj_{k+1}\cdots j_l)$ --- цикл длины $l-k+1$, т.е. нечетной длины. Таким образом, нам нужно получить все циклы нечетной длины и все перестановки вида $(xy)(zt)$. Все циклы нечетной длины получаются по индукции, а именно $$(i_1i_2\cdots i_k)(i_k i_{k+1} i_{k+2})=(i_1i_2\cdots i_k i_{k+1} i_{k+2}).$$ Аналогично, $$(xyz)(xyt)=(xz)(yt).$$ В силу произвольности $x,y,z,t$, теорема доказана.
+\end{proof}
+
+\section{Группы}
+
+Пусть $S$ --- произвольное множество. \emph{Бинарной операцией} на
+множестве $S$ мы будем называть любое отображение
+$$S\times S\rightarrow S.$$ На $S$ может быть задано, вообще говоря, много различных
+операций. Желая выделить одну из них, используются скобки:
+$(S,\circ)$, и говорят, что операция $\circ$  определена на $S$.
+Примерами множеств с заданными на них операциями, могут служить:
+$(\NN,+)$, $(\NN,\cdot)$, $(\ZZ,+)$, $(\ZZ,\cdot)$.
+
+\begin{definition}
+	\emph{Группой} называется множество $G$ с определенной на ней операцией
+	$\circ$ такое, что для $(G,\circ)$ выполнены следующие условия:
+	\begin{enumerate}
+		\item (ассоциативность) для любых $a,b,c\in G$ имеет место $(a\circ b)\circ
+			      c=a\circ (b\circ c)$;
+		\item (существование единицы) существует элемент $e\in G$ такой, что
+		      для любого $a\in G$ имеет место $a=e\circ a=a\circ e$ (элемент $e$
+		      называется единицей группы $G$);
+		\item (существование обратного элемента) для любого $a\in G$
+		      существует $a^{-1}\in G$ такой, что $a\circ a^{-1}=a^{-1}\circ a=e$.
+	\end{enumerate}
+\end{definition}
+
+\begin{definition}
+	Группа $G$ называется \emph{абелевой}, если для любых $a,b\in G$
+	имеет место $a\circ b=b\circ a$ (коммутативность).
+\end{definition}
+
+Если группа $G$ имеет конечное число элементов, то группа $G$
+называется конечной группой, а число элементов группы называется
+порядком группы $G$ и обозначается $|G|$. Пусть $a\in G$ --- элемент
+группы $G$. Минимальное целое число $k$, удовлетворяющее условию
+$a^k=e$, называется \emph{порядком} элемента $a$.
+
+\begin{remark}
+	Часто, мы будем опускать символ $\circ$ и вместо $a\circ b$ писать
+	$ab$. Для абелевых групп так же часто мы будем использовать
+	аддитивную запись, т.е. вместо $a\circ b$ будем писать $a+b$.
+\end{remark}
+
+\begin{example}
+	\begin{enumerate}
+		\item $(\NN,+)$ не является группой, т.к. нет обратного.
+		\item $(\NN,\cdot)$ не является группой, т.к. нет обратного.
+		\item $(\ZZ,+)$ является бесконечной абелевой группой, единицей является $0$, обратное к $a$, $-a$.
+		\item $(\ZZ,\cdot)$ не является группой, т.к. нет обратного.
+		\item $(\QQ,+)$ является бесконечной абелевой группой, единицей является $0$, обратное к $a$, $-a$.
+		\item $(\QQ,\cdot)$ не является группой, т.к. у $0$ нет обратного.
+		\item $(\QQ^*,\cdot)$ (здесь $\QQ^*=\QQ \setminus\{0\}$) является бесконечной абелевой группой, единицей является $1$, обратное к $a$, $\frac{1}{a}$.
+		\item $(\RR,+)$ является бесконечной абелевой группой, единицей является $0$, обратное к $a$, $-a$.
+		\item $(\RR,\cdot)$ не является группой, т.к. у $0$ нет обратного.
+		\item $(\RR^*,\cdot)$ (здесь $\RR^*=\RR \setminus\{0\}$) является бесконечной абелевой группой, единицей является $1$, обратное к $a$, $\frac{1}{a}$.
+		\item $(\CC,+)$ является бесконечной абелевой группой, единицей является $0$, обратное к $a$, $-a$.
+		\item $(\CC,\cdot)$ не является группой, т.к. у $0$ нет обратного.
+		\item $(\CC^*,\cdot)$ (здесь $\CC^*=\CC \setminus\{0\}$) является бесконечной абелевой группой, единицей является $1$, обратное к $a$, $\frac{1}{a}$.
+		\item $(M_{n\times m},+)$ (здесь $M_{n\times m}$ --- множество матриц размера $n\times m$) является бесконечной абелевой группой, единицей является нулевая матрица, обратное к $M$, $-M$.
+		\item $(\GL_n,\cdot)$ (здесь $\GL_n$ --- множество невырожденных матриц размера $n\times n$) является бесконечной некоммутативной группой, единицей является матрица $E$, обратное к $A$, $A^{-1}$.
+		\item $(S_n,\cdot)$ является конечной некоммутативной группой, единицей является перестановка $e$, обратное к $\sigma$, $\sigma^{-1}$.
+		\item $(A_n,\cdot)$ является конечной некоммутативной группой, единицей является перестановка $e$, обратное к $\sigma$, $\sigma^{-1}$.
+	\end{enumerate}
+\end{example}
+
+\begin{example}
+	Пусть $\ZZ_{m}=\{0,1,\dots,m-1\}$ --- множество остатков при делении
+	на $m$. Заметим, что остатки можно складывать. Тогда множество
+	$\ZZ_{m}$ образует группу относительно операции $+$. Такая группа
+	также называется группой вычетов по модулю $m$.
+\end{example}
+
+\begin{claim}
+	Пусть $G$ --- произвольная группа. Тогда в $G$ существует только
+	одна единица.
+\end{claim}
+
+\begin{proof}
+	Предположим противное. Пусть существуют две единицы $e,e'\in G$.
+	Тогда $e=ee'=e'$.
+\end{proof}
+
+\begin{claim}
+	Пусть $G$ --- произвольная группа и $a\in G$ --- произвольный
+	элемент. Тогда в $G$ существует только один обратный к $a$ элемент
+	--- $a^{-1}$.
+\end{claim}
+
+\begin{proof}
+	Предположим противное. Пусть существуют элемент $b\in G$ обратный к
+	$a$. Тогда $$b=be=b(aa^{-1})=(ba)a^{-1}=ea^{-1}=a^{-1}.$$
+\end{proof}
+
+\begin{definition}
+	Группа $G$ называется $p$-группой, если $p$ --- простое и $|G|=p^n$.
+\end{definition}
+
+\begin{definition}
+	Пусть $(G,\circ)$ --- группа. Пусть $H$ --- подмножество группы $G$.
+	Тогда $H$ называется подгруппой группы $G$, если $e\in H$ и $H$
+	является группой относительно операции $\circ$.
+\end{definition}
+
+\begin{definition}
+	Пусть $G$ --- группа, и $H$ --- ее подгруппа. Тогда для любого
+	элемента $a\in G$ множество всех элементов $ah$, где $h\in H$,
+	называется левым смежным классом и обозначается $aH$, а множество
+	элементов $ha$ --- правым смежным классом и обозначается $Ha$.
+\end{definition}
+
+\begin{proposition}
+	\label{1.1Gr} Пусть $G$ --- произвольная группа и $H$ --- ее
+	подгруппа. Тогда группа $G$ распадается на непересекающиеся левые
+	(правые) смежные классы.
+\end{proposition}
+
+\begin{proof}
+	Нам достаточно доказать, что если смежные классы содержат один и тот
+	же элемент, то они совпадают. Пусть $g_1,g_2\in G$, $h_1,h_2,h_3\in H$. Предположим, что $g_{1}h_{1}=g_{2}h_{2}$. Тогда
+	$g_{1}=g_{2}h_{2}h_{1}^{-1}$. Отсюда,
+	$g_{1}h_{3}=g_{2}h_{2}h^{-1}_{1}h_{3}$. Заметим, что
+	$h_{2}h^{-1}_{1}h_{3}\in H$. Следовательно, $g_{1}h_{3}\in g_{2}H$.
+\end{proof}
+
+Число смежных классов группы $G$ по подгруппе $H$ мы будем
+обозначать $(G:H)$.
+
+\begin{corollary}[теорема Лагранжа]
+	\label{Lagr1}Пусть $G$ --- конечная группа и $H\subset G$ --- ее
+	подгруппа. Пусть $|G|=n$ и $|H|=k$. Тогда $n=k(G:H)$.
+\end{corollary}
+
+\begin{corollary}
+	\label{Lagr2} Пусть $G$ --- конечная группа и $a\in G$. Пусть $k$
+	--- порядок элемента $a$. Тогда $k$ --- делитель $|G|$.
+\end{corollary}
+
+\begin{proof}
+	Пусть $H:=\{e,a,a^2,\dots,a^{k-1}\}$. Заметим, что $H$ --- подгруппа
+	группы $G$. Таким образом, наше утверждение следует из теоремы
+	\ref{1.1Gr}.
+\end{proof}
+
+\begin{definition}
+	Группа $G$ называется \emph{циклической}, если существует элемент
+	$a\in G$ такой, что для любого элемента $g\in G$ существует
+	$k\in\ZZ$ такое, что $g=a^k$. Элемент $a$ называется
+	\emph{порождающим} группы $G$.
+\end{definition}
+
+\begin{definition}
+	Два элемента $a, b\in G$ называются \emph{сопряженными}, если
+	существует элемент $g\in G$ такой, что $a=g^{-1}bg$. Множество всех элементов, сопряженных элементу $a$, называется \emph{классом сопряженности} элемента $a$. Аналогично, две подгруппы $H_1,H_2\subset G$ называются \emph{сопряженными}, если
+	существует элемент $g\in G$ такой, что $H_2=g^{-1}H_1g$.
+\end{definition}
+
+\begin{claim}
+	\label{Sopr} Пусть $G$ --- произвольная группа. Тогда группа $G$ распадается на непересекающиеся классы сопряженности.
+\end{claim}
+
+\begin{proof}
+	Пусть $C_1$ и $C_2$ --- классы сопряженности элементов $a$ и $b$ соответственно. Предположим, что $g_1^{-1}a g_1=g_2^{-1}b g_2$. Тогда $$b=g_2g_1^{-1}a g_1 g_2^{-1}=(g_1g_2^{-1})^{-1}a(g_1 g_2^{-1}).$$ Следовательно, $b\in C_1$. Отсюда, $$g_3^{-1}b g_3=g_3^{-1}g_2g_1^{-1}a g_1 g_2^{-1}g_3=(g_1g_2^{-1}g_3)^{-1}a(g_1 g_2^{-1}g_3).$$
+\end{proof}
+
+\begin{corollary}
+	\label{Sopr2} Любая группа разбивается на попарно непересекающиеся классы сопряженности.
+\end{corollary}
+
+\begin{remark}
+	Заметим, что для абелевых групп, любой класс сопряженности состоит из одного элемента. Также в любой группе есть класс сопряженности, состоящий из одного элемента $e$.
+\end{remark}
+
+\begin{definition}
+	Пусть $G$ и $G'$ --- две группы. Тогда \emph{прямым произведением}
+	этих групп $G\times G'$ называется группа из пар $(a,a')$ с операцией
+	$(a,a')\times (b,b')=(ab,a'b')$. Очевидно, что единицей группы $G\times G'$ является $(e,e')$, где $e,e'$ --- единицы групп $G$ и $G'$ соответственно.
+\end{definition}
+
+\begin{definition}
+	Пусть $S\subset G$ --- подмножество такое, что любой элемент группы
+	$g\in G$ представляется в виде $g=s_1^{i_1}\dots s_j^{i_j}$, где
+	$s_1,\dots, s_j\in S$ и $i_1,\dots, i_j\in\ZZ$. Тогда мы будем
+	говорить, что $G$ порождается множеством $S$. Группа $G$ ---
+	\emph{конечнопорожденная}, если существует конечное множество $S$,
+	порождающая $G$.
+\end{definition}
+
+Рассмотрим группу перестановок $S_n$.
+
+\begin{theorem}
+	\label{Gr2}
+	Пусть перестановка $\sigma\in S_n$ разлагается в произведения циклов длины $i_1,i_2,\ldots,i_k$. Пусть $\sigma'\in S_n$ --- сопряженный элемент к $\sigma$. Тогда $\sigma'$ разлагается в произведения циклов длины $i_1,i_2,\ldots,i_k$. Обратно, если $\sigma'\in S_n$ разлагается в произведения циклов длины $i_1,i_2,\ldots,i_k$, то $\sigma'$ сопряжен к $\sigma$.
+\end{theorem}
+
+\begin{proof}
+	Заметим, что $\tau\sigma\tau^{-1}(i)=i$, если $\tau^{-1}(i)$ не входит в разложение $\sigma$ в произведения циклов.
+	Поскольку $$\tau((j_{11}j_{12}\cdots j_{1k_1})(j_{21}j_{22}\cdots j_{2k_2})\cdots(j_{l1}j_{l2}\cdots j_{lk_l}))\tau^{-1}=$$ $$(\tau(j_{11}j_{12}\cdots j_{1k_1})\tau^{-1})(\tau(j_{21}j_{22}\cdots j_{2k_2})\tau^{-1})\cdots(\tau(j_{l1}j_{l2}\cdots j_{lk_l})\tau^{-1})$$ и $\tau^{-1}(i)$ входит не более чем в один цикл, то утверждение теоремы достаточно доказать для случая, когда $\sigma=(j_1j_2\cdots j_l)$, т.е. $\sigma$ состоит из одного цикла.
+	Пусть $\sigma'\in S_n$ сопряжен к $\sigma$. Тогда $\sigma'=\tau\sigma\tau^{-1}$ и $\sigma=\tau^{-1}\sigma'\tau$. Отсюда, $\sigma'$ --- цикл длины $l$.
+	
+	Обратно. Пусть $\sigma=(j_1j_2\cdots j_l)$ и $\sigma'=(k_1k_2\cdots k_l)$. Рассмотри перестановку $\tau$ такую, что $\tau(j_1)=k_1$, $\tau(j_2)=k_2$,$\ldots$, $\tau(j_l)=k_l$. Тогда $\sigma'=\tau\sigma\tau^{-1}$.
+\end{proof}
+
+
+
+\section{Действия групп на множествах}
+
+Пусть $G$ --- группа и $M$ --- произвольное множество. \emph{Действием} группы $G$ на множестве $M$ называется отображение $G\times M\rightarrow M$ такое, что
+\begin{enumerate}
+	\item $e m=m$ для любого $m\in M$
+	\item $g_1(g_2 m)=(g_1g_2) m$ для любых $g_1,g_2\in G$ и $m\in M$.
+\end{enumerate}
+
+\begin{definition}
+	Пусть группа $G$ действует на множестве $M$. \emph{Стабилизатором}
+	элемента $m\in M$  называется множество $\St(m)=\{g\in G\mid
+		gm=m\}$.
+\end{definition}
+
+Легко проверить, что $\St(m)$ - является подгруппой группы $G$.
+
+\begin{definition}
+	Пусть группа $G$ действует на множестве $M$. \emph{Орбитой} элемента
+	$m\in M$  называется множество $\Orb(m)=\{gm\mid g\in G\}$.
+\end{definition}
+
+\begin{claim}
+	Имеется взаимно однозначное соответствие между элементами орбиты
+	$\Orb(m)$ и левыми смежными классами по подгруппе $\St(m)$.
+\end{claim}
+
+\begin{proof}
+	Пусть $g_1\St(m)=g_2\St(m)$. Тогда $g_1=g_2a$, где $a\in\St(m)$.
+	Отсюда, $g_1=g_2am=g_2m$. Следовательно, каждому смежному классу
+	соответствует один элемент орбиты $\Orb(m)$. Обратно, пусть
+	$g_1m=g_2m$. Тогда $g_{2}^{-1}g_1m=m$. Следовательно,
+	$g_{2}^{-1}g_1\in\St(m)$. Отсюда, $g_1=g_2a$, где
+	$a=g_{2}^{-1}g_1\in\St(m)$.
+\end{proof}
+
+\begin{corollary}
+	\label{Gr3} Пусть $G$ --- конечная подгруппа и $G$ действует на
+	множестве $M$. Тогда $|G|=|\Orb(m)|\cdot|\St(m)|$ для любого $m\in
+		M$.
+\end{corollary}
+
+\begin{claim}
+	Пусть $m_1$ и $m_2$ --- элементы одной орбиты. Тогда подгруппы
+	$\St(m_1)$ и $\St(m_2)$ сопряжены.
+\end{claim}
+
+\begin{proof}
+	Пусть $m_1=gm_2$ и $a\in\St(m_1)$. Тогда $g^{-1}ag\in\St(m_2)$.
+	Отсюда, $g^{-1}\St(m_1)g\subseteq\St(m_2)$. Пусть $b\in\St(m_2)$.
+	Тогда $gbg^{-1}=c\in\St(m_1)$. Отсюда, $g^{-1}\St(m_1)g=\St(m_2)$.
+\end{proof}
+
+\begin{theorem}[Формула
+		Бернсайда]
+	\label{Gr4}
+	Пусть $G$ --- конечная группа, действующая на конечном множестве $M$. Пусть $M^g$ --- множество элементов $m$ таких, что $gm=m$. Тогда $$N=\frac{1}{|G|}\sum\limits_{g\in G} |M^g|,$$ где $N$ --- число орбит, $|M^g|$ --- число элементов $M^g$, $|G|$ --- порядок группы.
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим $\sum\limits_{g\in G} |M^g|$. Заметим, что эта сумма равна количеству пар $(g,m)$ таких, что $gm=m$. Таким образом, $$\sum\limits_{g\in G} |M^g|=\sum\limits_{m\in M} |\St(m)|.$$ Теперь применим следствие \ref{Gr3}. Получаем $$\sum\limits_{g\in G} |M^g|=\sum\limits_{m\in M} |\St(m)|=\sum\limits_{m\in M}\frac{|G|}{|\Orb(m)|}=|G|\sum\limits_{m\in M}\frac{1}{|\Orb(m)|}.$$ Пусть множество $M$ разбивается на орбиты $\Orb_1,\Orb_2,\ldots,\Orb_N$. Рассмотрим сумму $\sum\limits_{m\in M}\frac{1}{|\Orb(m)|}.$ Мы можем разбить ее на суммы по каждой орбите, т.е. $$\sum\limits_{m\in M}\frac{1}{|\Orb(m)|}=\sum\limits_{m\in \Orb_1}\frac{1}{|\Orb_1|}+\sum\limits_{m\in \Orb_2}\frac{1}{|\Orb_2|}+\cdots+\sum\limits_{m\in \Orb_N}\frac{1}{|\Orb_N|}.$$ Заметим, что $$\sum\limits_{m\in \Orb_i}\frac{1}{|\Orb_i|}=|\Orb_i|\frac{1}{|\Orb_i|}=1.$$ Таким образом, $\sum\limits_{m\in M}\frac{1}{|\Orb(m)|}=N.$ Отсюда, $$\sum\limits_{g\in G} |M^g|=N|G|.$$
+\end{proof}
+
+\section{Гомоморфизм групп}
+
+\begin{proposition}
+	\label{NormGr} Пусть $G$ --- произвольная группа и $H$ --- ее
+	подгруппа. Тогда следующие условия эквивалентны:
+	\begin{enumerate}
+		\item $gH=Hg$ для всех $g\in G$;
+		\item $g^{-1}Hg\subseteq H$ для всех $g\in G$;
+		\item $g^{-1}Hg=H$ для всех $g\in G$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+	$(1)\Rightarrow (2)$. Пусть $h\in H$. Поскольку $gH=Hg$, то существует $h'\in H$ такое, что $gh'=hg$. Тогда $g^{-1}hg=h'\in H$.
+	
+	$(2)\Rightarrow (3)$. Пусть $(g^{-1})^{-1}hg^{-1}=h'$, где $h,h'\in H$. Тогда
+	$h=g^{-1}(g^{-1})^{-1}hg^{-1}g=g^{-1}h'g\in g^{-1}Hg$.
+	Следовательно, $H=g^{-1}Hg$.
+	
+	$(3)\Rightarrow (1)$. Если $H=g^{-1}Hg$, то, умножая на $g$,
+	$gH=Hg$.
+\end{proof}
+
+Подгруппа, удовлетворяющая условиям предложения \ref{NormGr},
+называется \emph{нормальной подгруппой} группы $G$, и обозначается
+$H\triangleleft G$.
+
+\begin{claim}
+	\label{Gr5} Пусть $H\triangleleft G$ --- нормальная подгруппа
+	группы $G$. Пусть $A$ --- множество смежных классов по подгруппе
+	$H$. Введем следующую бинарную операцию на множестве $A$: $aH\circ
+		bH\mapsto abH$. Множество $A$ образует группу относительно бинарной
+	операции $aH\circ bH\mapsto abH$.
+\end{claim}
+
+\begin{proof}
+	Докажим корректность введенной операции, т.е. то что эта операция не
+	зависит от выбора представителей $a$ и $b$. Пусть $a'$ и $b'$ ---
+	другие представители смежных классов $aH$ и $bH$. Тогда $a'=ah_1$, $b'=bh_2$. Пусть $h\in H$. Тогда $a'b' h=ah_1bh_2 h$. Поскольку $bH=Hb$, то существует $h'_1\in H$ такое, что $h_1b=bh'_1$. Отсюда, $$a'b' h=ah_1bh_2 h=ab(h'_1h_2h)=ab\tilde{h},$$ где $\tilde{h}\in H$.
+	Ассоциативность такой операции
+	очевидна. Единицей служит сама $H$. Обратный элемент к $aH$ ---
+	$a^{-1}H$.
+\end{proof}
+
+Группа определенная в утверждении \ref{Gr5} называется
+\emph{факторгруппой} $G$ по $H$ и обозначается $G/H$.
+
+\begin{definition}
+	Пусть $G$ --- группа. Тогда множество $Z(G):=\{a\in G\mid ag=ga
+		\text{ для всех } g\in G\}$ называется центром группы $G$.
+\end{definition}
+
+Из определения непосредственно следует, что $Z(G)$ --- нормальная
+подгруппа.
+
+Пусть $G, G'$ --- две группы. Отображение $f\colon G\rightarrow G'$,
+для которого $f(ab)=f(a)f(b)$ для любых $a, b\in G$, называется
+\emph{гомоморфизмом}. Множество $\ker(f)=\{a\in G\mid f(a)=e\}$
+называется \emph{ядром} гомоморфизма $f$. Гомоморфизм $f$ называется
+\emph{инъективным}, если $\ker(f)=\{e\}$ ($e'$ --- единица группы $G'$) и сюръективным, если для
+любого $g'\in G'$ существует $g\in G$ такой, что $f(g)=g'$.
+Сюръективный и инъективны гомоморфизм называется
+\emph{изоморфизмом}. Две группы $G$ и $G'$ называются изоморфными,
+если существует изоморфизм $f:G\rightarrow G'$ (для краткости будем
+писать $G\cong G'$).
+
+\begin{claim}
+	\label{GomGr1} Пусть $f\colon G\rightarrow G'$ --- гомоморфизм
+	групп. Тогда $f(e)=e'$, где $e$ и $e'$ --- единицы групп $G$ и $G'$,
+	и $f(a)^{-1}=f(a^{-1})$.
+\end{claim}
+
+\begin{proof}
+	Пусть $a\in G$ --- элемент группы $G$. Тогда $f(a)=f(ae)=f(a)f(e)$.
+	Отсюда, $f(e)=e'$. Заметим, что
+	$f(a)f(a)^{-1}=e'=f(e)=f(aa^{-1})=f(a)f(a^{-1})$. Отсюда
+	$f(a)^{-1}=f(a^{-1})$.
+\end{proof}
+
+\begin{proposition}
+	\label{GomGr2}
+	Пусть $f\colon G\rightarrow G'$ --- гомоморфизм групп. Тогда
+	$\ker(f)$ --- нормальная подгруппа в группе $G$.
+\end{proposition}
+
+\begin{proof}
+	Докажем сначала, что $\ker(f)$ --- группа. Пусть $a,b\in\ker(f)$. Тогда $f(ab)=f(a)f(b)=e'\cdot e'=e'$, т.е. $ab\in\ker(f)$. Согласно утверждению
+	\ref{GomGr1} $f(e)=e'$, где $e$ и $e'$ --- единицы групп $G$ и $G'$.
+	Пусть $a\in\ker(f)$. Тогда, согласно утверждению \ref{GomGr1}
+	$f(a^{-1})=f(a)^{-1}=e'$. Следовательно, $\ker(f)$ --- группа. Пусть
+	$g\in G$. Тогда $f(g^{-1}ag)=f(g^{-1})e'f(g)=e'$. Следовательно,
+	$\ker(f)$ --- нормальная подгруппа.
+\end{proof}
+
+\begin{theorem}[1-я теорема о гомоморфизме]
+	\label{GomGr3} Пусть $f\colon G\rightarrow G'$ --- сюръективный
+	гомоморфизм групп. Тогда существует естественный изоморфизм
+	$G/\ker(f)\cong G'$. Обратно, если $H\triangleleft G$, то существует
+	естественное отображение $\varphi\colon G\rightarrow G/H$ такое, что
+	$\varphi$ --- сюръекция и $\ker(\varphi)=H$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\bar{f}\colon G/\ker(f)\rightarrow G'$ --- отображение,
+	определяемое следующим образом: $\bar{f}(g\ker(f))=f(g)$. Докажем
+	корректность определения $\bar{f}$. Пусть
+	$g_{1}\ker(f)=g_{2}\ker(f)$. Тогда $g_2 = g_1 \alpha$, где
+	$\alpha\in\ker(f)$. Следовательно,
+	$f(g_2)=f(g_1\alpha)=f(g_1)f(\alpha)=f(g_1)e'=f(g_1)$. Пусть $g_1, g_2\in G$.
+	Тогда
+	\begin{multline*}
+		\bar{f}(g_1\ker(f)\cdot
+		g_2\ker(f))=\bar{f}(g_1g_2\ker(f))=f(g_1g_2)=\\=f(g_1)f(g_2)=\bar{f}(g_1\ker(f))\bar{f}(g_2\ker(f)).
+	\end{multline*} Таким образом, $\bar{f}$
+	--- гомоморфизм групп. Докажем, что $\bar{f}$ --- инъекция. Пусть
+	$e'=\bar{f}(g\ker(f))=f(g)$. Тогда $g\in\ker(f)$ и $g\ker(f)=\ker(f)$. Докажем, что
+	$\bar{f}$ --- сюръекция. Пусть $a\in G'$. Тогда существует $b\in G$
+	такое, что $f(b)=a$. Отсюда, $\bar{f}(b\ker(f))=a$. Таким образом,
+	первая часть теоремы доказана.
+	
+	Докажем второе утверждение. Положим $\varphi(a)=aH$. Очевидно, $\varphi$
+	--- сюръективный гомоморфизм групп. Пусть $g\in\ker(\varphi)$. Тогда
+	$\varphi(g)=gH=H$. Следовательно, $g\in H$. Таким образом, теорема
+	доказана.
+\end{proof}
+
+\begin{theorem}[2-я теорема о гомоморфизме]
+	\label{GomGr4} Пусть $H$ и $K$ подгруппы группы $G$, причем $K$ ---
+	нормальная подгруппа. Тогда $HK=KH$ --- подгруппа группы $G$ и
+	$HK/K\cong H/(H\cap K)$.
+\end{theorem}
+
+\begin{proof}
+	Докажем, что $HK=KH$. Пусть $hk_1\in HK$. Тогда, поскольку $K$ ---
+	нормальная подгруппа, существует $k_2\in K$ такое, что $hk_1=k_2h\in
+		KH$. Аналогично, $h_1k_1h_2k_2=h_1h_2k'_1k_2$, где $h_1,h_2\in H$, $k_1,k'_1k_2\in K$. Следовательно, $HK=KH$ --- подгруппа группы $G$. Очевидно, что $K\triangleleft HK$ и $H\cap K\triangleleft H$.
+	
+	Пусть $f\colon H\rightarrow HK/K$ --- гомоморфизм групп,
+	определяемый следующим образом: $f(h)=hK$. Очевидно, что $f$ ---
+	сюръекция. Тогда, по теореме \ref{GomGr3}, $HK/K\cong H/\ker(f)$.
+	Очевидно, $H\cap K\subset\ker(f)$. Пусть $a\in\ker(f)$. Тогда $a\in
+		K$. Следовательно, $a\in H\cap K$. Таким образом, $H\cap K=\ker(f)$
+	и теорема доказана.
+\end{proof}
+
+\begin{theorem}[3-я теорема о гомоморфизме]
+	\label{GomGr5} Пусть $H$ и $K$ --- нормальные подгруппы группы $G$,
+	причем $K\subset H$. Тогда $$\left. G/H\cong (G/K)\right/(H/K).$$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим гомоморфизм $f\colon G/K\rightarrow G/H$, определяемый
+	следующим образом: $f(gK)=gH$. Очевидно, что $\ker(f)$ состоит из
+	всех $gK$ таких, что $g\in H$. Следовательно, $\ker(f)\cong H/K$.
+	Таким образом, наше утверждение следует из теоремы \ref{GomGr3}.
+\end{proof}
+
+\begin{theorem}[теорема Кели]
+	\label{Keli} Пусть $G$ --- конечная группа порядка $n$. Тогда существует вложение (т.е. инъективный гомоморфизм) группы $G$ в группу $S_n$.
+\end{theorem}
+
+\begin{proof}
+	Пронумеруем элементы группы $G$ и рассмотрим действие группы $G$ на самой себе умножением слева, т.е. $a(g)=ag$. Таким образом, мы получили гомоморфизм $G$ в группу перестановок $S_n$. Заметим, что он инъективен. Действительно, если $a$ оставляет все элементы на месте, то $a$ --- единица.
+\end{proof}
+
+\begin{theorem}[лемма о бабочке]
+	\label{GomGr6} Пусть $A$ и $B$ --- подгруппы группы $G$, и пусть $H$ и $K$ --- нормальные подгруппы в $A$, и в $B$ соответственно.
+	Тогда $H(A\cap K)$ нормальна в $H(A\cap B)$, и $(H\cap B)K$ нормальна в $(A\cap B)K$. Более того, $$H(A\cap B)/H(A\cap K)\cong (A\cap B)K/(H\cap B)K.$$
+\end{theorem}
+
+\section{Прямое произведение групп}
+
+Рассмотрим более подробно прямое произведение групп.
+
+\begin{theorem}
+	\label{Proizv1} Пусть $G$ --- группа и $H$, $K$ --- ее нормальные подгруппы. Предположим, что $H\cap K=\{e\}$ и $H K=G$. Тогда $G\cong H\times K$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $g\in G$. Поскольку $H K=G$, то существуют элементы $a\in H$, $b\in K$, что $g=ab$. Предположим, что существуют другие элементы $a'\in H$, $b'\in K$, что $g=a'b'$. Из $ab=a'b'$ следует $a'^{-1}a=b'b^{-1}$. Поскольку $a'^{-1}a\in H$, $b'b^{-1}\in K$, то $a'^{-1}a=b'b^{-1}\in H\cap K$. Отсюда, $a'^{-1}a=b'b^{-1}=e$ и $a=a'$, $b=b'$. Докажем, что $ab=ba$. Действительно, рассмотрим $aba^{-1}b^{-1}$. Поскольку $aba^{-1}\in K$, то $aba^{-1}b^{-1}\in K$. С другой стороны, поскольку $ba^{-1}b^{-1}\in H$, то $aba^{-1}b^{-1}\in H$. Следовательно, $aba^{-1}b^{-1}=e$. Отсюда $ab=ba$. Теперь мы можем определить гомоморфизм $f\colon G\rightarrow H\times K$, как $f(g)=(a,b)$. В силу единственности представления $g=ab$ это отображение корректно определено. Заметим, что если $g'=a'b'$, то $$f(gg')=f(aba'b')=f(aa'bb')=(aa',bb')=(a,b)(a',b')=f(g)f(g').$$ Следовательно, $f$ --- гомоморфизм. Очевидно, что он инъективен и сюръективен.
+\end{proof}
+
+\begin{corollary}
+	\label{Proizv2}
+	Пусть $G$ --- группа и $H_1, H_2,\ldots H_n$ --- ее нормальные подгруппы. Предположим, что $G=H_1H_2\cdots H_n$ и $H_i\cap(H_1H_2\cdots H_{i-1} H_{i+1}\cdots H_n=\{e\}$. Тогда $$G\cong H_1\times H_1\times\cdots\times H_n.$$
+\end{corollary}
+
+\begin{theorem}
+	\label{Proizv3} Пусть $G=G_1\times G_2$ и $H_1,H_2$ --- нормальные подгруппы в $G_1$ и $G_2$ соответственно. Тогда $H_1\times H_2\triangleleft G_1\times G_2$ и $G/H_1\times H_2\cong(G_1/H_1)\times(G_2/H_2).$
+\end{theorem}
+
+\begin{proof}
+	Пусть $\alpha\colon G_1\rightarrow G_1/H_1$ и $\beta\colon G_2\rightarrow G_2/H_2$ --- естественные гомоморфизмы. Определим гомоморфизм $f\colon G\rightarrow (G_1/H_1)\times(G_2/H_2)$ как $f(ab)=(\alpha(a),\beta(b))$. Очевидно, что $f$ --- гомоморфизм с ядром $\ker f=H_1\times H_2$ и образом $(G_1/H_1)\times(G_2/H_2).$
+\end{proof}
+
+\begin{corollary}
+	\label{Proizv4}
+	Пусть $G=G_1\times G_2\times\cdots\times G_n$ и $H_1,H_2,\ldots, H_n$ --- нормальные подгруппы в $G_1,G_2,\ldots,G_n$. Тогда $(H_1\times H_2\times\cdots\times H_n)\triangleleft G$ и $$G/(H_1\times H_2\times\cdots\times H_n)\cong(G_1/H_1)\times(G_2/H_2)\times\cdots\times (G_n/H_n).$$
+\end{corollary}
+
+\begin{claim}
+	\label{Proizv5} Пусть элементы $a\in G_1$, $b\in G_2$ имеют порядки $n$ и $m$ соответственно. Тогда порядок $(a,b)\in G_1\times G_2$ равен наименьшему общему кратному $n$ и $m$.
+\end{claim}
+
+\begin{proof}
+	Пусть $(a,b)^k=(a^k,b^k)=(e,e')$. Тогда $k$ делится на $n$ и $m$.
+\end{proof}
+
+\begin{claim}
+	\label{Proizv6} Пусть порядки групп $G_1$ и $G_2$ равны $n$ и $m$ соответственно. Тогда порядок группы $G_1\times G_2$ равен $nm$.
+\end{claim}
+
+\begin{definition}
+	Группа $G$ называется \emph{циклической}, если существует элемент
+	$a\in G$ такой, что для любого элемента $g\in G$ существует
+	$k\in\ZZ$ такое, что $g=a^k$. Элемент $a$ называется
+	\emph{порождающим} группы $G$.
+\end{definition}
+
+Из определения циклических групп следует, что все циклические
+подгруппы, порядка $n$, изоморфны $\ZZ_n$.
+
+
+\begin{theorem}
+	\label{Proizv7} Пусть $\ZZ_n$ и $\ZZ_m$ --- циклические группы. Тогда группа $\ZZ_n\times\ZZ_m$ циклическая тогда и только тогда, когда $n$ и $m$ взаимно просты.
+\end{theorem}
+
+\begin{proof}
+	Пусть $n$ и $m$ взаимно просты, $g_1$ и $g_2$ --- порождающие групп $\ZZ_n$ и $\ZZ_m$ соответственно. Согласно утверждению \ref{Proizv5} порядок $(g_1,g_2)\in\ZZ_n\times\ZZ_m$ равен $nm$, и по утверждению \ref{Proizv6} равен порядку группы. Таким образом, $(g_1,g_2)$ порождает $\ZZ_n\times\ZZ_m$. Пусть $\ZZ_n\times\ZZ_m$ --- циклическая группа и $(g_1,g_2)\in\ZZ_n\times\ZZ_m$ порождает эту группу. Тогда порядок $(g_1,g_2)$ равен $nm$. С другой стороны, согласно утверждению \ref{Proizv5}, порядок $(g_1,g_2)$ равен наименьшему общему кратному порядков $g_1$ и $g_2$, которые, в свою очередь, являются делителями $n$ и $m$. Отсюда, порядок $(g_1,g_2)$ является делителем наименьшего общего кратного $n$ и $m$. Таким образом, $n$ и $m$ взаимно просты.
+\end{proof}
+
+\section{Конечные абелевы группы}
+
+В этом параграфе мы рассмотрим абелевы группы. Мы будем, вместо
+мультипликативной записи $ab$, будем использовать аддитивную $a+b$,
+вместо $a^n$ будем писать $na$, вместо $e$ будем писать $0$.
+Заметим, что в абелевой группе любая подгруппа нормальная. Так же
+прямое произведение двух абелевых групп обычно называется прямой
+суммой и обозначают $A\oplus B$.
+
+\begin{lemma}
+	\label{AbGrL} Пусть $G$ --- абелева группа и любой элемент $a\in G$
+	имеет порядок $p^k$, для какого-то $k$. Тогда $|G|=p^n$.
+\end{lemma}
+
+\begin{proof}
+	Предположим, что $|G|=p^nm$, где $(p,m)=1$. Пусть $f\colon
+		G\rightarrow G_1=G/\langle a\rangle$, где $\langle a\rangle$ ---
+	циклическая группа порожденная элементом $a$. Поскольку порядок
+	элемента $a$ равен $p^k$, то $|G_1|=p^{n_{1}}m$, где $n_{1}<n$.
+	Предположим, что существует элемент $b\in G_1$ такой, что порядок
+	$b$ равен $p^st$, где $(p,t)=1$. Пусть $b'$ прообраз $b$. По
+	предположению порядок $b'$ равен $p^r$. Отсюда,
+	$0=f(0)=f(p^rb')=p^rb$. Противоречие. Следовательно, любой элемент
+	группы $G_1$ имеет порядок $p^r$ для какого-то $r$. Снова
+	$G_2=G_1/\langle b\rangle$. Тогда $|G_2|=p^{n_3}m$. Продолжая этот
+	процесс, мы получим $|G_i|=m$. Согласно следствию \ref{Lagr2}
+	порядок любого элемента группы $G_i$ является делителем $m$. Отсюда,
+	$m=1$.
+\end{proof}
+
+\begin{theorem}
+	\label{AbGr1} Пусть $G$ --- абелева группа и
+	$|G|=m=p_{1}^{s_{1}}\cdot p_{2}^{s_{2}}\dots p_{n}^{s_{n}}$. Тогда
+	$G\cong A_{p_{1}}\oplus\dots\oplus A_{p_{n}}$, где $A_{p_{i}}$ ---
+	абелева группа и $|A_{p_{i}}|=p_{i}^{s_{i}}$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $A_{p_{i}}$ --- множество элементов, порядок которых равен
+	$p_{i}^k$, где $k=0,1,2,\dots$ (возможно $A_{p_{i}}=\{0\}$).
+	Заметим, что $A_{p_{i}}$ --- подгруппа группы $G$. Действительно,
+	если $p_{i}^{l_{1}}a=0$ и $p_{i}^{l_{2}}b=0$, то $p_{i}^h(a+b)=0$,
+	где $h=\max\{l_{1},l_{2}\}$. При этом $A_{p_{i}}\cap
+		A_{p_{j}}=\{0\}$. Пусть $g\in G$ и пусть порядок элемента $g$ равен
+	$q=p_{1}^{r_{1}}\cdot p_{2}^{r_{2}}\dots p_{n}^{r_{n}}$. Пусть
+	$t_{i}=p_{1}^{r_{1}}\dots p_{i-1}^{r_{i-1}}\cdot
+		p_{i+1}^{r_{i+1}}\dots p_{n}^{r_{n}}$. Тогда $t_{i}g \in A_{p_{i}}$.
+	Поскольку $НОД(t_{1},\dots,t_{n})=1$, то существуют $a_{i}$ такие,
+	что $a_{1}t_{1}+\dots+a_{n}t_{n}=1$. Тогда
+	$a_{1}t_{1}g+\dots+a_{n}t_{n}g=g$. Докажем, что такое разложение
+	единственно. Пусть существует два разложения $b_{1}+\dots+b_{n}=g$ и
+	$b'_{1}+\dots+b'_{n}=g$, где $b_{i},b'_{i}\in A_{i}$. Тогда
+	$(b_{1}-b'_{1})+\dots+(b_{n}-b'_{n})=0$. Предположим, что
+	$b_{i}-b'_{i}\neq\{0\}$. Пусть $t=p_{1}^{s_{1}}\dots
+		p_{i-1}^{s_{i-1}}\cdot p_{i+1}^{s_{i+1}}\dots p_{n}^{s_{n}}$. Тогда
+	$t((b_{1}-b'_{1})+\dots+(b_{n}-b'_{n}))=t(b_{i}-b'_{i})=0$. Отсюда,
+	$b_{i}=b'_{i}$. Теперь утверждение теоремы следует из леммы
+	\ref{AbGrL}.
+\end{proof}
+
+\begin{theorem}
+	\label{AbGr2} Пусть $G$ --- абелева $p$-группа. Тогда
+	$G\cong\ZZ_{p^{s_{1}}}\oplus\cdots\oplus\ZZ_{p^{s_{n}}}$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $g$ --- элемент максимального порядка $p^{s_{1}}$ и пусть $A$
+	--- максимальная подгруппа группы $G$ такая, что $A\cap\langle
+		g\rangle=\{0\}$, где $\langle g\rangle$ --- циклическая группа
+	порожденная $g$. Пусть $H$ --- подгруппа, порожденная множеством
+	$A\cup g$. Докажем, что $H=G$. Предположим, что существует элемент
+	$b\in G$ такой, что $b\not\in H$. Можно считать, что $pb\in H$ (если
+	$p^ib\in H$ и $p^{i-1}b\not\in H$, то можно заменить $b$ на
+	$p^{i-1}b$). Тогда $pb=a+lg$, где $a\in A$ $l\in\NN\cup\{0\}$.
+	Умножим это равенство на $p^{s_{1}-1}$. В силу максимальности
+	порядка $p^{s_{1}}$, мы получаем $p^{s_{1}-1}a+lp^{s_{1}-1}g=0$.
+	Поскольку $A\cap\langle g\rangle=\{0\}$, то $p^{s_{1}-1}a=0$ и
+	$lp^{s_{1}-1}g=0$. Следовательно, $l=jp$. Отсюда, $p(b-jg)=a\in A$.
+	Пусть $c=b-jg$ и пусть $C$ --- подгруппа, порожденная $A\cup c$. В
+	силу максимальности $A$ существуют $s,k\in\NN$ и $a'\in A$ такие,
+	что $a'+sc=kg$. Тогда $sc\in H$ и $s$ не делится на $p$. Отсюда,
+	$c\in H$. Следовательно, $b\in H$. Противоречие. Таким образом
+	$G=H=A\oplus\ZZ_{p^{s_{1}}}$. Повторяя тоже самое рассуждение для
+	$A$, мы получаем утверждение теоремы.
+\end{proof}
+
+\begin{theorem}
+	\label{AbGr3} Пусть $G$ --- абелева группа. Тогда $G$ разлагается в
+	прямую сумму циклических $p$-групп. Причем это разложение
+	единственно с точностью до перестановки слагаемых.
+\end{theorem}
+
+\begin{proof}
+	Из теорем \ref{AbGr1} и \ref{AbGr2} следует, что достаточно доказать
+	единственность разложения для $p$-групп.
+\end{proof}
+
+\section{Свободные группы}
+
+Рассмотрим сначала абелевы группы.
+
+\begin{definition}
+	Пусть $A$ --- абелева группа. Мы говорим, что группа $A$ без кручений, если в ней не существует элементов конечного порядка, т.е. таких $a\in A$, что $na=0$ для некоторого $n$.
+\end{definition}
+
+\begin{definition}
+	Система элементов $a_1,a_2,\ldots, a_k\in A$ называется \emph{независимой}, если из равенства $n_1a_1+n_2a_2+\cdots+n_k a_k=0$, где $n_i\in\ZZ$ следует, что $n_1=n_2=\cdots=n_k=0$. Пусть $A$ --- абелева группа без кручений. Система элементов $a_1,a_2,\ldots, a_k\in A$ называется \emph{базисом} группы $A$, если $a_1,a_2,\ldots, a_k$ независимы и порождают $A$ (т.е. любой элемент $a\in A$ представляется в виде $a=n_1a_1+n_2a_2+\cdots+n_k a_k$).
+\end{definition}
+
+\begin{lemma}
+	\label{SvGr1} Пусть $A$ --- абелева группа и $a_1,a_2,\ldots, a_k$ --- базис $A$. Пусть $b_1,b_2,\ldots, b_n\in A$ независимы. Тогда $n\geq k$.
+\end{lemma}
+
+\begin{proof}
+	Пусть $$b_i=\alpha_{i1} a_1+\alpha_{i2} a_2+\cdots+\alpha_{ik}a_k,$$ где $\alpha_{ij}\in\ZZ$. Рассмотрим целочисленные вектора $B_i=(\alpha_{i1},\alpha_{i2},\ldots,\alpha_{ik})$. Предположим, что $n>k$. Тогда вектора $B_1,B_2,\ldots, B_n$ линейно зависимы. Следовательно, существуют $r_1,r_2,\ldots, r_n\in\QQ$, что $$r_1B_2+r_2B_2+\cdots+r_nB_n=0.$$ Умножим это равенство на общий знаменатель $r_1,r_2,\ldots, r_n$, получим $$s_1B_2+s_2B_2+\cdots+s_nB_n=0,$$ где $s_i\in\ZZ$. Отсюда, $$s_1\alpha_{1j}+s_2\alpha_{2j}+\cdots+s_n\alpha_{nj}=0,\quad\forall j.$$ Тогда $$\sum\limits_{i=1}^n s_i b_i=\sum\limits_{i=1}^n s_i\left(\sum\limits_{j=1}^k\alpha_{ij} a_j\right)=\sum\limits_{j=1}^k\left(\sum\limits_{i=1}^n s_i\alpha_{ij}\right)a_j=0.$$ Противоречие.
+\end{proof}
+
+\begin{remark}
+	Если $a_1,a_2,\ldots, a_k\in A$ --- базис группы $A$ и $b_1,b_2,\ldots, b_k\in A$ независимы, то далеко не всегда $b_1,b_2,\ldots, b_k$ --- базис.
+\end{remark}
+
+\begin{theorem}
+	\label{SvGr2} Всякая конечно порожденная абелева группа $A$ без кручений обладает базисом. Все базисы группы $A$ равномощны (содержат одинаковое количество элементов).
+\end{theorem}
+
+\begin{proof}
+	Пусть $a_1,a_2,\ldots, a_n\in A$ порождают группу $A$. Если $a_1,a_2,\ldots, a_n$ независимы, то это базис. Следовательно, мы можем считать, что существуют $s_1,s_2,\ldots, s_n\in\ZZ$, что $s_1a_1+s_2a_2+\cdots+s_na_n=0$. Такие выражения мы будем называть соотношениями. Число, равное $\min|s_i|$, будем называть высотой соотношения (здесь минимум берется по всем $s_i$ не равным нулю). Соотношение, у которого высота минимальна, будем называть минимальным соотношением. Заметим, что минимальное соотношение не всегда единственно.
+	
+	Если $s_1a_1+s_2a_2+\cdots+s_na_n=0$ --- минимальное соотношение, то наименьший общий делитель $s_1,s_2,\ldots, s_n$ равен единице. Действительно, если $s_i=ds'_i$ для всех $i$, то $$s_1a_1+s_2a_2+\cdots+s_na_n=d(s'_1a_1+s'_2a_2+\cdots+s'_na_n)=0.$$ Поскольку в $A$ нет кручений, то $s'_1a_1+s'_2a_2+\cdots+s'_na_n=0.$ Противоречие.
+	
+	Рассмотрим минимальное соотношение $s_1a_1+s_2a_2+\cdots+s_na_n=0$. Пусть его высота $h$. Умножая на $-1$ и перенумеровывая образующие, мы можем считать, что $s_1=h$. Мы знаем, что не все $s_i$ делятся на $h$. Пусть $s_2$ не делится на $h$. Тогда $s_2=qh+r$. Отсюда, $$ha'_1+ra'_2+s_3a'_3+s_4a'_4+\cdots+s_na'_n=0,$$ где $a'_1=a_1+qa_2$, $a'_i=a_i$ при $2\leq i\leq n$. Заметим, что $a'_1,a'_2,\ldots, a'_n$ --- образующие $A$. При этом высота минимального соотношения уменьшилась. Продолжая этот процесс, мы можем считать, что высота минимального соотношения равна $1$.
+	
+	Пусть $s_1a_1+s_2a_2+\cdots+s_na_n=0$ --- соотношение высоты $1$ и $|s_k|=1$. Тогда мы можем выразить $$a_k=s'_1a_1+s'_2a_2+\cdots+s'_{k-1}a_{k-1}+s'_{k+1}a_{k+1}+\cdots+s'_{n}a_{n},$$ где $s'_i=\pm s_i$. Таким образом, элементы $\{a_1,a_2,\ldots,a_{k-1},a_{k+1},\ldots,a_n\}$ будут системой образующих. Продолжая этот процесс, мы получим базис.
+	
+	Теперь докажем второе утверждение. Пусть $a_1,a_2,\ldots, a_n$ и $b_1,b_2,\ldots, b_m$ --- два базиса. Дважды применяя лемму \ref{SvGr1}, получаем $n\leq m$, $m\leq n$.
+\end{proof}
+
+\begin{definition}
+	Конечно порожденная абелева группа $A$ без кручений называется \emph{свободной абелевой группой}. Количество элементов в базисе называется \emph{рангом} этой группы. Обозначается $F_n^{ab}$.
+\end{definition}
+
+\begin{remark}
+	Согласно теореме \ref{SvGr2}, свободная группа ранга $n$ представляет собой сумму из $n$ копий групп $\ZZ$, т.е. $$F_n^{ab}=\underbrace{\ZZ+\ZZ+\cdots+\ZZ}_{\text{$n$ слагаемых}}.$$
+\end{remark}
+
+\begin{claim}
+	\label{SvGr3} Пусть $A$ --- свободная абелева группа ранга $n$ и $B$ --- ее подгруппа. Тогда $B$ --- свободная абелева группа ранга $m$, $m\leq n$.
+\end{claim}
+
+\begin{proof}
+	Следует из теоремы \ref{SvGr2}.
+\end{proof}
+
+\begin{theorem}
+	\label{SvGr4} Пусть $A$ --- конечно порожденная абелева группа. Тогда $A\cong F_n^{ab}\oplus B$, где $F_n^{ab}$ --- свободная абелева группа ранга $n$, $B$ --- конечная абелева группа.
+\end{theorem}
+
+\begin{proof}
+	Пусть $B\subset A$ --- множество элементов конечного порядка. Заметим, что $B$ --- конечная подгруппа. Рассмотрим факторгруппу $\bar{A}=A/B$. Пусть $f\colon A\rightarrow\bar{A}$ --- естественный гомоморфизм. Заметим, что в $\bar{A}$ нет кручений. Действительно, пусть $\bar{a}\in\bar{A}$ и $k\bar{a}=0$. Пусть $a$ --- любой прообраз $\bar{a}$ в $A$. Тогда $ka\in B$. Следовательно, существует $m$, что $mka=0$. Противоречие. Таким образом, $\bar{A}$ свободная группа. Пусть $\bar{a}_1,\bar{a}_1,\ldots,\bar{a}_n$ --- базис $\bar{A}$, и $a_1,a_1,\ldots,a_n$ --- прообразы $\bar{a}_1,\bar{a}_1,\ldots,\bar{a}_n$ в $A$. Заметим, что $a_1,a_1,\ldots,a_n$ независимы. Пусть $M$ --- свободная абелева группа порожденная $a_1,a_1,\ldots,a_n$. Докажем, что $B\oplus M=A$. Пусть $g\in A$. Если $g$ имеет конечный порядок, то $g\in B$. Пусть $g\not\in B$, $\bar{g}=f(g)$. Тогда $\bar{g}=s_1\bar{a}_1+s_2\bar{a}_1+\cdots+s_n\bar{a}_n$. Рассмотрим $b=g-(s_1a_1+s_2a_1+\cdots+s_na_n)$. Заметим, что $f(b)=0$. Тогда $b\in B$, и $$g=b+s_1a_1+s_2a_1+\cdots+s_na_n\in B\oplus M.$$ Таким образом, $B\oplus M=A$.
+\end{proof}
+
+Теперь перейдем к рассмотрению не коммутативного случая.
+
+Пусть $X$ --- некоторое множество символов $x_i$, будем называть его \emph{алфавитом}. Пусть $X^{-1}$ --- множество символов, состоящее из $x^{-1}_i$. \emph{Словом} в алфавите $X$ будем называть пустую (обозначается $1$) или конечную последовательность символов из $X\cup X^{-1}$. \emph{Редукцией} слова $u$ мы будем называть вычеркивание подслов вида $x_i x^{-1}_i$ или $x^{-1}_ix_i$. Слово $u$ называется \emph{несократимым}, если в нем нет последовательностей вида $x_i x^{-1}_i$ или $x^{-1}_ix_i$. Ясно, что применяя редукцию, мы можем от любого слова перейти к несократимому. Два слова $u$ и $v$ будем называть эквивалентными, если, применяя редукцию к обоим словам, мы получаем одно и тоже несократимое слово. Обозначим класс слов эквивалентных $u$ через $[u]$.
+
+\begin{theorem}
+	\label{SvGr5} В каждом классе слов $[u]$ существует только одно несократимое слово.
+\end{theorem}
+
+\begin{proof}
+	Будем доказывать индукцией по длине слова. Слова длины ноль и один являются несократимыми. Предположим, что единственность несократимого слова доказана для всех слов, длины меньшей $n$. Предположим, что слово $v$, длины $n$, редуцируется к двум несократимым словам $v'$ и $v''$. Если первая редукция применялась к одному подслову $x_i x^{-1}_i$ или $x^{-1}_ix_i$, то мы можем воспользоваться индуктивным предположением. Рассмотрим случай, когда первые редукции не пересекаются т.е. $$v=ax_i x^{-1}_ib x^{-1}_jx_jc,$$ где $a,b,c$ --- подслова (заметим, что возможны варианты --- вместо $x_i x^{-1}_i$ может стоять $x^{-1}_ix_i$, вместо $x^{-1}_jx_j$ может стоять $x_jx^{-1}_j$, доказательство не меняется). После первой редукции, мы получаем слова $v_1=abx^{-1}_jx_jc$ и $v_2=ax_i x^{-1}_ibc$. Оба эти слова редуцируются к слову $abc$. Следовательно, по индуктивному предположению, редуцируются к единственному несократимому слову. Рассмотрим случай, когда первые редукции пересекаются, т.е. $$v=ax_i x^{-1}_ix_ib,$$ где $a,b$ --- подслова. Тогда обе редукции приводят в слову $v_1=ax_ib$, которое, по индуктивному предположению, редуцируются к единственному несократимому слову.
+\end{proof}
+
+\begin{theorem}
+	\label{SvGr6} Пусть $X=\{x_i\}$ --- некоторое множество символов, $F(X)$ --- множество классов эквивалентных слов. На $F(X)$ введем операцию умножения $[u][v]=[uv]$. Эта операция не зависит от выбора представителей в классах, и $F(X)$ является группой относительно этой операции.
+\end{theorem}
+
+\begin{proof}
+	Корректность этой операции и ее ассоциативность следуют из теоремы \ref{SvGr5}. Единицей служит пустое слово, т.е. $1$. Обратный элемент строится по следующему правилу. Пусть дано слово $$v=x^{\epsilon_1}_1x^{\epsilon_2}_2\cdots x^{\epsilon_n}_n,$$ где $x_1,x_2,\ldots,x_n\in X$, $\epsilon_i=\pm 1$. Тогда $$v^{-1}=x^{-\epsilon_n}_n x^{-\epsilon_{n-1}}_{n-1}\cdots  x^{-\epsilon_2}_2  x^{-\epsilon_1}_1.$$
+\end{proof}
+
+\begin{definition}
+	Группа $F(X)$ называется \emph{свободной группой}. Если $X$ --- конечное множество, то $F(X)$ конечно порожденная свободная группа. Количество элементов в $X$ называется \emph{степенью свободы} группы $F(X)$.
+\end{definition}
+
+\begin{remark}
+	Не нужно путать свободную группу и свободную абелеву группу. Свободная абелева группа не является свободной группой и наоборот (исключением является случай, когда $X$ состоит их одного элемента, а свободная абелева группа имеет ранг $1$).
+\end{remark}
+
+\begin{theorem}
+	\label{SvGr7} Пусть $G$ --- группа, порожденная элементами $g_1,g_2,\ldots, g_n$. Рассмотрим алфавит $X$, состоящий из $x_1,x_2,\ldots,x_n$. Тогда отображение $f\colon X\rightarrow M$ по правилу $f(x_i)=g_i$ единственным образом продолжается до гомоморфизма групп $\bar{f}\colon F(X)\rightarrow G$.
+\end{theorem}
+
+\begin{proof}
+	Определим $\bar{f}\colon F(X)\rightarrow G$ по правилу $$\bar{f}(x^{\epsilon_{i_1}}_{i_1}x^{\epsilon_{i_2}}_{i_2}\cdots x^{\epsilon_{i_m}}_{i_m})=g^{\epsilon_{i_1}}_{i_1}g^{\epsilon_{i_2}}_{i_2}\cdots g^{\epsilon_{i_m}}_{i_m}.$$
+\end{proof}
+
+\begin{definition}
+	Элементы ядра гомоморфизма $\bar{f}\colon F(X)\rightarrow G$ называются \emph{соотношениями} группы $G$ в алфавите $X$. Если множество соотношений $H'$ такого, что минимальная нормальная подгруппа в $F(X)$, содержащая $H'$, совпадает с $H$, то $H'$ называется \emph{определяющим множеством соотношений}.
+\end{definition}
+
+\begin{example}
+	Пусть алфавит $X$ состоит из $x_1,x_2,\ldots,x_n$. Тогда соотношения $$H'=\{x_ix_jx^{-1}_ix^{-1}_j\mid 1\leq i<j\leq n\}$$ определяют свободную абелеву группу.
+\end{example}
+
+
+
+\chapter{Кольца, модули, поля и алгебры}
+
+В этой главе мы рассмотрим еще несколько важных алгебраических структур.
+
+\section{Определение и основные свойства колец}
+
+Пусть на множестве $A$ заданы две бинарные операции --- умножение и
+сложение $(+,\cdot)$ --- такие, что
+\begin{enumerate}
+	\item $(A,+)$ --- является абелевой группой.
+	\item Умножение ассоциативно и
+	      имеется единичный элемент.
+	\item Для всех $x, y, z\in A$ $$(x+y)z=xz+yz\text{ и }
+		      z(x+y)=zx+zy.$$ (Эти соотношения называются
+	      \emph{дистрибутивностью}).
+\end{enumerate}
+Тогда $A$ называется \emph{кольцом}.
+
+Если для любых двух элементов $a,b\in A$ выполнено $ab=ba$, то кольцо $A$ называется \emph{коммутативным}.
+Если для любого ненулевого элемента $a\in A$ существует $a^{-1}$ такое что $aa^{-1}=a^{-1}a=1$, то кольцо $A$ называется \emph{телом}. Тело, в котором выполнено $ab=ba$ для любых двух элементов $a,b\in A$, называется \emph{полем}.
+
+\begin{claim}
+	\label{Kol0} Пусть $A$ --- кольцо. Тогда $a\cdot 0=0\cdot a=0$ для любого $a\in A$.
+\end{claim}
+
+\begin{proof}
+	Заметим, что $$a=a\cdot 1=a(1+0)=a\cdot 1+a\cdot 0=a+a\cdot 0.$$ Прибавим к обеим частям равенства $-a$, получим $0=a\cdot 0$. Аналогично, $0\cdot a=0$.
+\end{proof}
+
+\begin{claim}
+	\label{Kol00} Пусть $A$ --- кольцо. Тогда, для любых $a,b\in A$, выполнено $(-a)b=a(-b)=-(ab)$, $(-a)(-b)=ab$.
+\end{claim}
+
+\begin{proof}
+	Поскольку, согласно \ref{Kol0}, $0b=0$, то $$0=0b=(a+(-a))b=ab+(-a)b.$$ Отсюда, $(-a)b=-(ab)$. Аналогично, $a(-b)=-(ab)$.
+	Теперь $$(-a)(-b)=-(a(-b))=-(-(ab))=ab.$$
+\end{proof}
+
+\begin{definition}
+	Пусть $A$ и $B$ --- два кольца. \emph{Гомоморфизмом} колец называется отображение $f\colon A\rightarrow B$ такое что $f(a+b)=f(a)+f(b)$ и $f(ab)=f(a)f(b)$ для любых $a,b\in A$. \emph{Ядром} гомоморфизма $f$ называется множество элементов $a\in A$, отображающихся в $0$, т.е. $$\ker f=\{a\mid f(a)=0\}.$$
+\end{definition}
+
+Пусть $f(a)\neq 0$. Не трудно убедиться, что $f(0)=0$, $f(1)=1$. Действительно, $$f(a)=f(a+0)=f(a)+f(0).$$ Отсюда, $f(0)=0$. Аналогично, $f(a)=f(a1)=f(a)f(1)$. Если $f(a)\neq 0$, то $f(1)=1$. Аналогично $f(-a)=-f(a)$.
+
+\begin{example}
+	\begin{enumerate}
+		\item $\ZZ$ является коммутативным кольцом (не является полем, поскольку обратимы только $1$ и $-1$).
+		\item $\QQ, \RR, \CC$ являются полями.
+		\item $M_{n\times m}$ (здесь $M_{n\times m}$ --- множество матриц размера $n\times m$) является некоммутативным кольцом (единицей является единичная матрица $E$). Заметим, что $M_{n\times m}$ не является телом, поскольку матрицы, с определителем равным нулю, необратимы.
+	\end{enumerate}
+\end{example}
+
+Рассмотрим еще один важный пример.
+
+\begin{example}
+	Пусть $\ZZ_m=\{0,1,\ldots,m-1\}$ --- множество остатков при делении на $m$. Тогда $\ZZ_m$ --- коммутативное кольцо.
+\end{example}
+
+\begin{claim}
+	\label{Kol1} Кольцо $\ZZ_m$ является полем тогда и только тогда, когда $m$ --- простое число.
+\end{claim}
+
+\begin{proof}
+	Пусть $m$ не является простым числом, т.е. $m=m_1 m_2$. Тогда $m_1m_2=0$ в кольце $\ZZ_m$. Предположим, что $m_2$ обратим, т.е. существует $m^{-1}_2$ такой что $m^{-1}_2m_2=1$. С другой стороны, $$m_1=m_1 1=m_1 m_2 m^{-1}_2=0 m^{-1}_2=0.$$ Противоречие.
+	
+	Пусть $m$ --- простое число. Рассмотрим остаток $k\in\ZZ_m$. Поскольку $(k,m)=1$, то существуют целые числа $a,b$ такие что $ak+bm=1$. Пусть $\bar{a}$ --- остаток от деление $a$ на $m$. Поскольку $bm$ делится на $m$, то $\bar{a} k=1$ в $\ZZ_m$. Следовательно, любой элемент в $\ZZ_m$ обратим. Тогда $\ZZ_m$ --- поле.
+\end{proof}
+
+\begin{remark}
+	Заметим, что мы фактически доказали, что если в кольце существуют два элемента $a,b$ такие, что $ab=0$, то кольцо не является полем. Коммутативные кольца, в которых не существует таких элементов, называются \emph{кольцом без делителей нуля} или \emph{целостным кольцом}.
+\end{remark}
+
+\begin{definition}
+	Множество $\aaa\subset A$ называется \emph{левым идеалом} (\emph{правым идеалом}) кольца $A$, если $\aaa$ является подгруппой относительно операции сложения и $ax\in\aaa$ ($xa\in\aaa$) для любых $a\in A, x\in\aaa$, т.е. $A\aaa\subset\aaa$ ($\aaa A\subset\aaa$). Если $\aaa$ является одновременно правым и левым идеалом, то говорят, что $\aaa$ \emph{двусторонней идеал} или просто \emph{идеал}.
+\end{definition}
+
+\begin{remark}
+	Заметим, что в отличии от групп и нормальных подгрупп, идеал не является кольцом (за исключением тривиального случая $\aaa=A$). Действительно, если $1\in\aaa$, то из $a1\in\aaa$ ($1a\in\aaa$) для любых $a\in A$, следует $A=\aaa$. Следовательно, $1\not\in\aaa$ для нетривиального идеала. Тогда $\aaa$ не является кольцом. Очевидно, что если $\aaa$ и $\bbb$ --- два идеала (левых, правых или двусторонних), то их пересечение $\aaa\cap\bbb$ также будет идеалом.
+\end{remark}
+
+\begin{theorem}
+	\label{Kol2} Пусть $f\colon A\rightarrow B$ --- гомоморфизм колец. Тогда $\ker f$ является идеалом.
+\end{theorem}
+
+\begin{proof}
+	Заметим, что $f(a)=f(a+0)=f(a)+f(0)$. Отсюда, $0\in\ker f$.
+	Пусть $a,b\in\ker f$. Тогда $f(a+b)=f(a)+f(b)=0+0=0$. Отсюда, $a+b\in\ker f$. Заметим, что $$0=f(0)=f(a+(-a))=f(a)+f(-a)=0+f(-a)=f(-a).$$  Таким образом, $-a\in\ker f$. Следовательно, $\ker f$ --- группа относительно операции сложения. Пусть $x\in A$. Тогда $f(ax)=f(a)f(x)=0f(x)=0$, $f(xa)=f(x)f(a)=f(x)0=0$. Следовательно, $xa,ax\in\ker f$. Таким образом, $\ker f$ --- идеал кольца $A$.
+\end{proof}
+
+Аналогично, как в случае групп, мы можем определить факторструктуру $A/\aaa$, где $A$ --- кольцо, $\aaa$ --- идеал кольца $A$. Элементами $A/\aaa$ будут являться смежные классы $x+\aaa$. Операции сложения и умножение осуществляются по правилам $(x+\aaa)+(y+\aaa)=(x+y)+\aaa$, $(x+\aaa)(y+\aaa)=xy+\aaa$. Поскольку $\aaa$ --- подгруппа по сложению, то мы уже знаем, что операция сложения определена корректно. Докажем корректность операции умножения. Выберем по два представителя $x,x'$ и $y,y'$ в двух смежных классах $x+\aaa$ и $y+\aaa$. Тогда $x'=x+a$, $y'=y+b$, где $a,b\in\aaa$. Отсюда, $$x'y'=(x+a)(y+b)=xy+ay+xb+ab.$$ Поскольку $\aaa$ --- идеал кольца $A$, то $ay,xb\in\aaa$. Следовательно, $x'y'$ и $xy$ принадлежат одному и тому же смежному классу.
+
+
+\begin{theorem}[теорема о гомоморфизме]
+	\label{Kol3} Пусть $f\colon A\rightarrow B$ --- сюръективный
+	гомоморфизм колец. Тогда существует естественный изоморфизм
+	$A/\ker(f)\cong B$. Обратно, если $\aaa\subset A$ --- идеал кольца $A$, то существует
+	естественное отображение $\varphi\colon A\rightarrow A/\aaa$ такое, что
+	$\varphi$ --- сюрьекция и $\ker(\varphi)=\aaa$.
+\end{theorem}
+
+\begin{proof}
+	В силу аналогичного утверждения для групп (см. \ref{GomGr3}) мы уже имеем изоморфизм групп $\bar{f}\colon A/\ker(f)\rightarrow B$. Осталось проверить его корректность для операции умножения. Пусть $\bar{a},\bar{b}$ --- два смежных класса, и пусть $a\in\bar{a}$, $b\in\bar{b}$. Тогда, по определению, $$\bar{f}(\bar{a}\bar{b})=f(ab)=f(a)f(b)=\bar{f}(\bar{a})\bar{f}(\bar{b}).$$
+\end{proof}
+
+Пусть $A$ и $B$ --- два кольца. Тогда мы можем определить прямое произведение $A\times B$, как множемтво пар $(a,b)$, $a\in A$, $b\in B$ с операциями $(a_1,b_1)+(a_2,b_2)=(a_1+a_2,b_1+b_2)$, $(a_1,b_1)(a_2,b_2)=(a_1a_2,b_1b_2)$. Нулем будет элемент $(0,0)$, единицей элемент $(1,1)$.
+
+\begin{remark}
+	Заметим, что если мы возьмем прямое произведение двух полей (тел) $A$ и $B$, то $A\times B$ не будет полем (телом). Действительно, элементы $(a,0)$ и $(0,b)$ не обратимы.
+\end{remark}
+
+Пусть $U\subset A$ --- множество обратимых элементов, т.е. множество элементов, имеющих одновременно правый и левый обратный. Тогда $U$ --- группа. Действительно, если $a,b\in U$, то обратным к $ab$ буднт элемент $b^{-1}a^{-1}$. Группа $U$ называется \emph{группой единиц} кольца $A$, а элементы этой группы \emph{единицами} кольца $A$.
+
+\section{Коммутативные кольца}
+
+В этом параграфе все кольца будут предполагаться коммутативными.
+
+\begin{remark}
+	В коммутативных кольцах понятия левого, правого и двустороннего идеала совпадают.
+\end{remark}
+
+Пусть $\aaa$ и $\bbb$ --- идеалы кольца $A$. Тогда мы можем определить произведение идеалов $\aaa\bbb$, как множество элементов $x=ab$, где $a\in\aaa$, $b\in\bbb$. Заметим, что $\aaa\bbb\subset\aaa\cap\bbb$.
+
+\begin{definition}
+	Пусть $A$ --- кольцо. Идеал $\ppp\subset A$ называется \emph{простым}, если из $xy\in\ppp$ следует, что либо $x\in\ppp$, либо $y\in\ppp$. Идеал $\mmm\subset A$ называется \emph{максимальным}, если не существует идеала $\aaa\neq A$ такого, что $\mmm\subset\aaa$ и $\mmm\neq\aaa$.
+\end{definition}
+
+\begin{claim}
+	\label{KomKol1}
+	Идеал $\ppp\subset A$ простой тогда и только тогда, когда $A/\ppp$ целостно.
+\end{claim}
+
+\begin{proof}
+	Предположим, что идеал $\ppp\subset A$ не прост. Тогда существуют $x,y\not\in\ppp$ такие, что $xy\in\ppp$. Пусть $\bar{x},\bar{y}\in A/\ppp$ --- образы $x,y$ при естественном гомоморфизме. Тогда $\bar{x}\bar{y}=0$. Следовательно, кольцо $A/\ppp$ целостно не целостно.
+	Пусть $\ppp\subset A$ --- простой идеал. Предположим, что существуют элементы $\bar{x},\bar{y}\in A/\ppp$ такие, что $\bar{x}\bar{y}=0$. Пусть $x,y$ --- их прообразы при естественном гомоморфизме. Тогда $x,y\not\in\ppp$, но $xy\in\ppp$. Противоречие.
+\end{proof}
+
+\begin{claim}
+	\label{KomKol2}
+	Всякий максимальный идеал --- простой.
+\end{claim}
+
+\begin{proof}
+	Пусть $\mmm$ --- максимальный идеал.
+	Пусть $x,y\in A$ такие, что $xy\in\mmm$ и $x\not\in\mmm$. Тогда $\mmm+Ax$ --- идеал, содержащий $\mmm$. Поскольку $\mmm$ --- максимальный идеал, то $\mmm+Ax=A$. Следовательно, существуют $m\in\mmm$ и $a\in A$ такие, что $1=m+ax$. Умножая на $y$, получаем $y=my+axy$. Поскольку $my,axy\in\mmm$, то $y\in\mmm$.
+\end{proof}
+
+\begin{theorem}
+	\label{KomKol3} Кольцо $A/\mmm$ является полем тогда и только тогда, когда $\mmm$ --- максимальный идеал кольца $A$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\mmm$ --- максимальный идеал кольца $A$.
+	Поскольку $\mmm\neq A$, то в $A/\mmm$ существует единичный элемент. Пусть $x\in A$. Обозначим через $\bar{x}$ --- образ $x$ при естественном гомоморфизме. Заметим, что всякий ненулевой элемент $A/\mmm$ может быть записан, как $\bar{x}$ для некоторого $x\in A, x\not\in\mmm$. Заметим, что $\mmm+xA$ --- идеал кольца $A$, содержащий $\mmm$. Тогда $\mmm+xA=A$. Отсюда, существуют $a\in\mmm$ и $y\in A$ такие, что $1=a+xy$. Следовательно, $\bar{x}\bar{y}=\bar{1}$. Таким образом, всякий элемент $A/\mmm$ обратим, и $A/\mmm$ --- поле.
+	
+	Пусть $A/\mmm$ --- поле. Предположим, что существует идеал $\mmm'$, который содержит $\mmm$ и $\mmm\neq\mmm'$. Пусть $x\in\mmm'$ и $x\not\in\mmm$. Обозначим через $\bar{x}$ --- образ $x$ при естественном гомоморфизме. Поскольку $A/\mmm$ --- поле, то $\bar{x}$ обратим, т.е. существует элемент $\bar{y}\in A/\mmm$ такой, что $\bar{x}\bar{y}=\bar{1}$. Пусть $y$ --- прообраз $\bar{y}$. Поскольку образ $xy$ при естественном гомоморфизме есть $\bar{1}$, то $xy=1+m$, где $m\in\mmm$. Тогда $1=xy-m\in\mmm'$. Следовательно, $\mmm'=A$.
+\end{proof}
+
+\begin{theorem}
+	\label{KomKol4} Пусть $f\colon A\rightarrow B$ --- гомоморфизм колец. Пусть $\ppp'$ --- простой идеал кольца $B$. Тогда $\ppp=f^{-1}(\ppp')$ --- простой идеал кольца $A$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $x,y\in A$ такие, что $xy\in \ppp$. Тогда $f(xy)=f(x)f(y)\in\ppp'$. Следовательно, либо $f(x)\in\ppp'$, либо $f(y)\in\ppp'$. Отсюда, либо $x\in\ppp$, либо $y\in\ppp$.
+\end{proof}
+
+Пусть $A$ --- кольцо, и $\aaa$ --- идеал этого кольца. Мы говорим, что элементы $x,y\in A$ \emph{сравнимы по модулю} $\aaa$, если $x-y\in\aaa$. Записываем $x\equiv y (\mod\aaa)$.
+
+\begin{theorem}[китайская теорема об остатках]
+	\label{KitOst} Пусть $A$ --- коммутативное кольцо, и пусть $\aaa_1,\aaa_2,\ldots,\aaa_n$ --- идеалы кольца $A$. Предположим, что $\aaa_i+\aaa_j=A$ для всех $i\neq j$. Тогда для любого семейства $x_1,x_2,\ldots, x_n\in A$ существует $x\in A$ такой, что $x\equiv x_i (\mod\aaa_i)$ для всех $i$.
+\end{theorem}
+
+\begin{proof}
+	Докажем по индукции. Пусть $n=2$. Тогда существуют $a_1\in\aaa_1$ и $a_2\in\aaa_2$ такие, что $1=a_1+a_2$. Заметим, что $a_1\equiv 1 (\mod\aaa_2)$ и $a_2\equiv 1 (\mod\aaa_1)$. Рассмотрим $x=x_2a_1+x_1a_2$. Получаем $x\equiv x_1 (\mod\aaa_1)$, $x\equiv x_2 (\mod\aaa_2)$.
+	
+	Предположим, что теорема доказана для семейства из $n-1$ идеалов. Заметим, что существуют $a_1\in\aaa_1, a_2\in\aaa_2,\ldots,a_{n-1}\in\aaa_{n-1}$ и $b_1,b_2,\ldots,b_{n-1}\in\aaa_n$ такие, что $a_i+b_i=1$ для всех $i$. Тогда $$(a_1+b_1)(a_2+b_2)\cdots(a_{n-1}+b_{n-1})=1.$$ С другой стороны, $$(a_1+b_1)(a_2+b_2)\cdots(a_{n-1}+b_{n-1})\in \aaa_1\aaa_2\cdots\aaa_{n-1}+\aaa_n.$$ Следовательно, $\aaa_1\aaa_2\cdots\aaa_{n-1}+\aaa_n=A$. Тогда существует $y_n\in A$ такой, что $y_n\equiv 1 (\mod\aaa_n)$, $y_n\equiv 0 (\mod\aaa_1\aaa_2\cdots\aaa_{n-1})$. Следовательно, $y_n\equiv 1 (\mod\aaa_n)$ и $y_n\equiv 0 (\mod\aaa_i)$ для любого $i=1,2,\ldots,n-1$. Аналогично, существуют $y_1,\ldots, y_{n-1}$ такие, что $y_i\equiv 1(\mod\aaa_i)$, $y_i\equiv 0(\mod\aaa_j)$, где $i\neq j$. Тогда элемент $x=x_1y_1+x_2y_2+\cdots+x_ny_n$ удовлетворяет требованиям теоремы.
+\end{proof}
+
+\begin{corollary}
+	\label{KitOst2} Пусть $A$ --- коммутативное кольцо, и пусть $\aaa_1,\aaa_2,\ldots,\aaa_n$ --- идеалы кольца $A$. Предположим, что $\aaa_i+\aaa_j=A$ для всех $i\neq j$. Пусть $$f\colon A\rightarrow (A/\aaa_1)\times(A/\aaa_2)\times\cdots\times(A/\aaa_n)$$ --- отображение, индуцированное каноническими отображениями $A$ в $A/\aaa_i$ для каждого множителя. Тогда $\ker f=\aaa_1\cap\aaa_2\cap\cdots\cap\aaa_n$ и $$A/(\aaa_1\cap\aaa_2\cap\cdots\cap\aaa_n)\cong(A/\aaa_1)\times(A/\aaa_2)\times\cdots\times(A/\aaa_n).$$
+\end{corollary}
+
+\begin{proof}
+	Утверждение о ядре очевидно. Изоморфизм $$A/(=\aaa_1\cap\aaa_2\cap\cdots\cap\aaa_n)\cong(A/\aaa_1)\times(A/\aaa_2)\times\cdots\times(A/\aaa_n)$$ следует из сюръективности $f$, которая следует из теоремы \ref{KitOst}.
+\end{proof}
+
+Теперь рассмотрим приложение китайской теоремы об остатках к целым числам. Для этого нам потребуется несколько определений и вспомогательных фактов.
+
+\begin{definition}
+	Идеал $\aaa$ кольца $A$ называется \emph{главным}, если существует $a\in A$ такое, что $\aaa=aA$. Если в кольце $A$ все идеалы главные, то оно называется \emph{кольцом главных идеалов}.
+\end{definition}
+
+\begin{claim}
+	\label{KomKol5} Кольцо $\ZZ$ является кольцом главных идеалов.
+\end{claim}
+
+\begin{proof}
+	Пусть $\aaa\subset\ZZ$ --- идеал кольца $\ZZ$. Пусть $a\in\aaa$ --- минимальное положительное число в идеале $\aaa$. Докажем, что все элементы идеала $\aaa$ делятся на $a$. Предположим, что существует элемент $b\in\aaa$, который не делится на $a$. Тогда $b=aq+r$, где $r<a$. Поскольку $a,b\in\aaa$, то $r\in\aaa$. Противоречие.
+\end{proof}
+
+Если $\aaa=aA$ --- главный идеал, то часто пишут $\aaa=(a)$. Поскольку кольцо $\ZZ$ является кольцом главных идеалов, то мы будем писать $a\equiv b (\mod m)$ вместо $a\equiv b (\mod (m))$ (здесь $a,b,m$ --- целые числа).
+
+Теперь запишем китайскую теорему об остатках для кольца целых чисел.
+
+\begin{theorem}
+	\label{KitOst3} Пусть $m_1,m_2,\ldots,m_n$ --- попарно взаимно простые целые числа. Тогда для любого семейства остатков $x_1,x_2,\ldots, x_n$ существует $x\in \ZZ$ такой, что $x\equiv x_i (\mod m_i)$ для всех $i$.
+\end{theorem}
+
+\begin{remark}
+	Пусть $(m)$ --- идеал кольца $\ZZ$. Тогда $\ZZ/(m)=\ZZ_m$. Таким образом, существует естественное отображение $f\colon\ZZ\rightarrow\ZZ_m$.
+\end{remark}
+
+\begin{remark}
+	Не трудно увидеть, что максимальными идеалами в кольце $\ZZ$ являются идеалы $(p)$, где $p$ --- простое число.
+	Из теоремы \ref{KomKol3} следует, что $\ZZ_p$ является полем, если $p$ --- простое число.
+\end{remark}
+
+\begin{definition}
+	Пусть $A$ --- целостное кольцо. Элемент $a\neq 0$ называется \emph{неприводимым}, если он не является единицей и из равенства $a=bc$ следует, что либо $b$, либо $c$ единица.
+\end{definition}
+
+\begin{claim}
+	\label{Gl1} Пусть $a\neq 0$ --- элемент целостного кольца $A$, и главный идеал $(a)$ простой. Тогда $a$ неприводим.
+\end{claim}
+
+\begin{proof}
+	Пусть $a=bc$. Поскольку идеал $(a)$ простой, то либо $b\in(a)$, либо $c\in(a)$. Пусть $b\in(a)$. Тогда $b=da$. Отсюда, $a=adc$. Следовательно, $cd=1$, т.е. $c$ --- единица кольца $A$.
+\end{proof}
+
+
+\begin{definition}
+	Говорят, что элемент $a\in A$, $a\neq 0$, обладает \emph{однозначным разложением на неприводимые элементы}, если существует единица $u$ и неприводимые элементы $p_1,p_2\ldots,p_k$ такие, что $$a=up_1p_2\cdots p_k,$$ причем для двух таких разложений $$a=up_1p_2\cdots p_k=u' q_1q_2\cdots q_m$$ мы имеем $m=k$ и, с точностью до перестановки, $q_i=u_i p_i$, где $u_i$ --- единицы в $A$. Кольцо $A$ называется \emph{факториальным}, если оно целостное и всякий элемент имеет однозначное разложение на неприводимые элементы.
+\end{definition}
+
+
+\begin{definition}
+	Мы говорим, что элемент $a$ \emph{делит} $b$, если существует элемент $c\in A$ такой, что $b=ac$. Мы говорим, что элемент $d$ является \emph{наибольшим общим делителем} (сокращенно НОД) элементов $a$ и $b$, если $d$ делит одновременно $a$ и $b$, и если любой элемент $c$, делящий $a$ и $b$, делит также $d$.
+\end{definition}
+
+\begin{remark}
+	Наибольший общий делитель не всегда определен однозначно.
+\end{remark}
+
+\begin{theorem}
+	\label{Gl2} Пусть $A$ --- целостное кольцо главных идеалов, и $a,b\in A$ --- ненулевые элементы. Если $(a,b)=(c)$, то $c$ --- наибольший общий делитель элементов $a$ и $b$.
+\end{theorem}
+
+\begin{proof}
+	Поскольку $a,b\in(c)$, то существуют $x,y\in A$ такие, что $a=xc$, $b=yc$. Таким образом, $c$ делит и $a$, и $b$. Пусть $d$ делит и $a$, и $b$. Тогда $a=zd$, $b=td$, где $z,t\in A$. С другой стороны, поскольку $c\in(a,b)$, то $c=ua+vb$, где $u,v\in A$. Тогда $$c=ua+vb=uzd+vtd=(uz+vt)d.$$ Таким образом, $d$ делит $c$.
+\end{proof}
+
+\begin{theorem}
+	\label{Factor} Всякое целостное кольцо главных идеалов факториально.
+\end{theorem}
+
+\begin{proof}
+	Пусть $A$ --- целостное кольцо главных идеалов. Докажем, что любой ненулевой элемент в $A$ разложим на неприводимые множители. Пусть $S$ --- множество главных идеалов, образующие которых не имеют разложение на неприводимые множители. Предположим, что $S$ не пусто, и $(a_1)\in S$. Рассмотрим произвольную возрастающую цепочку $$(a_1)\subsetneq (a_2)\subsetneq\cdots\subsetneq(a_n)\subsetneq\cdots$$ идеалов из $S$. Докажем, что она обрывается. Действительно, объединение идеалов этой цепочки есть идеал в $A$, который порожден $a$. Тогда $a\in(a_n)$ для какого-то $n$. Следовательно цепочка обрывается на $(a_n)$. Заметим, что $a_n$ не может быть неприводимым элементом (иначе он имел бы разложение). Следовательно, существуют $b$ и $c$ не являющиеся единицами кольца $A$ такие, что $a_n=bc$. Тогда $(a_n)\subsetneq (b)$ и $(a_n)\subsetneq(c)$. Следовательно, $b$ и $c$ разложимы на неприводимые множители. Тогда произведение их разложений будет разложением $a_n$. Таким образом, мы доказали, что любой ненулевой элемент в $A$ разложим на неприводимые множители. Докажем единственность этого разложения. Заметим, что если неприводимый элемент $p$ делит $ab$, то либо $p$ делит $a$, либо $p$ делит $b$. Действительно, если $p$ не делит $a$. Тогда, согласно теореме \ref{Gl2}, $(a,p)=A$. Следовательно, существуют $x,y\in A$ такие, что $xp+ya=1$. Тогда $b=bpx+bay$. Поскольку $p$ делит $ab$, то $p$ делит $b$. Предположим, что существует два разложения $$a=u_1p_1p_2\cdots p_r=u_2 q_1q_2\cdots q_s.$$ Поскольку $p_1$ делит произведение, стоящее справа, то существует $q_i$ и единица $u$ такие, что $q_i=u p_1$. Без ограничения общности можно считать, что $i=1$. Сократим на $p_1$, получаем $$u_1p_2\cdots p_r=u_3 q_2\cdots q_s.$$ Далее доказательство завершается по индукции.
+\end{proof}
+
+\begin{example}
+	Кольцо $\ZZ$ --- кольцо главных идеалов, а, следовательно факториально. Группа единиц состоит из $1$ и $-1$. Неприводимыми элементами являются простые числа.
+\end{example}
+
+\begin{example}
+	Пусть $\RR[x]$ --- кольцо многочленов с вещественными коэффициентами. Пусть $I$ --- идеал этого кольца. Если $f,g\in I$, то $(f,g)=h\in I$. Таким образом, $\RR[x]$ --- кольцо главных идеалов, а, следовательно, факториально. Группа единиц состоит из вещественных чисел. Неприводимыми элементами являются неприводимые многочлены. Аналогично, $\QQ[x]$ --- кольцо главных идеалов.
+\end{example}
+
+\section{Локализация}
+
+В этом параграфе все кольца будут предполагаться коммутативными.
+
+Пусть $A$ --- кольцо. Множество $S\subset A$ называется \emph{мультипликативным подмножеством}, если $1\in S$ и если $x,y\in S$, то $xy\in S$. Рассмотрим пары $(a,s)$, где $a\in A$, $s\in S$. Определим отношение эквивалентности. Две пары $(a,s)$, $(a',s')$ эквивалентны, если существует $s''\in S$ такое, что $$s''(as'-sa')=0.$$ Рефлексивность и симметричность очевидна. Проверим транзитивность. Пусть $(a,s)\sim(a',s')$ и $(a',s')\sim(a'',s'')$. Тогда существуют $s_1,s_2\in S$ такие, что $$s_1(as'-sa')=0,\quad s_2(a's''-s'a'')=0.$$ Следовательно, $$s_1s_2(as's''-sa's'')=0,\quad s_1s_2(a's''s-s'a''s)=0.$$ Складывая эти уравнения, получаем $$s_1s_2(as''s'-a''ss')=s_1s_2s'(as''-a''s)=0.$$ Множество классов эквивалентности будем обозначать $S^{-1}A$, элементы $(a,s)$ этого множества будем обозначать $\frac{a}{s}$. На множестве $S^{-1}A$ можно ввести операции сложения и умножения. Умножение осуществляется по правилу $$(\frac{a}{s})(\frac{a'}{s'})=\frac{aa'}{ss'}.$$ Сложение осуществляется по правилу $$\frac{a}{s}+\frac{a'}{s'}=\frac{as'+a's}{ss'}.$$
+
+Проверим корректность этих операций. Пусть $\frac{a}{s}=\frac{a_1}{s_1}$, $\frac{a'}{s'}=\frac{a'_1}{s'_1}$. Тогда существуют $t_1,t_2\in S$ такие, что $$t_1(as_1-a_1s)=0,$$ $$t_2(a's'_1-a'_1s')=0.$$ Умножим первое на $t_2s's'_1$, второе на $t_3ss_1$ и сложим. Получаем $$0=t_1t_2(s's'_1(as_1-a_1s)+ss_1(a's'_1-a'_1s'))= $$ $$=t_1t_2(s_1s'_1(as'+a's)-ss'(a_1s'_1+a'_1s_1)).$$ Таким образом, $$\frac{as'+a's}{ss'}=\frac{a_1s'_1+a'_1s_1}{s_1s'_1}.$$ Следовательно, $S^{-1}A$ является кольцом. Единицей служит класс $s/s$.
+
+Рассмотрим отображение $\varphi_S A\rightarrow S^{-1}A$, осуществляемое по правилу $\varphi_S(a)=a/1$.
+
+\begin{claim}
+	\label{Lok1} Пусть $A$ --- целостное кольцо и $S$ --- мультипликативное множество, не содержащее нуля. Тогда $\varphi_S$ инъективен.
+\end{claim}
+
+\begin{proof}
+	Предположим, что существует $a\in A$ такой, что $\varphi_S(a)=a/1=0$. Тогда существует $s\in S$, что $sa=0$. Противоречие.
+\end{proof}
+
+Заметим, что множество $S\subset S^{-1}A$ обратимо. Обратным к $s/1$ служит $1/s$.
+
+\begin{example}
+	Пусть $A$ --- целостное кольцо. Если $S$ состоит из обратимых элементов, то $S^{-1}A=A$.
+\end{example}
+
+\begin{example}
+	Пусть $A$ --- целостное кольцо, и $S$ --- множество всех его ненулевых элементов. Тогда $S$ --- мультипликативное множество, и $S^{-1}A$ --- поле. Оно называется \emph{полем частных} кольца $A$. Например, $\QQ$ --- поле частных кольца $\ZZ$.
+\end{example}
+
+\section{Многочлены}
+
+Пусть $A$ --- коммутативное кольцо (в этом параграфе слово "кольцо" означает "коммутативное кольцо"). Построим новое кольцо $B$, элементами которого будут последовательности $$f=(a_0,a_1,a_2,\ldots,a_n,\ldots),\quad a_i\in A$$ такие, что все $a_i$ за исключением конечного числа равны нулю. Определим на этом множестве операции сложения и умножения, полагая $$f+g=(a_0,a_1,\ldots,a_n,\ldots)+(b_0,b_1,\ldots,b_n,\ldots)=$$ $$=(a_0+b_0,a_1+b_1,\ldots,a_n+b_n,\ldots),$$ $$f\cdot g=(a_0,a_1,\ldots,a_n,\ldots)\cdot(b_0,b_1,\ldots,b_n,\ldots)=(h_0,h_1,\ldots,h_n,\ldots),$$ где $$h_m=\sum\limits_{i+j=m}a_ib_j.$$ Очевидно, что $B$ --- кольцо. Нулем будет элемент $(0,0,0,\ldots)$, единицей $(1,0,0,\ldots)$. Обратным к $f=(a_0,a_1,\ldots,a_n,\ldots)$ будет $f=(-a_0,-a_1,\ldots-,a_n,\ldots)$. Рассмотрим гомоморфизм, $\varphi A\rightarrow B$ заданный по правилу $\varphi(a)=(a,0,0,\ldots)$. Очевидно, что $\varphi$ инъективен. Таким образом, мы можем рассматривать кольцо $A$, как подкольцо кольца $B$. Пусть $x=(0,1,0,0,\ldots)$. Тогда $x^2=(0,0,1,0,\ldots)$, $x^3=(0,0,0,1,0\ldots)$ и т.д. Поскольку $A\subset B$, то $$a\cdot x^n=a\cdot(0,0,\ldots,0,1,0,\ldots)=(0,0,\ldots,0,a,0,\ldots),$$ где $a\in A$. Таким образом, любой элемент из $B$ может быть записан в виде
+$$f(x)=a_0+a_1x+a_2x^2+\cdots+a_n x^n.$$ Кольцо $B$ называется \emph{кольцом многочленов} от одной переменной и обозначается $A[x]$. Элементы $a_0,a_1,\ldots,a_n$ называются \emph{коэффициентами} многочлена $f(x)$, максимальное $n$ для которого $a_n\neq 0$ называется \emph{степенью} многочлена и обозначается $\deg(f)$. Пусть $$g(x)=b_0+b_1x+b_2x^2+\cdots+b_m x^m.$$ Тогда $$f(x)g(x)=a_0b_0+(a_0b_1+a_1b_0)x+\cdots+a_nb_mx^{n+m}.$$ Отсюда следует следующие утверждения.
+
+\begin{claim}
+	\label{Mnog1} Пусть $A$ --- целостное кольцо. Тогда $\deg(f+g)\leq\max(\deg(f),\deg(g))$, $\deg(fg)=\deg(f)+\deg(g)$.
+\end{claim}
+
+\begin{theorem}
+	\label{Mnog2} Пусть $A$ --- целостное кольцо. Тогда $A[x]$ также является целостным.
+\end{theorem}
+
+\begin{theorem}
+	\label{Mnog3} Пусть $A$ --- подкольцо коммутативного кольца $K$, и $\alpha\in K$. Тогда существует единственный гомоморфизм $\varphi_{\alpha}\colon A[x]\rightarrow K$, такой, что $\varphi_{\alpha}(a)=a$ для любого $a\in A$ и $\varphi_{\alpha}(x)=\alpha$.
+\end{theorem}
+
+\begin{proof}
+	Предположим, что такой гомоморфизм существует. Поскольку $\varphi_{\alpha}(a)=a$ и $\varphi_{\alpha}(x)=\alpha$, то $$\varphi_{\alpha}(f)=a_0+a_1\alpha+a_2\alpha^2+\cdots+a_n\alpha^n.$$ Таким образом, $\varphi_{\alpha}$ определен однозначно. Обратно, мы можем задать $\varphi_{\alpha}$, как $$\varphi_{\alpha}(f)=a_0+a_1\alpha+a_2\alpha^2+\cdots+a_n\alpha^n.$$ Легко проверяется, что данное отображение будет гомоморфизмом.
+\end{proof}
+
+Элемент $\alpha$ называется \emph{алгебраическим} над $A$, если существует $f\in A[x]$ такой, что $\varphi_{\alpha}(f)=0$. Если $\varphi_{\alpha}$ инъективно, то $\alpha$ называется \emph{трансцендентным} над $A$. Если $A=\QQ$, $K=\CC$, то говорят об \emph{алгебраических} и \emph{трансцендентных} числах. Если $\varphi_{\alpha}(f)=0$, то $\alpha$ называется \emph{корнем} многочлена $f$, будем писать $f(\alpha)=0$.
+
+Рассмотрим алгоритм деления в кольце многочленов.
+\begin{theorem}
+	\label{Mnog4} Пусть $K$ --- поле и $f,g\in K[x]$. Тогда существуют многочлены $q,r\in K[x]$, причем $\deg r<\deg g$, что $f=qg+r$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+ a_1x+a_0,$$ $$g(x)=b_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0.$$ Если $m>n$, то $q=0$, $r=f$. Предположим, что $n\geq m$. Пусть $f_1=f-\frac{a_n}{b_m}x^{n-m}g$. Тогда $\deg f_1\leq n-1$. Если $\deg f_1<\deg g$, то все доказано. Предположим, что $\deg f_1\geq\deg g$. Пусть $f_2=f_1-\frac{a'}{b_m}x^{\deg f_1-m}g$, где $a'$ --- коэффициент при старшей степени. Снова, $\deg f_2\leq \deg f_1-1$. Если $\deg f_2<\deg g$, то все доказано. Продолжая этот процесс, мы получим нужное представление.
+\end{proof}
+
+Пусть $K$ --- поле и $f,g\in K[x]$. Запишем $f=q_1g+r_1$. Поскольку $\deg r_1<\deg g$, то существуют $q_2,r_2\in K[x]$ такие, что $g=q_2r_1+r_2$. Аналогично, $r_1=q_3r_2+r_3$ и т.д. Поскольку $\deg r_{i+1}<\deg r_i$, мы получим $$\begin{cases}f=q_1g+r_1             \\
+		g=q_2r_1+r_2           \\
+		r_1=q_3r_2+r_3         \\
+		\cdots\quad\cdots      \\
+		r_{n-2}=q_nr_{n-1}+r_n \\
+		r_{n-1}=q_{n+1}r_n.\end{cases}$$ Подставим $r_{1}=f-q_1g$ в $g=q_2r_1+r_2$, получим $r_{2}=(1+q_1q_2)g-q_2f$. Затем выразим $r_3$. Продолжая этот процесс, мы получим $r_n=Pf+Qg$.
+
+\begin{claim}
+	\label{Mnog5} Многочлен $r_n$ является наибольшим общим делителем $f$ и $g$.
+\end{claim}
+
+\begin{proof}
+	Поскольку $r_{n-1}=q_{n+1}r_n$, то $r_{n-1}$ делится на $r_n$. В силу $r_{n-2}=q_nr_{n-1}+r_n$ видим, что $r_{n-2}$ делится на $r_n$. Таким образом, $f$ и $g$ делится на $r_n$. Пусть делится $f$ и $g$ делится на $d(x)$. Из равенства $r_n=Pf+Qg$ следует, что и $r_n$ делится на $d(x)$.
+\end{proof}
+
+Рассмотрим еще один класс колец. Пусть $A$ --- целостное кольцо и определено отображение $\delta\colon A\setminus\{0\}\rightarrow\NN\cup\{0\}$, обладающее следующими свойствами. \begin{enumerate}
+	\item $\delta(ab)\geq\delta(a)$ $\forall a,b\in A\setminus\{0\}$;
+	\item для любых $a,b\in A$, $b\neq 0$ существуют $q,r\in A$ такие, что $a=qb+r$, $\delta(r)<\delta(b)$ или $r=0$.
+\end{enumerate}
+Такие кольца называются \emph{евклидовыми кольцами}.
+
+\begin{theorem}
+	\label{Mnog6} Всякое евклидово кольцо является кольцом главных идеалов.
+\end{theorem}
+
+\begin{proof}
+	Пусть $A$ --- евклидово кольцо, $\aaa$ --- идеал в $A$. Пусть $a\in\aaa$ --- элемент для которого $\delta(a)$ минимально. Пусть $b\in\aaa$. Тогда $b=qa+r$, где $\delta(r)<\delta(a)$ или $r=0$. Поскольку $qa\in\aaa$, то $r\in\aaa$. В силу минимальности $\delta(a)$, $r=0$. Тогда $b=qa$. Следовательно, $\aaa=(a)$ --- главный идеал.
+\end{proof}
+
+\begin{corollary}
+	\label{Mnog7}
+	Всякое евклидово кольцо является факториальным.
+\end{corollary}
+
+Заметим, что кольцо многочленов над полем евклидово. Возьмем $\delta(f)=\deg f$. Таким образом, $A[x]$ --- кольцо главных идеалов, а следовательно, и факториально.
+
+\begin{lemma}[лемма Гаусса]
+	\label{Gaus}
+	Пусть $f(x)$ и $g(x)$ --- многочлены с целыми коэффициентами. Пусть $a$ --- наибольший общий делитель коэффициентов многочлена $f(x)$, $b$ --- наибольший общий делитель коэффициентов многочлена $g(x)$, $c$ --- наибольший общий делитель коэффициентов многочлена $f(x)g(x)$. Тогда $c=ba$.
+\end{lemma}
+
+\begin{proof}
+	Достаточно доказать, что если $a=b=1$, то $c=1$. Предположим, что $c$ делится на простое число $p$. Пусть $$f(x)=a_n x^n+ a_{n-1}x^{n-1}+\cdots+a_1 x+ a_0,$$ $$g(x)=b_m x^m+ b_{m-1}x^{m-1}+\cdots+b_1 x+ b_0.$$ Пусть $r$ --- наименьшее число такое, что $a_r$ не делится на $p$, $s$ --- наименьшее число такое, что $b_s$ не делится на $p$. Рассмотрим коэффициент при $x^{r+s}$ в $f(x)g(x)$. Он равен $$c_{r+s}=a_rb_s+a_{r+1}b_{s-1}+a_{r+2}b_{s-2}+\cdots+a_{r-1}b_{s+1}+a_{r-2}b_{s+2}+\cdots.$$ Заметим, что все слагаемые, кроме $a_rb_s$ делятся на $p$, а $a_rb_s$ не делится на $p$. Тогда $c_{r+s}$ также не делится на $p$.
+\end{proof}
+
+Пусть $K$ --- поле. Многочлен $f\in K[x]$ ненулевой степени называется \emph{неприводимым} над полем $K$, если он не делится ни на какой многочлен $g\in K[x]$, у которого $1\leq\deg g<\deg f$.
+
+\begin{theorem}
+	\label{Mnog8} Пусть $f(x)\in K[x]$ и $\alpha\in K$ --- корень $f(x)$. Тогда $f=g(x-\alpha)$ для некоторого $g\in K$.
+\end{theorem}
+
+\begin{proof}
+	Предположим, что $f$ не делится на $x-\alpha$. Тогда наибольший общий делитель этих многочленов равен $1$. Следовательно, существуют $h,g\in K[x]$ такие, что $fh+g(x-\alpha)=1$. Заметим, что $\varphi_{\alpha}(x-\alpha)=0$ и $\varphi_{\alpha}(1)=1$. Применяя $\varphi_{\alpha}$ к равенству $fh+g(x-\alpha)=1$, получаем $0=1$. Противоречие.
+\end{proof}
+
+Пусть $f$ --- неприводимый многочлен над $K$. Из теоремы \ref{Mnog8} следует, что если $\deg f\geq 2$, то $f$ не имеет корней в $K$. Докажем, что $\aaa=(f)$ --- максимальный идеал. Действительно, если существует $\aaa'\supset\aaa$, то $\aaa'=(g)$. Следовательно, $f=gh$. Если $\deg h\geq 1$, то $f$ приводим. Отсюда, $\deg h=0$, т.е. $h\in K$. Тогда $g=h^{-1}f$ и $\aaa'=\aaa$. Согласно теореме \ref{KomKol3} $K[x]/(f)$ является полем. Заметим, что естественный гомоморфизм $K[x]\rightarrow K[x]/(f)$ задает инъективный гомоморфизм $K$ в $K[x]/(f)$. Таким образом, мы можем рассматривать $K$ как подполе $K[x]/(f)$. Заметим, что образ элемента $x$ в $K[x]/(f)$ является корнем многочлена $f$. Поле $K[x]/(f)$ называется расширением поля $K$.
+
+\begin{theorem}
+	\label{Mnog9} Пусть $f(x)\in K[x]$. Тогда существует расширение $E$ поля $K$, в котором $f(x)$ разлагается на линейные множители, т.е. $$f(x)=a(x-\alpha_1)(x-\alpha_2)\cdots(x-\alpha_n),$$ где $\alpha_1,\alpha_2,\ldots,\alpha_n\in E$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $f=af_1f_2\cdots f_m$ --- разложение на неприводимые множители, причем коэффициент при старшей степени во всех $f_i$ равен $1$. Если все $f_i$ линейны, то все доказано. Пусть $\deg f_i\geq 2$. Рассмотрим расширение $E_1=K[x]/(f_i)$. Поскольку $K[x]\subset E_1[x]$, то $f=af_1f_2\cdots f_m$ над $E_1$. Более того, $f_i$ имеет разложение в поле $E_1$. Таким образом, $f=af'_1f'_2\cdots f'_{m'}$ над $E_1$, где $m'>m$. Если все $f'_i$ линейны, то все доказано. Если существует $f'_j$ такой, что $\deg f'_j\geq 2$, рассмотрим расширение $E_2=E_1[x]/(f'_j)$. Продолжая этот процесс, мы получаем необходимое разложение.
+\end{proof}
+
+Заметим, что число $\alpha_i$ совпадает со степенью многочлена (возможно не все $\alpha_i$ различны. Число $s$ называется \emph{кратностью} корня $\alpha$, если $f(x)=g(x)(x-\alpha)^s$ и $g(\alpha)\neq 0$.
+
+\begin{definition}
+	Поле $K$ называется \emph{алгебраически замкнутым}, если любой многочлен $f(x)\in K[x]$ имеет корень.
+\end{definition}
+
+\begin{theorem}
+	\label{Zam}
+	Для любого поля $K$ существует поле $\bar{K}$, содержащее поле $K$, такое, что $\bar{K}$ алгебраически замкнуто.
+\end{theorem}
+
+Если все элементы поля $\bar{K}$ алгебраичны над $K$, то $\bar{K}$ называется \emph{алгебраическим замыканием} поля $K$.
+
+\begin{theorem}[основная теорема алгебры]
+	\label{Mnog10} Поле $\CC$ алгебраически замкнуто.
+\end{theorem}
+
+Для доказательства этой теоремы нам потребуется некоторые вспомогательные утверждения.
+
+\begin{lemma}[лемма Даламбера]
+	\label{Dal}
+	Пусть $f(x)$ --- многочлен над полем комплексных чисел, и $f(x_0)\neq 0$. Тогда существует $h\in \CC$ такое, что $|f(x_0+h)|<|f(x_0)|$.
+\end{lemma}
+
+\begin{proof}
+	Рассмотрим разложение в ряд Тейлора в точке $x_0$, получаем $$f(x)=f(x_0)+f'(x_0)(x-x_0)+\frac{f''(x_0)}{2}(x-x_0)^2+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n.$$ Обозначим $h=x-x_0$. Пусть $$f'(x_0)=f''(x_0)=\cdots=f^{(k-1)}(x_0)=0,\quad f^{(k)}(x_0)\neq 0.$$ Тогда $$f(x_0+h)=f(x_0)+\frac{f^{(k)}(x_0)}{k!}h^k+\cdots+\frac{f^{(n)}(x_0)}{n!}h^n.$$ Поделим на $f(x_0)$, получим $$\frac{f(x_0+h)}{f(x_0)}=1+c_kh^k+c_{k+1}h^{k+1}+\cdots+c_n h^n,$$ где $c_i=\frac{f^{(i)}(x_0)}{i!f(x_0)}$. Получаем $$\frac{f(x_0+h)}{f(x_0)}=1+c_kh^k+c_kh^k\left(\frac{c_{k+1}}{c_k}h+\cdots+\frac{c_{n}}{c_k}h^{n-k}\right).$$ Отсюда, $$\left|\frac{f(x_0+h)}{f(x_0)}\right|\leq|1+c_kh^k|+|c_kh^k|\left|\frac{c_{k+1}}{c_k}h+\cdots+\frac{c_{n}}{c_k}h^{n-k}\right|.$$ Рассмотрим $$g(h)=\frac{c_{k+1}}{c_k}h+\cdots+\frac{c_{n}}{c_k}h^{n-k}.$$ Заметим, что $g$ непрерывна и $g(0)=0$. Следовательно, для любого $\varepsilon>0$ существует $\delta$ такое, что для любого $h$ с условием $|h|<\delta$ выполнено $|g(h)|<\varepsilon$. Возьмем $\varepsilon=\frac{1}{2}$. Тогда для любого $h$ с условием $|h|<\delta$ выполнено $$\left|\frac{f(x_0+h)}{f(x_0)}\right|\leq|1+c_kh^k|+\frac{1}{2}|c_kh^k|.$$ Рассмотрим $h$ с $\arg h^k=\pi-\arg c_k$. Тогда $c_kh^k=-|c_k||h|^k$. Отсюда, $$\left|\frac{f(x_0+h)}{f(x_0)}\right|\leq|1+c_kh^k|+\frac{1}{2}|c_kh^k|=1-|c_k||h|^k+\frac{1}{2}|c_k||h|^k=1-\frac{1}{2}|c_k||h|^k.$$ Получаем $|f(x_0+h)|<|f(x_0)|$.
+\end{proof}
+
+\begin{lemma}
+	\label{LemMnog1}
+	Для любого $K\in\RR$ существует $M\in\RR$ такое, что для любого $x$ с условием $|x|>M$ выполнено $|f(x)|>K$.
+\end{lemma}
+
+\begin{proof}
+	Имеем $$|f(x)|=|a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0|\geq$$ $$\geq|a_nx^n|-|a_{n-1}x^{n-1}+\cdots+a_1x+a_0|\geq$$ $$\geq|a_n| |x|^n-(|a_{n-1}||x|^{n-1}+\cdots+|a_1||x|+|a_0|).$$ Теперь утверждение следует из известного факта из математического анализа.
+\end{proof}
+
+Теперь докажем теорему. Нам необходимо доказать, что любой многочлен имеет корень в $\CC$. Мы можем считать, что $a_0\neq 0$. Пусть $M\in\RR$ такое, что $|f(x)|>2|a_0|$ для любого $x$ с условием $|x|>M$. Рассмотрим замкнутый круг $R$ радиуса $M$. Заметим, что функция $|f(x)|$ непрерывна. Следовательно, $|f(x)|$ достигает минимума в $R$. Этот минимум достигается во внутренней точке круга $R$. Пусть $x_0$ --- точка минимума. Согласно лемме \ref{LemMnog1} $x_0$ --- точка минимума $|f(x)|$ на всем $\CC$. С другой стороны, согласно лемме Даламбера если $|f(x_0)|\neq 0$, то существует $h$ такое, что $|f(x_0+h)|<|f(x_0)|$. Таким образом, $f(x)$ имеет корень в $\CC$.
+
+\section{Модули}
+
+\begin{definition}
+	Пусть $A$ --- кольцо. \emph{Левым модулем} над $A$ (или \emph{левым $A$-модулем}) называется абелева группа $M$ с действием кольца $A$ на $M$, удовлетворяющим следующим свойствам.
+	\begin{enumerate}
+		\item $(a+b)x=ax+bx$ $\forall a,b\in A, x\in M$;
+		\item $a(x+y)=ax+ay$ $\forall a\in A, x,y\in M$;
+		\item $(ab)x=a(bx)$ $\forall a,b\in A, x\in M$;
+		\item $1\cdot x=x$ $\forall x\in M$.
+	\end{enumerate}
+\end{definition}
+
+Аналогично можно определить \emph{правый $A$-модуль}. Далее мы будем иметь дело только с левыми модулями над кольцом $A$, поэтому будем называть их просто "модуль" ($A$-модуль).
+
+\begin{example}
+	Любой левый идеал в $A$ есть модуль.
+\end{example}
+
+\begin{example}
+	Любая коммутативная группа есть $\ZZ$-модуль.
+\end{example}
+
+\begin{example}
+	Кольцо многочленов $A[x]$ есть $A$-модуль.
+\end{example}
+
+\begin{definition}
+	Пусть $M$ --- модуль. Подгруппа $N\subset M$ называется \emph{подмодулем}, если $AN\subset N$.
+\end{definition}
+
+\begin{example}
+	Пусть $M$ --- модуль над $A$ и $\aaa\subset A$ --- левый идеал в $A$. Тогда множество $\aaa M$ всех элементов вида $$a_1x_1+a_2x_2+\cdots a_nx_n,$$ где $a_i\in\aaa$, $x_i\in M$ будет подмодулем в $M$.
+\end{example}
+
+Пусть $M$ --- модуль над $A$ и $N$ --- его подмодуль. Определим структуру модуля на факторгруппе $M/N$. Пусть $x+N$ --- смежный класс. Тогда $a(x+N)=ax+N$. Модуль $M/N$ называется \emph{фактормодулем}. Пусть $M$ и $M'$ --- $A$-модули. \emph{Гомоморфизмом} модулей $f\colon M\rightarrow M'$ называется гомоморфизм групп такой, что $f(ax)=af(x)$ для любых $a\in A$, $x\in M$. \emph{Ядром} $\ker f$ называется множество $N=\{x\mid f(x)=0\}$. Легко заметить, что $N$ --- подмодуль $M$. \emph{Образом} $Im f$ называется множество $N'=\{y\mid y\in M'\quad\exists x f(x)=y\}$. Легко заметить, что $N'$ --- подмодуль $M'$.
+
+Как и в случае групп имеем теоремы о гомоморфизме.
+
+\begin{theorem}[1-я теорема о гомоморфизме]
+	\label{Gommod1} Пусть $f\colon M\rightarrow M'$ --- сюръективный
+	гомоморфизм модулей. Тогда существует естественный изоморфизм
+	$M/\ker(f)\cong M'$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\bar{f}\colon M/\ker(f)\rightarrow M'$ --- отображение,
+	определяемое следующим образом: $\bar{f}(x+\ker(f))=f(x)$. Докажем
+	корректность определения $\bar{f}$. Пусть $x+\ker(f)\in M/\ker(f)$, $a\in A$. Тогда $$\bar{f}(a(x+\ker(f)))=\bar{f}(ax+\ker(f))=f(ax)=af(x)=af(x+N).$$ Изоморфизм $M/\ker(f)\cong M'$ следует из аналогичного утверждения для групп.
+\end{proof}
+
+\begin{theorem}[2-я теорема о гомоморфизме]
+	\label{Gommod2} Пусть $N$ и $N'$ --- подмодули модуля $M$. Тогда $(N+N')/N'\cong N/(N\cap N')$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $f\colon N\rightarrow (N+N')/N'$ --- гомоморфизм групп,
+	определяемый следующим образом: $f(h)=h+N'$. Очевидно, что $f$ ---
+	сюръекция. Тогда, по теореме \ref{Gommod1}, $(N+N')/N'\cong N/\ker(f)$.
+	Очевидно, $N\cap N'\subset\ker(f)$. Пусть $a\in\ker(f)$. Тогда $a\in
+		N'$. Следовательно, $a\in N\cap N'$. Таким образом, $N\cap N'=\ker(f)$
+	и теорема доказана.
+\end{proof}
+
+\begin{theorem}[3-я теорема о гомоморфизме]
+	\label{Gommod3} Пусть $N$ и $N'$ --- подмодули модуля $M$,
+	причем $N'\subset N$. Тогда $$\left. M/N\cong (M/N')\right/(N/N').$$
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим гомоморфизм $f\colon M/N'\rightarrow M/N$, определяемый
+	следующим образом: $f(x+N')=x+N$. Очевидно, что $\ker(f)$ состоит из
+	всех $x+N'$ таких, что $x\in N$. Следовательно, $\ker(f)\cong N/N'$.
+	Таким образом, наше утверждение следует из теоремы \ref{Gommod1}.
+\end{proof}
+
+Пусть $M$ и $M'$ --- $A$-модули. \emph{Прямой суммой} $M\oplus M'$ этих модулей называется прямая сумма абелевых групп, на которой определена структура модуля $a(x,y)=(ax,ay)$, где $x\in M$, $y\in M'$, $a\in A$.
+Модуль $M$ называется \emph{конечно порожденным} или модулем \emph{конечного типа}, если он имеет конечную систему образующих, т.е. существуют элементы $x_1,x)2,\ldots,x_n\in M$ такие, что любой $x\in M$ имеет представление $$x=a_1x_1+a_2x_2+\cdots a_nx_n.$$
+
+\begin{definition}
+	\emph{Аннулятором} $A$-модуля $M$ называется множество $$\Ann(M)=\{a\mid a\in A, ax=0,\forall x\in M\}.$$ Модуль $M$ называется \emph{точным}, если $\Ann(M)=0$.
+\end{definition}
+
+\begin{theorem}
+	\label{Mod1} $\Ann(M)$ --- двусторонний идеал кольца $A$.
+\end{theorem}
+
+\begin{proof}
+	Очевидно, что $0\in\Ann(M)$. Пусть $b,c\in\Ann(M)$. Тогда $(b+c)x=bx+cx=0$ для любого $x\in M$. Из равенства $$0=(b-b)x=bx+(-bx)=(-bx)$$ следует, что $-b\in\Ann(M)$. Таким образом, $\Ann(M)$ --- абелева группа. Пусть $a\in A$. Тогда $$(ab)x=a(bx)=a\cdot 0=0,\quad (ba)x=b(ax)=by=0.$$ Таким образом, $\Ann(M)$ --- двусторонний идеал кольца $A$.
+\end{proof}
+
+Полагая $(a+\Ann(M))x=ax$ для $x\in M$, $(a+\Ann(M)\in A/\Ann(M)$, мы определяем на $M$ структуру $A/\Ann(M)$-модуля.
+
+Модуль $M$ над полем называется \emph{векторным пространством}. Если $M$ конечно порожден, то $M$ \emph{конечномерное векторное пространство}.
+
+
+\section{Алгебры}
+
+\begin{definition}
+	Пусть $K$ --- поле. Будем говорить, что $A$ является \emph{алгеброй} над полем $K$ или $K$-\emph{алгеброй}, если $A$ является векторным пространством над $K$ и на $A$ есть операция умножения, удовлетворяющая следующим свойствам
+	\begin{enumerate}
+		\item $x(y+z)=xy+xz$, $\forall x,y,z\in A$;
+		\item $(x+y)z=xz+yz$, $\forall x,y,z\in A$;
+		\item $(ax)y=x(ay)=a(xy)$, $\forall x,y\in A$, $a\in K$.
+	\end{enumerate}
+	Если умножение в $A$ обладает свойством ассоциативности, то $A$ называется \emph{ассоциативной алгеброй}. Если в $A$ существует единица, т.е. элемент $1\in A$ такой, что $x=1\cdot x=x\cdot1$ для любого $x\in A$, то $A$ называется \emph{алгеброй с единицей}.
+\end{definition}
+
+В этом параграфе все алгебры будут предполагаться ассоциативными алгебрами с единицей. Заметим, что в таких алгебрах $K\cong K\cdot 1$. Действительно, пусть $f\colon K\rightarrow A$ --- отображение, заданное $f(a)=a\cdot 1$. Заметим, что $\ker f\neq K$. Поскольку $K$ --- поле, то $\ker f=0$. Таким образом, мы можем считать, что $K\subset A$.
+
+Алгебра $A$ над полем $K$ называется \emph{конечномерной}, если конечномерно векторное пространство $A$ над $K$. Алгебра $A$ над полем $K$ называется \emph{конечно порожденной}, если существует конечное множество элементов порождающих $A$.
+
+\begin{example}
+	Поле $\CC$ является алгеброй над $\RR$.
+\end{example}
+
+\begin{example}
+	Пусть $K$ --- поле. Кольцо многочленов $K[x]$ есть $K$-алгебра. Эта алгебра конечно порождена, но не конечномерна.
+\end{example}
+
+\begin{example}
+	Кольцо матриц $M_n(K)$ является конечномерной $K$-алгеброй.
+\end{example}
+
+\begin{theorem}
+	\label{Algebra1} Пусть $A$ --- $n$-мерная алгебра над полем $K$. Тогда $A$ изоморфна некоторой подалгебре в $M_n(K)$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $a\in A$. Тогда $a$ определяет отображение $a^*\colon A\rightarrow A$ по правилу $a^*(x)=ax$. Заметим, что для любых $x,y\in A$, $\alpha\in K$ выполнено $$a^*(x+y)=a(x+y)=ax+ay=a^*(x)+a^*(y),$$ $$a^*(\alpha x)=a(\alpha x)=\alpha ax=\alpha a^*(x).$$ Таким образом, $a$ --- линейный оператор на пространстве $A$. Более того, для $a,b\in A$ выполнено $$(a+b)^*(x)=(a+b)x=ax+bx=a^*(x)+b^*(x)=(a^*+b^*)(x),$$ $$(ab)^*(x)=(ab)x=a(bx)=ab^*(x)=a^*(b^*(x))=(a^*b^*)(x).$$ Зафиксируем базис $e_1,e_2,\ldots e_n$ пространства $A$. Мы получили гомоморфизм $J\colon A\rightarrow M_n(K)$, отображающий элемент $a\in A$ в матрицу линейного оператора $a^*$. Докажем, что гомоморфизм инъективен. Пусть $J(a)=0$. Тогда $a=a\cdot 1=a^*(1)=0.$
+\end{proof}
+
+\begin{theorem}
+	\label{Algebra2} Пусть $A$ --- $n$-мерная алгебра над полем $K$. Тогда для любого $a\in A$ существует многочлен $f(x)\in K[x]$ такой, что $f(a)=0$ и $\deg f\leq n$.
+\end{theorem}
+
+\begin{proof}
+	Поскольку $A$ --- $n$-мерная алгебра над полем $K$, то элементы $1,a,a^2\cdots a^n$ линейно зависимы. Тогда существуют  $\alpha_0,\alpha_1\ldots,\alpha_n\in K$ такие, что $\alpha_0+\alpha_1 a+\alpha_2 a^2+\cdots\alpha_n a^n=0.$
+\end{proof}
+
+Многочлен $f(x)\in K[x]$ для которого $f(a)=0$ называется \emph{аннулирующим} элемент $a$.
+
+\begin{theorem}
+	\label{Algebra3} Пусть $A$ --- конечномерная алгебра над полем $K$. Тогда любой элемент $a\in A$ либо обратим, либо является делителем нуля.
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим многочлен $f(x)=\alpha_n x^n+\cdots+\alpha_1 x+\alpha_0$ минимальной степени, аннулирующий $a$. Предположим, что $\alpha_0=0$. Тогда $$0=f(a)=\alpha_n a^n+\cdots+\alpha_1 a=a(\alpha_n a^{n-1}+\cdots+\alpha_1).$$ Поскольку $f(x)$ имеет минимальную степень из всех многочленов, аннулирующих $a$, то $a$ --- делитель нуля. Предположим, что $\alpha_0\neq 0$. Тогда $$1=\alpha_0^{-1}(\alpha_n a^{n-1}+\cdots+\alpha_1)a.$$ Таким образом, $a$ обратим.
+\end{proof}
+
+\begin{corollary}
+	\label{Algebra4}
+	Пусть $A$ --- конечномерная алгебра над полем $K$. Если в $A$ нет делителей нуля, то $A$ --- тело.
+\end{corollary}
+
+Если в $K$-алгебре $A$ (необязательно ассоциативной) есть единичный элемент и любой элемент обратим, то такая алгебра называется \emph{алгеброй с делением}.
+Пусть $A$ --- конечномерная алгебра над полем $K$ и $e_1,e_2,\ldots,e_n$ --- базис $A$ над $K$. Тогда соотношения $$e_ie_j=\sum\limits_{k=1}^n g_{ij}^k e_k$$ задают структуру $K$-алгебры на $A$. Действительно, пусть $$a=a_1e_1+a_2e_2+\cdots+a_ne_n,\quad b=b_1e_1+b_2e_2+\cdots+b_n e_n,$$ тогда $$ab=\left(\sum\limits_{i=1}^n a_ie_i\right)\left(\sum\limits_{j=1}^n b_je_j\right)=\sum\limits_{i=1}^n\sum\limits_{j=1}^n a_ib_je_ie_j=\sum\limits_{i=1}^n\sum\limits_{j=1}^n\sum\limits_{k=1}^na_ib_jg_{ij}^k e_k.$$
+
+
+\begin{example}
+	Рассмотрим четырехмерное векторное пространство $\HH$ над $\RR$ с базисом $1,i,j,k$, т.е. $\HH$ --- множество $x=a+bi+cj+dk$, где $a,b,c,d\in\RR$. Положим $i^2=j^2=k^2=-1$, $ij=k$, $ji=-k$. Эти соотношения определяют $\RR$-алгебру на $\HH$. Не трудно убедиться, что элементы $\pm 1,\pm i,\pm j,\pm k$ образуют группу (это группа кватернионов). Таким образом, $\HH$ ассоциативная $\RR$-алгебра с единицей. Пусть $x=a+bi+cj+dk$. Положим $\bar{x}=a-bi-cj-dk$. Тогда $$x\bar{x}=(a+bi+cj+dk)(a-bi-cj-dk)=$$ $$=a^2-abi-acj-adk+abi+b^2-bck+bdj+acj+bck+$$ $$+c^2-cdi+adk-bdj+cdi+d^2=a^2+b^2+c^2+d^2.$$ Следовательно, $$(a+bi+cj+dk)(\frac{a}{|x|}-\frac{b}{|x|}i-\frac{c}{|x|}j-\frac{d}{|x|}k)=1,$$ где $|x|=a^2+b^2+c^2+d^2$. Таким образом, любой элемент в $\HH$ обратим. Мы получили, что $\HH$ --- тело. Это тело называется \emph{телом кватернионов}. Легко увидеть, что $\HH$ не является полем.
+\end{example}
+
+\begin{definition}
+	Пусть $A$ --- конечномерная алгебра над полем $K$ и $a\in A$. Тогда многочлен $f(x)$, аннулирующий $a$, степень которого минимальна и старший коэффициент равен $1$, называется \emph{минимальным многочленом элемента} $a$ над $K$.
+\end{definition}
+
+\begin{theorem}
+	\label{Algebra5} Пусть $A$ --- конечномерная алгебра с делением над полем $K$ и $a\in A$. Тогда минимальный многочлен $f(x)$ элемента $a$ неприводим и единственен. Более того, любой многочлен $g(x)$, аннулирующий $a$, делится на $f(x)$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $f(x)$ --- минимальный многочлен элемента $a$. Предположим, что он приводим, т.е. $f(x)=g(x)h(x)$ и $\deg f>\deg g\geq\deg h\geq 1$. Тогда $0=f(a)=g(a)h(a)$. Поскольку $A$ --- алгебра с делением, то либо $g(a)=0$, либо $h(a)=0$. Противоречие с минимальностью $f(x)$. Пусть $g(x)$ --- другой многочлен, аннулирующий $a$. Заметим, что $\deg g\geq\deg f$. Тогда $g(x)=q(x)f(x)+r(x)$, где $\deg r<\deg f$. Поскольку $f(a)=g(a)=0$, то $r(a)=0$. Следовательно, $r(x)=0$. Таким образом, $g(x)$ делится на $f(x)$. Если $\deg f=\deg g$, то $f=\alpha g$, где $\alpha\in K$. Отсюда следует единственность $f(x)$.
+\end{proof}
+
+\begin{theorem}
+	\label{Algebra6} Пусть $A$ --- конечномерная алгебра с делением над полем $\CC$. Тогда $A=\CC$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $a\in A$, и $f(x)$ --- его минимальный многочлен. Тогда $f(x)$ неприводим (см. \ref{Algebra5}). Тогда $f(x)=x-a$ (см. \ref{Mnog10}). Отсюда, $a\in\CC$.
+\end{proof}
+
+\begin{theorem}[Фробениус]
+	\label{Algebra7} Пусть $A$ --- конечномерная ассоциативная алгебра с делением над полем $\RR$. Тогда либо $A=\RR$, либо $A=\CC$, либо $A=\HH$.
+\end{theorem}
+
+\begin{lemma}
+	\label{LemMnogo1}
+	Пусть $f(x)\in\RR[x]$, и $\alpha$ --- комплексный корень $f(x)$. Тогда $\bar{\alpha}$ --- тоже корень $f(x)$.
+\end{lemma}
+
+\begin{proof}
+	Пусть $$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,$$ где все $a_i\in\RR$. Заметим, что $\bar{a}_i=a_i$. Тогда $$f(\bar{\alpha})=a_n\bar{\alpha}^n+a_{n-1}\bar{\alpha}^{n-1}+\cdots+a_1\bar{\alpha}+a_0=\bar{a}_n\overline{\alpha^n}+\bar{a}_{n-1}\overline{\alpha^{n-1}}+\cdots+\bar{a}_1\bar{\alpha}+\bar{a}_0$$ $$=\overline{a_n\alpha^n+a_{n-1}\alpha^{n-1}+\cdots+a_1\alpha+a_0}=0.$$
+\end{proof}
+
+\begin{corollary}
+	\label{LemMnogo2}
+	Любой многочлен $f(x)\in\RR[x]$ степени больше $2$ приводим.
+\end{corollary}
+
+\begin{proof}
+	Пусть $f(x)\in\RR[x]$ и $\deg f>2$. Пусть $\alpha$ --- комплексный корень многочлена $f(x)$. Согласно \ref{LemMnogo1} $\bar{\alpha}$ --- тоже корень $f(x)$. Тогда $f(x)$ делится на $x-\alpha$ и $x-\bar{\alpha}$ над $\CC$. Следовательно, $f(x)$ делится на $(x-\alpha)(x-\bar{\alpha})$. С другой строны, $$(x-\alpha)(x-\bar{\alpha})=x^2-(\alpha+\bar{\alpha})x+\bar{\alpha}\alpha\in\RR[x].$$ Таким образом, $f(x)$ приводим.
+\end{proof}
+
+Теперь докажем более слабый вариант теоремы Фробениуса.
+
+\begin{theorem}
+	\label{Algebra8} Пусть $A$ --- конечномерная ассоциативная коммутативная алгебра с делением над полем $\RR$ (т.е. $A$ --- поле). Тогда либо $A=\RR$, либо $A=\CC$.
+\end{theorem}
+
+\begin{proof}
+	Если размерность $A$ над $\RR$ равна единице, то $A=\RR$. Предположим, что $\dim A\geq 2$. Тогда существует $a\in A$ такое, что $a\not\in\RR$. Пусть $f(x)$ --- минимальный многочлен элемента $a$. Согласно теореме \ref{Algebra5} и следствию \ref{LemMnogo2}, либо $\deg f=1$, либо $\deg f=2$. Если $\deg f=1$, то $f(x)=x-a$ и $a\in\RR$. Следовательно, $\deg f=2$, т.е. $f(x)=x^2+\alpha x+\beta$, $\alpha,\beta\in\RR$. Представим $f(x)$ в виде $$f(x)=(x+\frac{\alpha}{2})^2+(\beta-\frac{\alpha^2}{4}).$$ Отсюда, $(a+\frac{\alpha}{2})^2=D$, где $D=\frac{\alpha^2}{4}-\beta$. Если $D\geq 0$, то многочлен $f(x)$ приводим, что противоречит теореме \ref{Algebra5}. Положим $i=\frac{a+\frac{\alpha}{2}}{\sqrt{|D|}}$. Тогда $i^2=-1$. Таким образом, в $A$ есть подалгебра $\RR+\RR i$, которая изоморфна полю комплексных чисел. Поскольку $A$ поле, содержащее $\CC$, то $A$ является $\CC$-алгеброй. Заметим, что размерность $A$ над $\CC$ меньше размерности $A$ над $\RR$. Следовательно, $A$ --- конечномерная алгебра с делением над полем $\CC$. Тогда, согласно \ref{Algebra6}, $A=\CC$.
+\end{proof}
+
+\begin{example}
+	Пусть $G$ --- конечная группа и $K$ --- поле. Пусть $$KG=\{\sum k_g g\mid g\in G, k_g\in K\}$$ --- совокупность формальных линейных комбинаций элементов группы $G$ с коэффициентами из поля $K$. Мы можем задать умножение на $KG$ как $$\left(\sum\limits_{g\in G} k_g g\right)\left(\sum\limits_{g'\in G} l_{g'} g'\right)=\left(\sum\limits_{h\in G} \left(\sum\limits_{g,g'\in G, gg'=h}k_g l_{g'}\right)h\right).$$ Таким образом мы получили ассоциативную алгебру с единицей. Эта алгебра называется \emph{групповой алгеброй} группы $G$ над полем $K$.
+\end{example}
+
+
+\begin{definition}
+	Пусть $A$ --- алгебра над полем $K$. \emph{Дифференцированием} алгебры $A$ называется отображение $d\colon A\rightarrow A$, удовлетворяющее условиям.
+	\begin{enumerate}
+		\item $d(ax)=adx$, $\forall a\in K, x\in A$;
+		\item $d(x+y)=dx+dy$, $\forall x,y\in A$;
+		\item $d(xy)=(dx)y+x(dy)$, $\forall x,y\in A$.
+	\end{enumerate}
+\end{definition}
+
+
+
+\chapter{2-й семестр}
+
+\section{Расширение полей}
+
+Пусть $E,k$ --- два поля, причем $k\subset E$. Тогда поле $E$ называется \emph{расширением} поля $k$.
+
+\begin{definition}
+	Расширение $E$  поля $k$ называется \emph{конечным} (\emph{бесконечным}), если $E$ конечномерно (бесконечномерно), как линейное пространства над $k$. Другими словами, $E$ конечно над $k$, если существуют $a_1,a_2,\ldots, a_n\in E$ такие, что $\forall x\in E$, $x=\alpha_1 a_1+\alpha_2 a_2+\cdots+\alpha_n a_n$, где $\alpha_1,\alpha_2\ldots,\alpha_n\in k$. \emph{Степенью} $E$ над $k$ мы будем называть размерность $E$ как линейного пространства и обозначать $[E:k]$.
+\end{definition}
+
+\begin{theorem}
+	\label{Ras1} Пусть $E$ --- конечное расширение поля $k$, $F$ --- конечное расширение поля $E$. Тогда $F$ --- конечное расширение поля $k$ и $[F:k]=[E:k][F:E]$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $x_1,x_2,\ldots, x_n$ --- базис $E$ над полем $k$, $y_1,y_2,\ldots, y_m$ --- базис $F$ над полем $E$. Тогда для любого элемента $a\in F$ существует разложение $$a=\alpha_1 y_1+\cdots+\alpha_m y_m,$$ где $\alpha_1,\ldots\alpha_m\in E$. Поскольку $E$ --- конечное расширение поля $k$, то $$\alpha_i=\beta_{i1}x_1+\cdots\beta_{in}x_n,$$ где $\beta_{ij}\in k$. Таким образом, $$a=\sum\limits_{i=1}^m\sum\limits_{j=1}^n\beta_{ij}x_jy_i.$$ Следовательно, $\{x_jy_i\}$ порождают $F$ над $k$. Таким образом, $F$ --- конечное расширение поля $k$. Осталось доказать равенство $[F:k]=[E:k][F:E]$. Для этого докажем линейную независимость $\{x_jy_i\}$. Предположим противное, т.е. существуют элементы $c_{ij}$ такие, что $$\sum\limits_{i=1}^m\sum\limits_{j=1}^n c_{ij}x_jy_i=0.$$ С другой стороны, $$\sum\limits_{i=1}^m\sum\limits_{j=1}^n c_{ij}x_jy_i=\left(\sum\limits_{j=1}^n c_{1j} x_j\right)y_1+\left(\sum\limits_{j=1}^n c_{2j} x_j\right)y_2+\cdots+\left(\sum\limits_{j=1}^n c_{mj} x_j\right)y_m.$$ Заметим, что $\sum\limits_{j=1}^n c_{ij} x_j\in E$. Поскольку $y_1,y_2,\ldots, y_m$ линейно независимы, то все $\sum\limits_{j=1}^n c_{ij} x_j=0$. Поскольку $x_1,x_2,\ldots, x_n$ линейно независимы, то все $c_{ij}=0$.
+\end{proof}
+
+\begin{remark}
+	Если $k\subset E\subset F$ и $F$ --- конечное расширение поля $k$, то очевидно, что $E$ --- конечное расширение поля $k$, а $F$ --- конечное расширение поля $E$.
+\end{remark}
+
+\begin{definition}
+	Элемент $x\in E$ называется \emph{алгебраическим}, если он является корнем многочлена с коэффициентами из $k$, т.е. существуют  $\alpha_0,\alpha_1\ldots,\alpha_n\in k$ такие, что $\alpha_0+\alpha_1 x+\alpha_2 x^2+\cdots\alpha_n x^n=0.$
+	Расширение $E$  поля $k$ называется \emph{алгебраическим}, если любой элемент $E$ является алгебраическим.
+\end{definition}
+
+\begin{theorem}
+	\label{Ras2} Любое конечное расширение является алгебраическим.
+\end{theorem}
+
+\begin{proof}
+	Пусть $E$ --- конечное расширение поля $k$, и пусть $a\in E$. Если $a\in k$, то он алгебраичен. Предположим, что $a\not\in k$. Рассмотрим $1,a,a^2\cdots a^n\cdots$. Поскольку $E$ --- конечное расширение поля $k$, то существует $n$ такое, что элементы $1,a,a^2\cdots a^n$ линейно зависимы. Тогда существуют  $\alpha_0,\alpha_1\ldots,\alpha_n\in k$ такие, что $\alpha_0+\alpha_1 a+\alpha_2 a^2+\cdots\alpha_n a^n=0.$
+\end{proof}
+
+Пусть $E$ --- расширение поля $k$, и $a_1,a_2,\ldots, a_n\in E$ обозначим через $k(a_1,a_2,\ldots, a_n)$ наименьшее подполе поля $E$, содержащее $a_1,a_2,\ldots,a_n$. Очевидно оно состоит из элементов вида $$\frac{f(a_1,a_2,\ldots,a_n)}{g(a_1,a_2,\ldots,a_n)},$$ где $f,g$ --- многочлены с коэффициентами из $k$ и $g(a_1,a_2,\ldots,a_n)\neq 0$.
+
+\begin{theorem}
+	\label{Ras3} Пусть $E$ --- расширение поля $k$ и $a\in E$ алгебраичен над $k$. Тогда $k(a)$ --- конечное расширение поля $k$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $f(x)$ --- многочлен с коэффициентами из $k$ такой, что $f(a)=0$. Предположим, что $f(x)$ приводим над $k$, т.е. $f(x)=f_1(x)f_2(x)$, где $f_1(x),f_2(x)$ --- многочлены над $k$, степени меньше степени $f(x)$. Тогда либо $f_1(a)=0$, либо $f_2(a)=0$. Таким образом, последовательно заменяя $f(x)$ на многочлены меньшей степени, мы можем считать, что $f(x)$ неприводим. Рассмотрим $k[x]$ --- множество многочленов от $x$ с коэффициентами из $k$. Пусть $g(x)\in k[x]$ такой, что $g(a)\neq 0$. Тогда $g(x)$ взаимно прост с $f(x)$. Следовательно, существуют многочлены $p(x), q(x)$ такие, что $f(x)p(x)+g(x)q(x)=1$. Подставляя $a$, получаем $g(a)q(a)=1$. Таким образом, $k[a]$ не только кольцо, но и поле. Очевидно, что размерность $k[a]$ как векторного пространства над $k$ не превышает степени многочлена $f(x)$.
+\end{proof}
+
+\begin{remark}
+	Заметим, что многочлен $f(x)$ единственен с точностью до умножения на константу. Мы можем считать, что коэффициент при старшей степени у этого многочлена равен 1. Действительно, пусть существует другой неприводимый многочлен $f'(x)$ такой, что $f'(a)=0$. Поскольку они оба неприводимы, то они взаимно просты. Тогда существуют многочлены $p(x), q(x)$ такие, что $f(x)p(x)+f'(x)q(x)=1$. Подставляем $a$, получаем противоречие. Таким образом, мы можем считать, что старший коэффициент многочлена $f(x)$ равен 1. Такой многочлен мы будем называть \emph{минимальным многочленом элемента} $a$ над $k$, и обозначать $\Irr(a,k,x)$.
+\end{remark}
+
+\begin{corollary}
+	\label{Ras4}
+	Пусть $E$ --- расширение поля $k$ и $a_1,a_2,\ldots,a_n\in E$ алгебраичны над $k$. Тогда $k(a_1,a_2,\ldots,a_n)$ --- конечное расширение поля $k$.
+\end{corollary}
+
+\begin{proof}
+	Заметим, что $$k\subset k(a_1)\subset k(a_1,a_2)\subset\cdots \subset k(a_1,a_2,\ldots,a_n).$$ Поскольку $k(a_1,a_2,\ldots,a_i, a_{i+1})=k(a_1,a_2,\ldots,a_i)(a_{i+1})$, то согласно теореме \ref{Ras3} каждое вложение является конечным расширением. Теперь утверждение следует из теоремы \ref{Ras1}.
+\end{proof}
+
+\begin{theorem}
+	\label{Ras5}
+	Пусть $E$ --- алгебраическое расширение поля $k$ и $F$ --- алгебраическое расширение поля $E$. Тогда $F$ --- алгебраическое расширение поля $k$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $x\in F$. Тогда $$a_0+a_1x+\cdots+a_n x^n=0,$$ где $a_0,a_1,\ldots,a_n\in E$. Рассмотрим $E_0=k(a_0,a_1,\ldots,a_n)$. Согласно следствию \ref{Ras4} $E_0$ --- конечное расширение $k$. Рассмотрим $F_0=E_0(x)$. Аналогично, $F_0$ --- конечное расширение $E_0$. Следовательно, по теореме \ref{Ras1}, $F_0$ --- конечное расширение $k$. Заметим, что $x\in F_0$. С другой стороны, согласно теореме \ref{Ras2}, $F_0$ --- алгебраическое расширение поля $k$. Следовательно, $x$ алгебраичен.
+\end{proof}
+
+\begin{remark}
+	Если $k\subset E\subset F$ и $F$ --- алгебраическое расширение поля $k$, то очевидно, что $E$ --- алгебраическое расширение поля $k$, а $F$ --- алгебраическое расширение поля $E$.
+\end{remark}
+
+Пусть $p(x)$ --- неприводимый многочлен над полем $k$. Рассмотрим кольцо многочленов $k[x]$. Тогда многочлен $p(x)$ порождает главный идеал $(p(x))$. Поскольку $p(x)$ неприводим, то $(p(x))$ --- максимальный идеал. Следовательно, $k[x]/(p(x))$ --- поле. Пусть $\sigma\colon k[x]\rightarrow k[x]/(p(x))$ --- естественный гомоморфизм. Заметим, что $\sigma$ сюръективен на $k$. Тогда $\sigma(k)$ --- подполе поля $k[x]/(p(x))$ изоморфное $k$. Мы можем отождествить его с $k$. Тогда $E=k[x]/(p(x))$ является расширением поля $k$. Рассмотрим $\xi=\sigma(x)$. Заметим, что $\xi$ является корнем многочлена  $p(x)$ в $E$. Таким образом, мы получили следующее утверждение.
+
+\begin{claim}
+	\label{Nor1}
+	Для любого многочлена $p(x)\in k[x]$ существует расширение поля $k$ в котором $p(x)$ имеет корень.
+\end{claim}
+
+\begin{definition}
+	Пусть $k$ --- поле. Предположим, что существует такое число $p$, что $p\cdot 1=0$, т.е. $$\underbrace{1+1+\cdots+1}_{\text{$p$ слагаемых}}=0.$$ Пусть $p$ --- минимальное из таких чисел. Тогда говорят, что $p$ --- \emph{характеристика поля} $k$. Обозначается $char(k)$. Если не существует такого положительного числа $p$, то говорим, что поле имеет характеристику ноль.
+\end{definition}
+
+\begin{claim}
+	\label{Har1}
+	Характеристика поля либо ноль, либо простое число.
+\end{claim}
+
+\begin{proof}
+	Предположим, что характеристика поля $p=mn$. Тогда $$\underbrace{1+1+\cdots+1}_{\text{$p$ слагаемых}}=\underbrace{(1+1+\cdots+1)}_{\text{$m$ слагаемых}}\cdot\underbrace{(1+1+\cdots+1)}_{\text{$n$ слагаемых}}=0.$$ Отсюда, либо $$\underbrace{1+1+\cdots+1}_{\text{$m$ слагаемых}}=0,$$ либо $$\underbrace{1+1+\cdots+1}_{\text{$n$ слагаемых}}=0.$$
+\end{proof}
+
+Рассмотрим поле $k$ характеристики $p$.
+
+\begin{claim}
+	\label{Har2}
+	Пусть $k$ --- поле характеристики $p$. Тогда $(a+b)^p=a^p+b^p$.
+\end{claim}
+
+\begin{proof}
+	Следует из формулы Бинома--Ньютона и того, что $C_p^i$ делится на $p$ для любого $i\neq 0,p$.
+\end{proof}
+
+\begin{definition}
+	Поскольку $(a+b)^p=a^p+b^p$ и $(ab)^p=a^p b^p$, то отображение $f\colon k\rightarrow k^p$ заданное $f(x)=x^p$ является гомоморфизмом. Он называется \emph{морфизмом Фробениуса}.
+\end{definition}
+
+\begin{definition}
+	Поле $k$ называется совершенным, если либо $k$ характеристики ноль, либо $k$ характеристики $p$ и совпадает с $k^p$.
+\end{definition}
+
+\begin{theorem}
+	\label{Sov}
+	Пусть $k$ --- конечное поле. Тогда $k$ совершенно.
+\end{theorem}
+
+\begin{proof}
+	Заметим, что $k^p$ --- подполе в $k$ и $k^p$ изоморфно $k$. Следовательно, $k^p$ и $k$ имеют одинаковое количество элементов. Тогда они совпадают.
+\end{proof}
+
+\section{Конечные поля}
+
+В этом параграфе мы рассмотрим конечные поля. Пусть $k$ --- поле из $q$ элементов. Очевидно, что $char(k)=p>0$. Следовательно, поле $k$ содержит $\ZZ_p$ в качестве подполя. Тогда $k$ является конечным расширением поля $\ZZ_p$, т.е. $[k:\ZZ_p]=n$. Таким образом, любой элемент $\alpha\in k$ имеет единственное представление в виде $$\alpha=a_1e_1+a_2e_2+\cdots+a_ne_n,$$ где $e_1,e_2,\ldots,e_n$ --- базис $k$ как векторного пространства над $\ZZ_p$, $a_1,a_2,\ldots,a_n\in\ZZ_p$. Отсюда, число элементов в поле $k$ равно $p^n$.
+
+\begin{theorem}
+	\label{Kon1}
+	Пусть $k^*$ --- мультипликативная группа поля $k$, т.е. множество $k\setminus\{0\}$ с операцией умножение. Тогда $k^*$ --- циклическая группа порядка $p^n-1$.
+\end{theorem}
+
+\begin{proof}
+	Предположим, что $k^*$ не является циклической группой. Тогда существует $r<p^n-1$ такое, что $\alpha^r=1$ для любого $\alpha\in k^*$. Таким образом, все элементы $k^*$ являются корнями многочлена $x^r-1=0$, но этот многочлен имеет не более $r$ корней. Противоречие.
+\end{proof}
+
+\begin{remark}
+	Фактически мы доказали, что любая конечная мультипликативная группа в поле циклическая.
+\end{remark}
+
+Рассмотрим поле разложения многочлена $f(x)=x^{p^n}-x$ над полем $\ZZ_p$. Мы утверждаем, что это поле состоит из корней $f(x)$. Действительно, если $\alpha,\beta$ --- корни $f(x)$, то $$(\alpha+\beta)^{p^n}-(\alpha+\beta)=\alpha^{p^n}+\beta^{p^n}-\alpha-\beta=0,$$ $$(\alpha\beta)^{p^n}-\alpha\beta=\alpha\beta-\alpha\beta=0,$$ $$(\alpha^{-1})^{p^n}-\alpha^{-1}=(\alpha^{p^n})^{-1}-\alpha^{-1}=\alpha^{-1}-\alpha^{-1}=0,$$ $$(-\alpha)^{p^n}-(-\alpha)=-\alpha+\alpha=0.$$ Заметим, что $0$ и $1$ --- корни $f(x)$. Следовательно, поле разложение многочлена $f(x)=x^{p^n}-x$ состоит из его корней. С другой стороны, $f'(x)=-1$. Следовательно, все корни $f(x)$ различные. Таким образом, мы получили поле состоящее из $p^n$ элементов.
+
+\section{Нетеровы кольца}
+
+
+\begin{theorem}
+	\label{Net1}
+	Пусть $A$ --- кольцо и $M$ --- $A$-модуль. Тогда следующие условия эквивалентны:
+	\begin{enumerate}
+		\item всякий подмодуль в $M$ конечно порожден;
+		\item всякая возрастающая последовательность подмодулей $$M_1\subset M_2\subset\cdots\subset M_n\subset\cdots$$ в $M$, такая, что $M_i\neq M_{i+1}$ для любого $i$, конечна;
+		\item всякое непустое множество подмодулей в $M$ содержит максимальный элемент.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	$(1)\Rightarrow(2)$. Пусть $M_1\subset M_2\subset\cdots$ --- возрастающая последовательность подмодулей. Положим $N=\bigcup\limits_{n=1}^{\infty} M_n$. Тогда $N$ --- подмодуль. По предположению, $N$ конечно порожден. Следовательно, существуют элементы $x_1,x_2,\ldots x_m$, порождающие $N$. Тогда существует модуль $M_j$ такой, что $x_1,x_2,\ldots x_m\in M_j$. Отсюда, $$(x_1,x_2,\ldots x_m)\subset M_j\subset N=(x_1,x_2,\ldots x_m).$$ Следовательно, $M_j=N$. Тогда $M_p=N$ для любого $p>j$.
+	
+	$(2)\Rightarrow(1)$. Пусть $N$ --- подмодуль в $M$. Пусть $a_1\in N$. Если $(a_1)\neq N$, то существует $a_2\in N$ такой, что $a_2\not\in (a_1)$. Если $(a_1,a_2)\neq N$, то существует $a_3\in N$ такой, что $a_3\not\in (a_1,a_2)$ и т.д. Таким образом, мы получили возрастающую последовательность $$(a_1)\subset(a_1,a_2)\subset(a_1,a_2,a_3)\subset\cdots.$$ Согласно предположению, эта последовательность конечна. Тогда $N=(a_1,a_2,\ldots,a_n)$.
+	
+	$(2)\Rightarrow(3)$. Пусть $N_1\in S$. Предположим, что $N_1$ не максимален. Тогда существует $N_2\in S$ такой, что $N_1\subset N_2$ и $N_1\neq N_2$. Предположим, что $N_2$ не максимален. Тогда существует $N_3\in S$ такой, что $N_2\subset N_3$ и $N_2\neq N_3$ и т.д. Таким образом, мы либо получим максимальный элемент, содержащий $N_1$, либо бесконечную возрастающую последовательность подмодулей, что невозможно по предположению.
+	
+	$(3)\Rightarrow(2)$. Очевидно.
+\end{proof}
+
+\begin{theorem}
+	\label{Net2}
+	Пусть $M$ --- нетеров $A$-модуль. Тогда всякий подмодуль и всякий фактормодуль модуля $M$ нетеровы.
+\end{theorem}
+
+\begin{proof}
+	Пусть $N$ --- подмодуль $M$. Тогда любая возрастающая последовательность подмодулей в $N$ является возрастающей последовательностью подмодулей в $M$. Отсюда, $N$ --- нетеров $A$-модуль. Докажем утверждение для фактормодулей.
+	Пусть $f\colon M\rightarrow M/N$ --- канонический гомоморфизм. Пусть $\bar{M}_1\subset \bar{M}_2\subset\cdots\subset \bar{M}_n\subset\cdots$ --- возрастающая последовательность подмодулей в $M/N$. Положим $M_i=f^{-1}(\bar{M}_i)$. Тогда $M_1\subset M_2\subset\cdots\subset M_n\subset\cdots$ --- возрастающая последовательность подмодулей в $M$, которая должна иметь максимальный элемент $M_n$, т.е. $M_i=M_n$ для любого $i>n$. Тогда $\bar{M}_n=f(M_n)=f(M_i)=\bar{M}_i$ для любого $i>n$.
+\end{proof}
+
+\begin{lemma}
+	\label{NetL}
+	Пусть $M$ --- $A$-модуль, $N$ --- его подмодуль. Пусть $K\subset L$ --- два подмодуля $M$. Более того $K\cap N= L\cap N$ и $(K+N)/N=(L+N)/N$. Тогда $K=L$.
+\end{lemma}
+
+\begin{proof}
+	Пусть $x\in L$. Поскольку $(K+N)/N=(L+N)/N$, то существуют элементы $u,v\in N$, $y\in K$ такие, что $y+u=x+v$. Отсюда, $$x-y=u-v\in L\cap N=K\cap N.$$ Тогда $x=y+u-v\in K$.
+\end{proof}
+
+
+\begin{theorem}
+	\label{Net3}
+	Пусть $M$ --- $A$-модуль, $N$ --- его подмодуль. Предположим, что $N$ и $M/N$ нетеровы. Тогда $M$ тоже нетеров.
+\end{theorem}
+
+\begin{proof}
+	Пусть $M_1\subset M_2\subset\cdots$ --- возрастающая последовательность подмодулей в $M$. Тогда $M_1\cap N\subset M_2\cap N\subset\cdots$ и $(M_1+N)/N\subset (M_2+N)/N\subset\cdots$ --- возрастающие последовательности в $N$ и $M/N$ соответственно. Поскольку $N$ и $M/N$ --- нетеровы модули, то эти последовательности конечны, т.е. существует $n$ такое, что $M_i\cap N=M_n\cap N$ и $(M_i+N)/N=(M_n+N)/N$ для любых $i>n$. Согласно лемме \ref{NetL} $M_i=M_n$.
+\end{proof}
+
+\begin{corollary}
+	\label{Net4}
+	Пусть $M_1$ и $M_2$ --- нетеровы $A$-модули. Тогда $M_1\oplus M_2$ тоже нетеров.
+\end{corollary}
+
+\begin{corollary}
+	\label{Net5}
+	Пусть $M$ --- $A$-модуль и $M=M_1+M_2$. Предположим, что $M_1$ и $M_2$ нетеровы. Тогда $M$ тоже нетеров.
+\end{corollary}
+
+\begin{proof}
+	Согласно \ref{Net4} $M_1\oplus M_2$ --- нетеров $A$-модуль. Заметим, что существует канонический гомоморфизм $f\colon M_1\oplus M_2\rightarrow M$. Тогда $M\cong(M_1\oplus M_2)/\ker f$. Теперь наше утверждение следует из теоремы \ref{Net2}.
+\end{proof}
+
+\begin{definition}
+	Кольцо называется \emph{нетеровым}, если оно нетерово как левый модуль над собой, т.е. любой левый идеал конечно порожден.
+\end{definition}
+
+\begin{claim}
+	\label{Net6}
+	Пусть $A,B$ --- нетеровы кольца. Тогда $A\times B$ --- нетерово кольцо.
+\end{claim}
+
+\begin{theorem}
+	\label{Net7}
+	Пусть $A$ --- нетерово кольцо и $f\colon A\rightarrow B$ --- сюръективный гомоморфизм колец. Тогда $B$ нетерово.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\bbb_1\subset\bbb_2\subset\cdots$ --- возрастающая цепочка левых идеалов в $B$. Положим $\aaa_i=f^{-1}(\bbb_i)$. Тогда $\aaa_i$ образуют возрастающую цепочку левых идеалов в $A$, которая должна стабилизироваться, т.е. существует $\aaa_n$ такой, что $\aaa_i=\aaa_n$ для любого $i>n$. Тогда $\bbb_i=f(\aaa_i)=f(\aaa_n)=\bbb_n$ для любого $i>n$.
+\end{proof}
+
+\begin{theorem}
+	\label{Net8}
+	Пусть $A$ --- нетерово кольцо, $M$ --- конечно порожденный $A$-модуль. Тогда $M$ нетеров.
+\end{theorem}
+
+\begin{proof}
+	Пусть $x_1,x_2,\ldots,x_n$ --- образующие $M$. Тогда существует гомоморфизм модулей $$f\colon \underbrace{A\times A\times\cdots\times A}_n\rightarrow M$$ при котором $$f(a_1,a_2,\ldots,a_n)=a_1x_1+a_2x_2+\cdots+a_nx_n.$$ Этот гомоморфизм сюръективен. Согласно \ref{Net2} и теореме о гомоморфизме для модулей $M$ нетеров.
+\end{proof}
+
+\begin{corollary}
+	\label{Net8a}
+	Линейное пространство является нетеровым модулем тогда и только тогда, когда оно конечномерно.
+\end{corollary}
+
+\begin{theorem}
+	\label{Net9}
+	Пусть $A$ --- коммутативное нетерово кольцо, $S$ --- его мультипликативное подмножество. Тогда $S^{-1}A$ нетерово.
+\end{theorem}
+
+\begin{proof}
+	Замети, что $A$ можно считать подкольцом $S^{-1}A$. Пусть $\bbb_1\subset\bbb_2\subset\cdots$ --- возрастающая цепочка левых идеалов в $S^{-1}A$. Положим $\aaa_i=\bbb_i\cap A$. Тогда $\aaa_i$ образуют возрастающую цепочку левых идеалов в $A$, которая должна стабилизироваться, т.е. существует $\aaa_n$ такой, что $\aaa_i=\aaa_n$ для любого $i>n$. Предположим, что существует элемент $\frac{a}{s}\in\bbb_i$ такой, что $\frac{a}{s}\not\in\bbb_n$, где $a\in A$, $s\in S$, $i>n$. Умножая на $s$, мы видим, что $a\in\bbb_i$, а следовательно, $a\in\aaa_i$. Отсюда, $a\in\aaa_n$. Умножая на $\frac{1}{s}$, получаем $\frac{a}{s}\in\bbb_n$. Противоречие.
+\end{proof}
+
+\begin{theorem}[теорема Гильберта о базисе]
+	\label{Net10}
+	Пусть $A$ --- коммутативное нетерово кольцо. Тогда кольцо многочленов $A[x]$ также нетерово.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\AAA$ --- идеал в $A[x]$. Обозначим через $\aaa_n$ --- множество элементов из $A$, являющимися коэффициентами при старшей степени в многочленах $$a_n x^n+a_{n-1}x^{n-1}+\cdots+a_1 x+a_0\in\AAA.$$ Заметим, что $\aaa_n$ --- идеал кольца $A$. Поскольку умножая элемент $f\in\AAA$ на $x$ мы получаем многочлен степени на единицу больше, но с тем же коэффициентом при старшей степени, то имеем $$\aaa_0\subset\aaa_1\subset\aaa_2\subset\cdots\aaa_n\subseteq\cdots.$$ Поскольку $A$ нетерово, то эта последовательность стабилизируется, т.е. существует $\aaa_r$ такой, что $\aaa_i=\aaa_r$ для любого $i>r$. Пусть $a_{i1},a_{i2},\ldots,a_{in_i}$ --- образующие идеала $\aaa_i$, и $f_{i1},f_{i2},\ldots,f_{in_i}\in\AAA$ --- многочлены степени $i$ со старшими коэффициентами $a_{i1},a_{i2},\ldots,a_{in_i}$.
+	
+	Докажем, что $\{f_{ij}\}$ --- образующие идеала $\AAA$. Пусть $f\in\AAA$ --- многочлен степени $d$. Предположим, что $d\geq r$. Поскольку $\aaa_d=\aaa_r$, то старшие коэффициенты многочленов $x^{d-r}f_{r1},x^{d-r}f_{r2},\ldots,x^{d-r}f_{rn_r}$ порождают $\aaa_d$. Следовательно, существуют $c_1,c_2,\ldots, c_{n_r}\in A$ такие, что многочлен $$f-c_1x^{d-r}f_{r1}-c_2x^{d-r}f_{r2}-\cdots-c_{n_r}x^{d-r}f_{rn_r}$$ имеет степень меньшую $d$, причем этот многочлен также лежит в $\AAA$. Таким образом, мы можем считать, что $d<r$. Поскольку старший коэффициент лежит в $\aaa_d$, то существуют $c_1,c_2,\ldots,c_{n_d}$ такие, что многочлен $$f-c_1f_{d1}-c_2f_{d2}-\cdots-c_{n_d}f_{dn_d}$$ имеет степень меньшую $d$. Таким образом, $f$ можно выразить, как линейную комбинацию $\{f_{ij}\}$.
+\end{proof}
+
+\begin{corollary}
+	\label{Net11}
+	Пусть $A$ --- коммутативное нетерово кольцо. Тогда кольцо многочленов $A[x_1,x_2,\ldots,x_n]$ также нетерово.
+\end{corollary}
+
+\begin{corollary}
+	\label{Net12}
+	Пусть $A$ --- коммутативное нетерово кольцо, $B$ --- кольцо, содержащее $A$. Предположим, что $B$ конечно порождено над $A$. Тогда $B$ также нетерово.
+\end{corollary}
+
+\begin{proof}
+	Пусть $y_1,y_2,\ldots y_n\in B$ --- элементы, порождающие $B$ над $A$. Рассмотрим кольцо многочленов $A[x_1,x_2,\ldots,x_n]$. Согласно \ref{Net11} оно нетерово. Заметим, что существует сюръективный гомоморфизм $f\colon A[x_1,x_2,\ldots,x_n]\rightarrow B$ такой, что $f(x_i)=y_i$. Тогда, согласно \ref{Net7}, $B$ также нетерово.
+\end{proof}
+
+Далее мы будем предполагать, что все кольца коммутативны.
+
+\begin{definition}
+	Идеал $\aaa$ называется \emph{неприводимым}, если из $\aaa=\aaa_1\cap\aaa_2$ следует, что либо $\aaa=\aaa_1$, либо $\aaa=\aaa_2$.
+\end{definition}
+
+\begin{theorem}
+	\label{Net13}
+	В нетеровом кольце любой идеал является пересечением конечного числа неприводимых идеалов.
+\end{theorem}
+
+\begin{proof}
+	Предположим противное. Тогда множество идеалов, которые не являются пересечением неприводимых идеалов, содержит максимальный элемент $\aaa$. Поскольку $\aaa$ приводим, то $\aaa=\aaa_1\cap\aaa_2$, где $\aaa\subset\aaa_1$ и $\aaa\subset\aaa_2$. Поскольку $\aaa$ --- максимальный идеал из тех, которые не являются пересечением неприводимых идеалов, то $\aaa_1$ и $\aaa_2$ можно представить в виде пересечения неприводимых идеалов. Следовательно, $\aaa$ также можно представить в виде пересечения неприводимых идеалов. Противоречие.
+\end{proof}
+
+\begin{definition}
+	Идеал $\aaa$ называется \emph{примарным}, если из $xy\in\aaa$ следует, что либо $x\in\aaa$, либо $y^n\in\aaa$ для некоторого $n$.
+\end{definition}
+
+\begin{theorem}
+	\label{Net14}
+	В нетеровом кольце любой неприводимый идеал примарен.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\aaa$ --- неприводимый идеал в кольце $A$. Рассматривая факторкольцо $A/\aaa$, мы должны проверить, что если нулевой идеал неприводим, то он примарен. Пусть $xy=0$. Рассмотрим $$\Ann(x)=\{a\mid ax=0\}.$$ Заметим, что $\Ann(x)$ является идеалом в кольце. Рассмотрим цепочку идеалов $\Ann(x)\subset\Ann(x^2)\subset\cdots$. Поскольку кольцо $A$ нетерово, то эта цепочка стабилизируется, т.е. существует $n$ такое, что $\Ann(x^i)=\Ann(x^n)$ для любого $i>n$. Отсюда, $(x^n)\cap(y)=0$. Действительно, пусть $a\in(x^n)\cap(y)$. Из $a\in(y)$ следует, что $ax=0$. Поскольку $a\in(x^n)$, то $a=bx^n$. Тогда $0=ax=bx^{n+1}$. Отсюда, $b\in\Ann(x^{n+1})=\Ann(x^{n})$. Таким образом, $bx^n=0$, т.е. $a=0$.
+\end{proof}
+
+Из теорем \ref{Net13} и \ref{Net14} следует
+
+\begin{theorem}
+	\label{Net14}
+	В нетеровом кольце любой идеал можно представить в виде пересечения конечного числа примарных идеалов.
+\end{theorem}
+
+\section{Артиновы кольца}
+
+В этом параграфе мы будем предполагать, что все кольца коммутативные.
+
+Элемент $a\in A$ называется \emph{нильпотентным} (\emph{нильпотентом}), если существует $n$ такое, что $a^n=0$.
+
+\begin{theorem}
+	\label{Rad1}
+	Множество всех нильпотентных элементов является идеалом.
+\end{theorem}
+
+\begin{proof}
+	Пусть $R$ --- множесво нильпотентных элементов в кольце $A$, $x,y\in R$, т.е. $x^n=0$, $y^m=0$. Тогда $(ax)^n=a^nx^n=a^n0=0$, т.е. $ax\in R$. Проверим, что $x+y\in R$. Рассмотрим $(x+y)^{n+m}$. По формуле бинома, получаем $$(x+y)^{n+m}=\sum\limits_{i=0}^{n+m}C_{n+m}^ix^iy^{n+m-i}.$$ Заметим, что либо $i>n$, либо $m+n-i>m$. Таким образом, все слагаемые этой суммы обращаются в ноль. Следовательно, $(x+y)^{n+m}=0$ и $x+y\in R$.
+\end{proof}
+
+Идеал $R$ называется \emph{нильрадикалом}.
+
+\begin{theorem}
+	\label{Rad2}
+	Нильрадикал кольца $A$ совпадает с пересечением всех простых идеалов в $A$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\ppp$ --- простой идеал и $x$ --- нильпотент. Тогда $x^n=0\in\ppp$. Следовательно, $x\in\ppp$. Таким образом нильрадикал лежит в пересечение всех простых идеалов в $A$.
+	
+	Обратно. Пусть $a$ лежит в пересечение всех простых идеалов в $A$. Пусть $\mmm$ --- максимальный идеал такой, что $a^n\not\in\mmm$ для любого $n$. Докажем, что $\mmm$  --- простой идеал. Пусть $xy\in\mmm$, но $x\not\in\mmm$ и $y\not\in\mmm$. Тогда идеалы $\mmm+(x)$ и $\mmm+(y)$ содержат $\mmm$. В силу максимальности $\mmm$ имеем $a^n\in \mmm+(x)$ и $a^m\in\mmm+(y)$. Отсюда, $a^{n+m}\in \mmm+(xy)=\mmm$. Противоречие.
+\end{proof}
+
+\begin{definition}
+	\emph{Радикалом Джекобсона} кольца $A$ называется пересечение всех его максимальных идеалов.
+\end{definition}
+
+Из теоремы \ref{Rad2} следует
+
+\begin{claim}
+	\label{Rad3}
+	Радикал Джекобсона содержит нильрадикал.
+\end{claim}
+
+\begin{theorem}
+	\label{Rad4}
+	Пусть $R$ --- радикал Джекобсона кольца $A$. Тогда $x\in R$ $\Leftrightarrow$ $1-xy$ является единицей в $A$ для всех $y\in A$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $x\in R$. Предположим, что $1-xy$ не является единицей. Тогда существует максимальный идеал $\mmm$, содержащий $1-xy$. Заметим, что $x\in\mmm$. Отсюда, $1\in\mmm$. Противоречие.
+	
+	Пусть $1-xy$ является единицей для всех $y$. Предположим, что $x\not\in\mmm$ для некоторого максимального идеала $\mmm$. Тогда $(x,\mmm)=A$. Отсюда, $xy+m=1$, где $y\in A$, $m\in\mmm$. Следовательно, $1-xy\in\mmm$, т.е. $1-xy$ не является единицей. Противоречие.
+\end{proof}
+
+\begin{definition}
+	Модуль $M$ над кольцом $A$ \emph{артиновым}, если всякая последовательность его подмодулей $M_1\supset M_2\supset\cdots\subset M_n\subset\cdots$ стабилизируется, т.е. существует $n$ такое, что $M_i=M_n$ для любого $i>n$. Кольцо $A$ называется \emph{артиновым}, если оно артиного как модуль над собой, или (равносильно) всякая последовательность идеалов $$\aaa_1\supset\aaa_2\supset\cdots\supset\aaa_n\supset\cdots$$ стабилизируется.
+\end{definition}
+
+\begin{theorem}
+	\label{ArtM1}
+	Пусть $M$ --- артинов $A$-модуль. Тогда всякий подмодуль и всякий фактормодуль модуля $M$ артиновы.
+\end{theorem}
+
+\begin{proof}
+	Пусть $N$ --- подмодуль $M$. Тогда любая убывающая последовательность подмодулей в $N$ является убывающей последовательностью подмодулей в $M$. Отсюда, $N$ --- артинов $A$-модуль. Докажем утверждение для фактормодулей.
+	Пусть $f\colon M\rightarrow M/N$ --- канонический гомоморфизм. Пусть $\bar{M}_1\supset \bar{M}_2\supset \cdots\supset  \bar{M}_n\supset \cdots$ --- убывающая последовательность подмодулей в $M/N$. Положим $M_i=f^{-1}(\bar{M}_i)$. Тогда $M_1\supset M_2\supset\cdots\supset M_n\supset\cdots$ --- убывающая последовательность подмодулей в $M$, которая должна стабилизироваться, т.е. $M_i=M_n$ для любого $i>n$. Тогда $\bar{M}_n=f(M_n)=f(M_i)=\bar{M}_i$ для любого $i>n$.
+\end{proof}
+
+\begin{theorem}
+	\label{ArtM2}
+	Пусть $M$ --- $A$-модуль, $N$ --- его подмодуль. Предположим, что $N$ и $M/N$ артиновы. Тогда $M$ тоже артинов.
+\end{theorem}
+
+\begin{proof}
+	Пусть $M_1\supset M_2\supset\cdots$ --- убывающая последовательность подмодулей в $M$. Тогда $M_1\cap N\subset M_2\cap N\subset\cdots$ и $(M_1+N)/N\subset (M_2+N)/N\subset\cdots$ --- убывающие последовательности в $N$ и $M/N$ соответственно. Поскольку $N$ и $M/N$ --- артиновы модули, то эти последовательности конечны, т.е. существует $n$ такое, что $M_i\cap N=M_n\cap N$ и $(M_i+N)/N=(M_n+N)/N$ для любых $i>n$. Согласно лемме \ref{NetL} $M_i=M_n$.
+\end{proof}
+
+\begin{corollary}
+	\label{ArtM3}
+	Пусть $M_1$ и $M_2$ --- артиновы $A$-модули. Тогда $M_1\oplus M_2$ тоже артинов.
+\end{corollary}
+
+\begin{corollary}
+	\label{ArtM4}
+	Пусть $M$ --- $A$-модуль и $M=M_1+M_2$. Предположим, что $M_1$ и $M_2$ артиновы. Тогда $M$ тоже артинов.
+\end{corollary}
+
+\begin{claim}
+	\label{Art1}
+	Пусть $A,B$ --- артиновы кольца. Тогда $A\times B$ --- артиново кольцо.
+\end{claim}
+
+\begin{theorem}
+	\label{Art2}
+	Пусть $A$ --- артиново кольцо и $f\colon A\rightarrow B$ --- сюръективный гомоморфизм колец. Тогда $B$ артиново.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\bbb_1\supset\bbb_2\supset\cdots$ --- убывающая цепочка идеалов в $B$. Положим $\aaa_i=f^{-1}(\bbb_i)$. Тогда $\aaa_i$ образуют убывающую цепочку идеалов в $A$, которая должна стабилизироваться, т.е. существует $\aaa_n$ такой, что $\aaa_i=\aaa_n$ для любого $i>n$. Тогда $\bbb_i=f(\aaa_i)=f(\aaa_n)=\bbb_n$ для любого $i>n$.
+\end{proof}
+
+\begin{theorem}
+	\label{Art3}
+	В артиновом кольце любой простой идеал максимален.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\ppp$ --- простой идеал в артиновом кольце $A$. Положим $B=A/\ppp$. Заметим, что $B$ --- целостное артиного кольцо. Пусть $x\in B$. Поскольку $B$ артиного, то существует $n$ такое, что $(x^n)=(x^{n+1})$. Тогда $x^n=x^{n+1}y$, $y\in B$. Отсюда, $x^n(1-xy)=0$. Поскольку $B$ --- целостное кольцо, то $1-xy=0$. Отсюда, $xy=1$, т.е. $x$ обратим. Таким образом $B$ --- поле. Следовательно, $\ppp$ --- максимальный идеал (см. \ref{KomKol3}).
+\end{proof}
+
+\begin{corollary}
+	\label{Art4}
+	В артиновом кольце нильрадикал совпадает с радикалом Джекобсона.
+\end{corollary}
+
+\begin{lemma}
+	\label{ArtL1}
+	Пусть $\aaa_1,\aaa_2,\ldots,\aaa_n$ --- идеалы кольца $A$, $\ppp$ --- простой идеал в $A$. Предположим, что $\bigcap\limits_{i=1}^n\aaa_i\subset\ppp$. Тогда $\aaa_i\subset\ppp$ для некоторого $i$. Если $\bigcap\limits_{i=1}^n\aaa_i=\ppp$, то $\aaa_i=\ppp$ для некоторого $i$.
+\end{lemma}
+
+\begin{proof}
+	Предположим, что $\aaa_i\not\subset\ppp$ для всех $i$. Тогда существуют элементы $x_1,x_2,\ldots,x_n$ такие, что $x_i\in\aaa_i$, $x_i\not\in\ppp$. Заметим, что $$x_1x_2\cdots x_n\in\prod\limits_{i=1}^n\aaa_i\subset\bigcap\limits_{i=1}^n\aaa_i.$$ С другой стороны, $x_1,x_2,\ldots,x_n\not\in\ppp$. Противоречие. Если $\bigcap\limits_{i=1}^n\aaa_i=\ppp$, то $\ppp\subset\aaa_i$ для всех $i$. Отсюда, $\aaa_i=\ppp$ для некоторого $i$.
+\end{proof}
+
+
+\begin{theorem}
+	\label{Art5}
+	В артиновом кольце множество максимальных идеалов конечно.
+\end{theorem}
+
+\begin{proof}
+	Пусть $\mmm_1,\mmm_2,\ldots,\mmm_n,\ldots$ --- последовательность максимальных идеалов в $A$. Рассмотрим последовательность $$\mmm_1\supset\mmm_1\cap\mmm_2\supset\cdots\supset\mmm_1\cap\mmm_2\cap\cdots\cap\mmm_k\supset\cdots.$$ Поскольку $A$ --- артиного, то $\mmm_1\cap\mmm_2\cap\cdots\cap\mmm_n=\mmm_1\cap\mmm_2\cap\cdots\cap\mmm_{n+1}$ для некоторого $n$. Тогда $\mmm_1\cap\mmm_2\cap\cdots\cap\mmm_n\subset\mmm_{n+1}$. Отсюда, $\mmm_i\subset\mmm_{n+1}$ для некоторого $i$. Поскольку $\mmm_i$ максимален, то $\mmm_i=\mmm_{n+1}$.
+\end{proof}
+
+\begin{claim}
+	\label{Art6}
+	Пусть $V$ --- векторное пространство над полем $k$. Тогда $V$ --- артинов модуль тогда и только тогда, когда $V$ конечномерно.
+\end{claim}
+
+\begin{proof}
+	Пусть $V$ --- конечномерное пространство. Рассмотрим убывающую цепочку $$V_1\supset V_2\supset\cdots\supseteq V_m\supset\cdots$$ подпространств в $V$. Заметим, что $\dim V_i\geq\dim V_{i+1}$. Более того, $V+_i\neq V_{i+1}$ тогда и только тогда, когда $\dim V_i>\dim V_{i+1}$.
+	
+	Пусть $V$ --- бесконечномерное пространство. Тогда существует бесконечная последовательность $x_1,x_2,\ldots,x_n,\ldots$ линейно независимых элементов из $V$. Пусть $V_i=L(x_{i+1},x_{i+2},\ldots)$ --- линейная оболочка натянутая на элементы $x_{i+1},x_{i+2},\ldots$, т.е. множество линейных комбинаций $a_1x_{k_1}+a_2x_{k_2}+\cdots+a_mx_{k_m}$, где $a_j\in k$, $k_j>i$. Тогда $V_i$ --- линейные подпространства в $V$. Мы получили убывающую цепочку подпространств $$V_1\supset V_2\supset\cdots\supset V_n\supset\cdots,$$ которая не стабилизируется.
+\end{proof}
+
+
+\begin{theorem}
+	\label{Art7}
+	Пусть $A$ --- кольцо, в котором нулевой идеал является произведением (не обязательно различных) максимальных идеалов $\mmm_1\mmm_2\cdots\mmm_n$. Тогда нетеровость $A$ равносильно его артиновости.
+\end{theorem}
+
+\begin{proof}
+	Рассмотрим цепочку идеалов $$A\supset\mmm_1\supset\mmm_1\mmm_2\supset\cdots\supset\mmm_1\mmm_2\cdots\mmm_n=0.$$ Заметим, что фактор $\mmm_1\mmm_2\cdots\mmm_{i-1}/\mmm_1\mmm_2\cdots\mmm_{i}$ является векторным пространством над $A/\mmm_i$. Тогда его артиновость равносильна его нетеровости. Тогда нетеровость $A$ равносильно его артиновости.
+\end{proof}
+
+\begin{lemma}
+	\label{ArtL2}
+	В артиновом кольце $A$ нильрадикал $R$ нильпотентен, т.е. существует $k$ такое, что $R^k=0$.
+\end{lemma}
+
+\begin{proof}
+	Рассмотрим $$R\supset R^2\supset\cdots\supset R^n\supset R^{n+1}\supset\cdots.$$ Поскольку $A$ --- артиного кольцо, то существует $k$ такое, что $R^k=R^i$ для любого $i>k$. Обозначим $\aaa=R^k$. Рассмотрим множество идеалов $\bbb$ таких, что $\bbb\aaa\neq 0$. Пусть $\bbb_0$ --- его минимальный элемент. Заметим, что существует элемент $x\in\bbb_0$ такой, что $x\aaa\neq 0$. Поскольку $(x)\subset\bbb_0$, то $\bbb_0=(x)$. С другой стороны, $(x\aaa)\aaa=x\aaa^2=x\aaa\neq 0$ и $x\aaa\subset (x)$. Отсюда, $x\aaa=(x)$. Таким образом, существует $y\in\aaa$ такой, что $x=xy$. Тогда $x=xy=xy^2=\cdots=xy^n=\cdots$. Поскольку $y\in R^k\subset R$, то существует $n$ такое, что $y^n=0$. Следовательно, $x=0$. Противоречие.
+\end{proof}
+
+\begin{theorem}
+	\label{Art8}
+	Любое артиного кольцо является нетеровым.
+\end{theorem}
+
+\begin{proof}
+	Пусть $A$ --- артиного кольцо. Пусть $\mmm_1,\mmm_2,\ldots,\mmm_n$ --- множество максимальных идеалов. Тогда нильрадикал $R=\bigcap\mmm_i$  (см. \ref{Rad2}, \ref{Art3} и \ref{Art5}). Согласно лемме \ref{ArtL2}, существует $k$ такое, что $R^k=0$. Отсюда, $$\prod\limits_{i=1}^n\mmm_i^k\subset\left(\bigcap\limits_{i=1}^n\mmm_i\right)^k=R^k=0.$$ Согласно теореме \ref{Art7}, $A$ --- нетерого кольцо.
+\end{proof}
+
+\section{Многочлены}
+
+
+\begin{theorem}
+	\label{Mn2-1}
+	Пусть $A$ --- целостное кольцо главных идеалов, $K$ --- его поле частных. Пусть $\alpha\in K$. Тогда существуют неприводимые элементы $p_1,p_2,\ldots, p_n\in A$, элементы $a_1,a_2,\ldots, a_n\in A$ и натуральные числа $j_1,j_2,\ldots,j_n$ такие, что $$\alpha=\frac{a_1}{p_1^{j_1}}+\frac{a_2}{p_2^{j_2}}+\cdots+\frac{a_n}{p_n^{j_n}}.$$
+\end{theorem}
+
+\begin{proof}
+	Пусть $a,b\in A$ --- взаимно простые ненулевые элементы. Тогда существуют $x,y\in A$ такие, что $ax+by=1$. Отсюда, $$\frac{1}{ab}=\frac{y}{a}+\frac{x}{b}.$$ Таким образом, $$\frac{c}{ab}=\frac{yc}{a}+\frac{xc}{b}.$$ Далее требуемое представление получается по индукции.
+\end{proof}
+
+\begin{remark}
+	Сокращая на наибольший общий делитель, мы можем считать, что $a_i$ не делится на $p_i$.
+\end{remark}
+
+\begin{theorem}
+	\label{Mn2-2}
+	Пусть $k$ --- поле, $k(x)$ --- поле частных кольца многочленов $k[x]$. Пусть $R(x)=\frac{P(x)}{Q(x)}\in k(x)$. Тогда существует представление $$R(x)=f(x)+\frac{f_1(x)}{(p_1(x))^{j_1}}+\frac{f_2(x)}{(p_2(x))^{j_2}}+\cdots+\frac{f_n(x)}{(p_n(x))^{j_n}},$$ где $f(x),f_1(x),\ldots, f_n(x)\in k[x]$, $p_1(x),\ldots,p_n(x)\in k[x]$ --- неприводимые (не обязательно различные) многочлены. Более того $\deg f_i(x)<\deg p_i(x)$.
+\end{theorem}
+
+\begin{proof}
+	Согласно теореме \ref{Mn2-1} существует представление $$R(x)=\frac{f_1(x)}{(p_1(x))^{j_1}}+\frac{f_2(x)}{(p_2(x))^{j_2}}+\cdots+\frac{f_m(x)}{(p_n(x))^{j_m}},$$ где $p_i(x)$ --- неприводимые над полем $k$ многочлены. Предположим, что $\deg f_i(x)\geq\deg p_i(x)$. Тогда $f_i(x)=q(x)p_i(x)+r(x)$, $\deg r(x)<\deg p_i(x)$. Отсюда, $\frac{f_i(x)}{(p_i(x))^{j_i}}=\frac{q(x)}{(p_i(x))^{j_i-1}}+\frac{r(x)}{(p_i(x))^{j_i}}$, где $\deg q(x)<\deg f_i(x)$.
+\end{proof}
+
+Пусть $A$ --- факториальное кольцо, $K$ --- его поле частных. Пусть $\alpha\in K$. Тогда мы можем представить в виде несократимой дроби $\alpha=\frac{a}{b}$, где $a,b$ --- элементы $A$, не имеющие общих простых множителей. Пусть $p\in A$ --- простой элемент. Тогда $\alpha=p^r\beta$, где $\beta\in K$, при этом $p$ не делит ни числитель, ни знаменатель $\beta$ (в его несократимом представлении), $r\in\ZZ$. Будем называть число $r\in\ZZ$ \emph{порядком} $p$ в $\alpha$, и записывать $r=\ord_p\alpha$. Будем считать $\ord_p 0=-\infty$.
+
+\begin{claim}
+	\label{Mn2-3}
+	Пусть $\alpha,\beta\in K$, $p\in A$ --- простой элемент. Тогда
+	$$\ord_p(\alpha\beta)=\ord_p\alpha+\ord_p\beta,$$ $$\ord_p(\alpha+\beta)\geq\min(\ord_p\alpha,\ord_p\beta).$$
+\end{claim}
+
+\begin{proof}
+	Пусть $\alpha=p^r\frac{a}{b}$, $\beta=p^s\frac{c}{d}$, при этом $a,b,c,d$ не делятся на $p$. Тогда $\alpha\beta=p^{r+s}\frac{ac}{bd}$. Поскольку $ac$ и $bd$ не делятся на $p$, то $$\ord_p(\alpha\beta)=\ord_p\alpha+\ord_p\beta.$$ Предположим, что $r\geq s$. Тогда $$\alpha+\beta=p^r\frac{a}{b}+p^s\frac{c}{d}=p^s\left(\frac{p^{r-s}a}{b}+\frac{c}{d}\right)=p^s\frac{p^{r-s}ad+bc}{bd}.$$ Поскольку $bd$ не делится на $p$ и $r-s>0$, то $$\ord_p(\alpha+\beta)\geq\min(\ord_p\alpha,\ord_p\beta).$$
+\end{proof}
+
+Пусть $$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\in K[x].$$ Положим $\ord_p f=\min\ord_p a_i$. \emph{Содержанием} многочлена $f(x)$ называется выражение $$\cont(f)=u\prod\limits_{p\colon\ord_p f\neq 0}p^{\ord_p f},$$ где $u$ --- любая единица кольца $A$. По определению $\cont(0)=-\infty$. Заметим, что содержание определено с точностью до умножения на единицу. Пусть $b\in K$. Тогда $\cont(bf)=b\cont(f)$. Таким образом, $f(x)=c f_1(x)$, где $c=\cont(f)$ и $\cont(f_1)=1$.
+
+\begin{claim}
+	\label{Mn2-4}
+	Пусть $\cont(f)=1$. Тогда все коэффициенты $f(x)$ принадлежат $A$.
+\end{claim}
+
+\begin{proof}
+	Пусть $$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\in K[x].$$ Пусть $c$ --- наименьшее общее кратное знаменателей $a_i$. Тогда $ca_i$ не имеют общих делителей. С другой стороны, $cf(x)\in A[x]$ и $c=c\cont(f)=\cont(cf)$. Противоречие.
+\end{proof}
+
+\begin{theorem}[лемма Гаусса]
+	\label{Gaus2}
+	Пусть $A$ --- факториальное кольцо, $K$ --- его поле частных.
+	Пусть $f(x),g(x)\in K[x]$. Тогда $\cont(fg)=\cont(f)\cont(g)$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $f(x)=cf_1(x)$, $g(x)=dg_1(x)$, где $c=\cont(f)$, $d=\cont(g)$ и $\cont(f_1)=\cont(g_1)=1$. Тогда $$\cont(fg)=\cont(cdf_1g_1)=cd\cont(f_1g_1).$$ Таким образом, достаточно доказать, что если $\cont(f)=\cont(g)=1$, то $\cont(fg)=1$. Более того, согласно \ref{Mn2-4}, $f(x),g(x)\in A[x]$. Пусть $$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,$$ $$g(x)=b_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0.$$ Предположим, что $\cont(fg)$ делится на простой элемент $p\in A$. Пусть $r$ --- минимальное число такое, что $a_r$ не делит $p$, $s$ --- минимальное число такое, что $b_s$ не делит $p$. Положим $$h(x)=f(x)g(x)=c_{n+m}x^{n+m}+\cdots+c_1x+c_0.$$ Тогда $$c_{r+s}=a_rb_s+\sum a_ib_{r+s-i}.$$ Заметим, что $a_rb_s$ не делится на $p$, но любое $a_ib_{r+s-i}$ делится на $p$. Отсюда, $c_{r+s}$ не делится на $p$. Таким образом, $\cont(fg)$ не делится на $p$. Противоречие.
+\end{proof}
+
+\begin{corollary}
+	\label{Mn2-5}
+	Пусть $f(x)\in A[x]$ и существует разложение $f(x)=g(x)h(x)$ в $K[x]$, т.е. $g(x),h(x)\in K[x]$. Тогда существует разложение $f(x)=\hat{g}(x)\hat{h}(x)$ в $A[x]$, т.е. $\hat{g}(x),\hat{h}(x)\in A[x]$.
+\end{corollary}
+
+\begin{proof}
+	Пусть $f(x)=g(x)h(x)$, где $g(x),h(x)\in K[x]$. Положим $c_1=\cont(g)$, $c_2=\cont(h)$. Тогда $c_1c_2=\cont(f)\in A$. С другой стороны, $g(x)=c_1g_1(x)$, $h(x)=c_2h_1(x)$, где $\cont(g_1)=\cont(h_1)=1$. Тогда $g_1(x),h_1(x)\in A[x]$ (см. \ref{Mn2-4}). Пусть $\hat{g}(x)=c_1c_2g_1(x)\in A[x]$, $\hat{h}(x)=h_1(x)\in A[x]$. Тогда $f(x)=\hat{g}(x)\hat{h}(x)$.
+\end{proof}
+
+\begin{theorem}
+	\label{Mn2-6}
+	Пусть $A$ --- факториальное кольцо, $K$ --- его поле частных. Тогда $A[x]$ тоже факториально, его простыми элементами являются простые элементы из $A$ и многочлены, неприводимые над $K[x]$ и имеющие содержание $1$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $f(x)\in A[x]$. Поскольку $K[x]$ факториально, то $$f(x)=p_1(x)p_2(x)\cdots p_n(x),$$ где $p_i(x)$ --- неприводимые в $K[x]$ многочлены. Заметим, что $p_i(x)=c_i\hat{p}_i(x)$, где $c_i=\cont(p_i)$ и $\cont(\hat{p}_i)=1$. Отсюда, $$f(x)=c\hat{p}_1(x)\hat{p}_2(x)\cdots\hat{p}_n(x),$$ где $c=c_1c_2\cdots c_n=\cont(f)\in A$. Поскольку $\cont(\hat{p}_i)=1$, то $\hat{p}_i(x)\in A[x]$. Очевидно, что $\hat{p}_i(x)$ неприводимы в $A[x]$. Поскольку $A$ факториально, то существует разложение $c$ на простые множители. Таким образом, осталось доказать единственность разложения. Пусть существует другое разложение $$f(x)=dq_1(x)q_2(x)\cdots q_m(x).$$ В силу однозначности разложения на множители в $K[x]$ получаем $n=m$ и $p_1(x)=a_iq_i(x)$, где $a_i\in K$. Поскольку $p_1(x)$ и $q_i(x)$ имеют содержание $1$, то $a_i$ является единицей в $A$.
+\end{proof}
+
+\begin{corollary}
+	\label{Mn2-7}
+	Пусть $A$ --- факториальное кольцо. Тогда $A[x_1,x_2,\ldots,x_n]$ тоже факториально.
+\end{corollary}
+
+\begin{theorem}
+	\label{Mn2-8}
+	Пусть $A$ --- факториальное кольцо, $K$ --- его поле частных, $$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0\in A[x].$$ Пусть $p$ --- простой элемент в $A$. Предположим, что $$a_n\not\equiv 0 (\mod p),\quad a_i\equiv 0(\mod p), \forall i<n,\quad a_0\not\equiv 0 (\mod p^2).$$ Тогда $f(x)$ неприводим в $K[x]$.
+\end{theorem}
+
+\begin{proof}
+	Заметим, что мы можем считать $\cont(f)=1$. Если $f(x)$ разлагается в $K[x]$, то $f(x)$ разлагается в $A[x]$ (см. \ref{Mn2-5}). Пусть $f(x)=g(x)h(x)$, где $g,h\in A[x]$. Положим $$g(x)=b_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0,$$ $$h(x)=c_kx^k+c_{k-1}x^{k-1}+\cdots+c_1x+c_0.$$ Заметим, что $m+k=n$ и $b_mc_k\neq 0$. Пусть $\sigma$ --- канонический гомоморфизм $A$ в $A/(p)$. Заметим, что $\sigma$ индуцирует гомоморфизм $A[x]$ в $A/(p)[x]$. Тогда $\sigma(f(x))=\sigma(a_n)x^n$. Докажем, что $\sigma(g(x))=\sigma(b_m)x^m$, $\sigma(h(x))=\sigma(c_k)x^k$. Предположим, что $$\sigma(g(x))=\sigma(b_m)x^m+\sigma(b_{m-1})x^{m-1}+\cdots+\sigma(b_r)x^r,$$ $$\sigma(h(x))=\sigma(c_k)x^k+\sigma(c_{k-1})x^{k-1}+\cdots+\sigma(c_s)x^s,$$ где $\sigma(b_r)\neq 0$, $\sigma(c_s)\neq 0$ в $A/(p)[x]$. Тогда $$\sigma(a_n)x^n=\sigma(f(x))=\sigma(g(x)h(x))=\sigma(g(x))\sigma(h(x))=$$ $$=\sigma(b_m)\sigma(c_k)x^n+\cdots+\sigma(b_r)\sigma(c_s)x^{r+s}.$$ Поскольку $p$ --- простой элемент, то $(p)$ --- простой идеал. Тогда $\sigma(b_r)\sigma(c_s)\neq 0$. Противоречие. Таким образом, $\sigma(g(x))=\sigma(b_m)x^m$, $\sigma(h(x))=\sigma(c_k)x^k$. Тогда $b_0\equiv 0(\mod p)$ и $c_0\equiv 0(\mod p)$. Следовательно, $a_0=b_0c_0\equiv 0(\mod p^2)$. Противоречие.
+\end{proof}
+
+\begin{theorem}
+	\label{Mn2-9}
+	Пусть $A$ и $B$ --- целостные кольца, $\sigma\colon A\rightarrow B$ --- гомоморфизм, $K$ и $L$ --- поля частных для $A$ и $B$ соответственно. Пусть $f(x)\in A[x]$ и $\deg f(x)=\deg\sigma(f(x))$. Предположим, что $\sigma(f(x))$ неприводим в $L[x]$. Тогда $f(x)$ не обладает разложением $f(x)=g(x)h(x)$ в котором $g(x),h(x)\in A[x]$ и $\deg g(x)\geq 1$, $\deg h(x)\geq 1$.
+\end{theorem}
+
+
+\begin{proof}
+	Предположим, что $f(x)$ имеет такое разложение, т.е. $f(x)=g(x)h(x)$, где $g(x),h(x)\in A[x]$. Поскольку $A$ --- целостное, то $\deg f=\deg g+\deg h$. Тогда $\sigma(f(x))=\sigma(g(x))\sigma(h(x))$. Заметим, что $\deg\sigma(g(x))\leq\deg g(x)$, $\deg\sigma(h(x))\leq\deg h(x)$. Поскольку $\deg f(x)=\deg\sigma(f(x))$ и $B$ целостное, то $\deg\sigma(g(x))=\deg g(x)$, $\deg\sigma(h(x))=\deg h(x)$. Поскольку $\sigma(f(x))$ неприводим в $L[x]$, то либо $g(x)$, либо $h(x)$ есть элемент из $A$.
+\end{proof}
+
+\section{Симметрические многочлены}
+
+\begin{definition}
+	Пусть $A$ --- целостное кольцо и $f(x_1,x_2,\ldots,x_n)\in A[x_1,x_2,\ldots, x_n]$. Будем говорить, что $f(x_1,x_2,\ldots,x_n)$ \emph{симметрический многочлен}, если для любой перестановки $\sigma\in S_n$ выполнено $$f(x_1,x_2,\ldots,x_n)=f(x_{\sigma(1)},x_{\sigma(2)},\ldots,x_{\sigma(n)}).$$ \emph{Элементарными симметрическими многочленами} будем называть многочлены $$s_k(x_1,x_2,\ldots,x_n)=\sum\limits_{1\leq i_1<i_2<\cdots< i_k\leq n} x_{i_1}x_{i_2}\cdots x_{i_k},$$ где $k=1,2,\ldots,n$.
+\end{definition}
+
+\begin{remark}
+	Заметим, что элементарные симметрические многочлены можно определить следующим образом. Рассмотрим $A[x_1,x_2,\ldots, x_n][y]$. Пусть $$f(y)=(y-x_1)(y-x_2)\cdots(y-x_n)\in A[x_1,x_2,\ldots, x_n][y].$$ Тогда $$f(y)=y^n-s_1y^{n-1}+s_2y^{n-2}-s_3y^{n-3}+\cdots+(-1)^ns_n.$$
+\end{remark}
+
+\begin{remark}
+	Если мы подставим $x_n=0$ в $s_1,s_2,\ldots,s_{n-1},s_n$, то мы получим $(s_1)_0,(s_2)_0,\ldots,(s_{n-1})_0$ --- элементарные симметрические многочлены от $x_1,x_2,\ldots,x_{n-1}$.
+\end{remark}
+
+\begin{definition}
+	Пусть $x_1,x_2,\ldots, x_n$ --- переменные. Будем называть \emph{весом} одночлена $x_1^{k_1}x_2^{k_2}\cdots x_n^{k_n}$ число $k_1+2k_2+\cdots+nk_n$. \emph{Весом} многочлена $f(x_1,x_2,\ldots,x_n)$ будем называть максимум весов одночленов, встречающихся в $f(x_1,x_2,\ldots,x_n)$.
+\end{definition}
+
+\begin{theorem}
+	\label{SimMn1}
+	Пусть $f(x_1,x_2,\ldots,x_n)\in A[x_1,x_2,\ldots, x_n]$ --- симметрический многочлен степени $d$. Тогда существует многочлен $g(y_1,y_2,\ldots,y_n)$ веса, не превышающего $d$, такой, что $$f(x_1,x_2,\ldots,x_n)=g(s_1,s_2,\ldots,s_n).$$
+\end{theorem}
+
+\begin{proof}
+	Докажем индукцией по $n$. Если $n=1$ (т.е. $f(x)\in A[x]$), то утверждение очевидно. Предположим мы доказали для любого $m<n$. Проведем теперь индукцию по $d$. Если $d=0$, то наше утверждение очевидно. Предположим утверждение доказано для многочленов степени меньше $d$. Пусть $f(x_1,x_2,\ldots,x_n)$ имеет степень $d$. Подставим $x_n=0$. По индуктивному предположению существует многочлен $g_1(y_1,y_2,\ldots,y_{n-1})$ такой, что $$f(x_1,x_2,\ldots,x_{n-1},0)=g_1((s_1)_0,(s_2)_0,\ldots,(s_{n-1})_0).$$ Тогда многочлен $$f_1(x_1,x_2,\ldots,x_n)=f(x_1,x_2,\ldots,x_n)-g_1(s_1,s_2,\ldots,s_{n-1})$$ имеет степень $\leq d$ и является симметрическим. Более того, $f_1(x_1,x_2,\ldots,x_{n-1},0)=0$. Следовательно, $f_1(x_1,x_2,\ldots,x_n)$ делится на $x_n$. Поскольку $f_1(x_1,x_2,\ldots,x_n)$ симметрический, то $f_1(x_1,x_2,\ldots,x_n)$ делится на $x_1x_2\cdots x_n$. Таким образом, $f_1(x_1,x_2,\ldots,x_n)=s_nf_2(x_1,x_2,\ldots,x_n)$, где $f_2(x_1,x_2,\ldots,x_n)$ --- симметрический многочлен, степени $\leq d-n$. По индуктивному предположению существует многочлен $g_2$ такой, что $f_2(x_1,x_2,\ldots,x_n)=g_2(s_1,s_2,\ldots,s_n)$. Отсюда, $$f(x_1,x_2,\ldots,x_n)=g_1(s_1,s_2,\ldots,s_{n-1})+s_ng_2(s_1,s_2,\ldots,s_n).$$ Заметим, что каждый член справа имеет вес $\leq d$.
+\end{proof}
+
+\begin{example}
+	Пусть $$f(x)=x^n+a_1x^{n-1}+\cdots+a_{n-1}x+a_n\in\CC[x]$$ --- многочлен над полем $\CC$. Пусть $\alpha_1,\alpha_2,\ldots,\alpha_n$ --- его корни (необязательно различные). Тогда $$f(x)=(x-\alpha_1)(x-\alpha_2)\cdots(x-\alpha_n).$$ Отсюда, $$a_1=-s_1(\alpha_1,\alpha_2,\ldots,\alpha_n),\quad a_2=s_2(\alpha_1,\alpha_2,\ldots,\alpha_n),\ldots,$$ $$a_n=(-1)^ns_n(\alpha_1,\alpha_2,\ldots,\alpha_n).$$ Рассмотрим симметрический многочлен $$D(x_1,x_2,\ldots, x_n)=\prod\limits_{1\leq i<j\leq n}(x_i-x_j)^2.$$ Выражение $D(\alpha_1,\alpha_2,\ldots,\alpha_n)$ называется \emph{дискриминантом} многочлена $f(x)$. Заметим, что многочлен $f(x)$ имеет кратные корни тогда и только тогда, когда $D(\alpha_1,\alpha_2,\ldots,\alpha_n)=0$. Поскольку $D(x_1,x_2,\ldots, x_n)$ --- симметрический многочлен, то существует многочлен $g(y_1,y_2,\ldots,y_n)$ такой, что $$D(\alpha_1,\alpha_2,\ldots,\alpha_n)=g(a_1,a_2,\ldots,a_n).$$ Таким образом, мы можем определять наличие кратных корней не находя их.
+\end{example}
+
+\section{Теорема Штурма}
+
+\begin{definition}
+	Пусть $f(x)$ --- многочлен с вещественными коэффициентами. Конечная упорядоченная система многочленов $$f(x)=f_0(x),f_1(x),\ldots,f_n(x)$$ с вещественными коэффициентами называется \emph{системой Штурма} многочлена $f(x)$ на отрезке $[a;b]$, если
+	\begin{enumerate}
+		\item $f_n(x)$ не имеет корней на $[a;b]$;
+		\item $f(a)\neq 0$, $f(b)\neq 0$;
+		\item если $f_k(c)=0$, то $f_{k-1}(c)f_{k+1}(c)<0$;
+		\item если $f(c)=0$, то $f_0(x)f_1(x)$ меняет знак с минуса на плюс при переходе через точку $c$, т.е. существует $\delta>0$ такое, что $f_0(x)f_1(x)<0$ при $x\in[c-\delta;c]$ и $f_0(x)f_1(x)>0$ при $x\in[c;c+\delta]$.
+	\end{enumerate}
+\end{definition}
+
+Пусть $V_c=V_c(f_0,f_1,\ldots,f_n)$ --- число перемен знаков в последовательности $f_0(c),f_1(c),\ldots,f_n(c)$ (если эта последовательность содержит нули, то их просто вычеркиваем).
+
+\begin{theorem}[теорема Штурма]
+	\label{Sht1}
+	Пусть $f(x)\in\RR[x]$ и $f(x)=f_0(x),f_1(x),\ldots,f_n(x)$ --- последовательность Штурма для $f(x)$. Тогда число вещественных корней многочлена $f(x)$ на отрезке $[a;b]$ равно $V_a-V_b$.
+\end{theorem}
+
+
+\begin{proof}
+	Совокупность корней многочленов $f_0(x),f_1(x),\ldots,f_n(x)$ на отрезке $[a;b]$ задает разбиение $$a=t_0<t_1<\cdots<t_m=b.$$ Заметим, что на интервале $(t_{i-1};t_i)$ многочлены $f_j(x)$ не имеют корней. Следовательно, $V_{x_1}=V_{x_2}$ для любых $x_1,x_2\in (t_{i-1};t_i)$. Из (3) следует, что соседние многочлены не имеют общих корней на $[a;b]$. Тогда $V_a=V_c$ для любого $c\in(t_0;t_1)$. Рассмотрим точку $t_1$. Предположим, что $f(t_1)\neq 0$. Пусть $f_j(t_1)=0$. Тогда из (3) $f_{j-1}(t_1)\neq0$ и $f_{j+1}(t_1)\neq0$. Имеют место следующие случае
+	\begin{enumerate}
+		\item $f_{j-1}(x)>0$, $f_{j+1}(x)<0$ в окрестности $t_1$, и $f_j(x)$ меняет знак с плюса на минус;
+		\item $f_{j-1}(x)>0$, $f_{j+1}(x)<0$ в окрестности $t_1$, и $f_j(x)$ меняет знак с минуса на плюс;
+		\item $f_{j-1}(x)>0$, $f_{j+1}(x)<0$ в окрестности $t_1$, и $f_j(x)$ не меняет знак;
+		\item $f_{j-1}(x)<0$, $f_{j+1}(x)>0$ в окрестности $t_1$, и $f_j(x)$ меняет знак с плюса на минус;
+		\item $f_{j-1}(x)<0$, $f_{j+1}(x)>0$ в окрестности $t_1$, и $f_j(x)$ меняет знак с минуса на плюс;
+		\item $f_{j-1}(x)<0$, $f_{j+1}(x)>0$ в окрестности $t_1$, и $f_j(x)$ не меняет знак.
+	\end{enumerate}
+	Во всех случаях число перемен знака в последовательности $f_{j-1}(x),f_j(x),f_{j+1}(x)$ не меняется. Таким образом, $V_a=V_c$ для любого $c\in(t_1;t_2)$. Предположим, что $f(t_1)=0$. Поскольку $f_0(x)f_1(x)$ меняет знак с минуса на плюс при переходе через точку $t_1$, то $V_a=V_c+1$ для любого $c\in(t_1;t_2)$. Последовательно рассматривая точки $t_i$ получаем необходимое утверждение.
+\end{proof}
+
+Пусть $f(x)\in\RR[x]$. Положим $f_1(x)=f'(x)$ и применим алгоритм Евклида. Получаем $$f(x)=q_1(x)f_1(x)-f_2(x),$$ $$f_1(x)=q_2(x)f_2(x)-f_3(x),$$ $$\cdots\cdots\cdots\cdots\cdots\cdots$$ $$f_{n-2}(x)=q_{n-1}(x)f_{n-1}(x)-f_n(x),$$ $$f_{n-1}(x)=q_n(x)f_n(x).$$
+
+
+\begin{theorem}
+	\label{Sht2}
+	Предположим, что $f(x)$ не имеет кратных корней на $[a;b]$ и $f(a)\neq 0$, $f(b)\neq 0$. Тогда только что полученная последовательность является системой Штурма.
+\end{theorem}
+
+\begin{proof}
+	Поскольку $f_n(x)$ --- наибольший общий делитель $f(x)$ и $f'(x)$ и $f(x)$ не имеет кратных корней на $[a;b]$, то $f_n(x)$ не имеет корней на $[a;b]$. Второе свойство выполнено по предположению. Если $f_k(c)=0$, то $f_{k-1}(c)=-f_{k+1}(c)$. Следовательно, $f_{k-1}(c)f_{k+1}(c)\leq 0$. Предположим, что $f_{k+1}(c)=0$. Поскольку $f_k(c)=q_{k+1}(c)f_{k+1}(c)+f_{k+2}(c)$, то $f_{k+2}(c)=0$. Следовательно, $f_n(c)=0$. Противоречие. Таким образом, $f_{k-1}(c)f_{k+1}(c)<0$, т.е. выполнено свойство (3). Пусть $f(c)=0$ для некоторой точки $c\in[a;b]$. Тогда $f(x)=(x-c)g(x)$, где $g(c)\neq 0$. Заметим, что $f'(x)=g(x)+(x-c)g'(x)$. Тогда $f(x)f'(x)=(x-c)h(x)$, где $$h(x)=g^2(x)+(x-c)g(x)g'(x).$$ Заметим, что $h(c)=g^2(c)>0$. Следовательно, $h(x)$ принимает положительные значения в достаточно малой окрестности $c$. Поскольку $x-c$ меняет знак с минуса на плюс при переходе через точку $c$, то $f(x)f'(x)=(x-c)h(x)$ также меняет знак с минуса на плюс при переходе через точку $c$. Таким образом, выполнено свойство (4).
+\end{proof}
+
+
+\section{Результант}
+
+Пусть $$f(x)=a_nx^n+a_{n-1}x^{n-1}+\cdots+a_1x+a_0,$$ $$g(x)=b_mx^m+b_{m-1}x^{m-1}+\cdots+b_1x+b_0$$ --- два многочлена с коэффициентами в поле $k$. \emph{Результантом} многочленов $f(x)$ и $g(x)$ называется
+$$\Res(f,g)=\begin{vmatrix} a_n    & a_{n-1} & \cdots  & a_1    & a_0    & 0       & 0      & \cdots & 0      \\
+                0      & a_n     & a_{n-1} & \cdots & a_1    & a_0     & 0      & \cdots & 0      \\
+                \cdots & \cdots  & \cdots  & \cdots & \cdots & \cdots  & \cdots & \cdots & \cdots \\
+                0      & 0       & \cdots  & 0      & a_n    & a_{n-1} & \cdots & a_1    & a_0    \\
+                b_m    & b_{m-1} & \cdots  & b_1    & b_0    & 0       & 0      & \cdots & 0      \\
+                0      & b_n     & b_{m-1} & \cdots & b_1    & b_0     & 0      & \cdots & 0      \\
+                \cdots & \cdots  & \cdots  & \cdots & \cdots & \cdots  & \cdots & \cdots & \cdots \\
+                0      & 0       & \cdots  & 0      & b_m    & b_{m-1} & \cdots & b_1    & b_0\end{vmatrix}\eqno(1).$$
+
+\begin{theorem}
+	\label{Res1}
+	Результант $\Res(f,g)=0$ тогда и только тогда, когда $f$ и $g$ имеет общий множитель в $k[x]$ степени $>0$.
+\end{theorem}
+
+\begin{proof}
+	Пусть $h$ --- наибольший общий делитель $f$ и $g$. Предположим, что $\deg h>0$. Тогда существует расширение $E$ поля $k$ такое, что $h(x)$ имеет корень в $E$. Обозначим этот корень $\xi$. Пусть $C_1, C_2,\ldots, C_{n+m}$ --- столбцы матрицы (1). Рассмотрим $$C_1\xi^{n+m-1}+C_2\xi^{n+m-2}+\cdots+C_{n+m-1}\xi+C_{n+m}=C.$$ Тогда $$C=\begin{pmatrix} \xi^{m-1}f(\xi) \\
+			\xi^{m-2}f(\xi) \\
+			\cdots          \\
+			f(\xi)          \\
+			\xi^{n-1}g(\xi) \\
+			\xi^{n-2}g(\xi) \\
+			\cdots          \\
+			g(\xi)\end{pmatrix}=\begin{pmatrix} 0      \\
+			0      \\
+			\cdots \\
+			\cdots \\
+			\cdots \\
+			0\end{pmatrix}.$$ Отсюда, $\Res(f,g)=0$.
+	
+	Обратно. Пусть $\Res(f,g)=0$. Положим $D_1, D_2,\ldots, D_{n+m}$ --- строки матрицы (1). Тогда существуют ненулевые $\alpha_1,\alpha_2,\ldots,\alpha_m,\beta_1,\beta_2,\ldots,\beta_n$ такие, что $$\alpha_1D_1+\alpha_2D_2+\cdots+\alpha_m D_m+\beta_1 D_{m+1}+\cdots+\beta_n D_{m+n}=(0,0,\ldots,0).\eqno(2)$$ Рассмотрим многочлены $$f_1(x)=\beta_1x^{n-1}+\beta_2x^{n-2}+\cdots+\beta_{n-1}x+\beta_n,$$ $$g_1(x)=\alpha_1x^{m-1}+\alpha_2x^{m-2}+\cdots+\alpha_{m-1}x+\alpha_m.$$ Из (2) следует $$fg_1+gf_1=0.$$ Предположим, что $f$ и $g$ не имеют общих делителей степени $>0$. Поскольку $k[x]$ факториально, то существует разложение на простые множители $f(x)=p_1(x)\cdots p_k(x)$. Заметим, что $g(x)$ не делится ни на один $p_i(x)$. Тогда $f_1(x)$ делится на все $p_i(x)$. Следовательно, $f_1(x)$ делится на $f(x)$, но $\deg f_1(x)<\deg f(x)$. Противоречие.
+\end{proof}
+
+\section{Алгоритм Кронекера}
+
+Пусть $f(x)\in\ZZ[x]$. Нужно найти $f_1(x)\in\ZZ[x]$ такой, что $f(x)$ делится на $f_1(x)$ или доказать, что таких нет. Алгоритм Кронекера основан на следующих
+соображениях:
+\begin{enumerate}
+	\item если степень многочлена $f(x)$ равна $n$, то степень хотя бы одного множителя $f_1(x)$ многочлена $f(x)$ не превосходит $[\frac{n}{2}]$;
+	\item значения многочленов $f(x)$ и $f_1(x)$ в целых точках --- целые числа;
+	\item пусть $k\in\ZZ$ и $f(k)\neq 0$ тогда $f_1(x)$ может принимать только конечное число значений, состоящее из
+	      делителей числа $f(k)$;
+	\item многочлен $f_1(x)$ однозначно восстанавливается по его значению в $[\frac{n}{2}]+1$ точке.
+\end{enumerate}
+
+Таким образом, мы можем выбрать любые целые $[\frac{n}{2}]+1$ точки, например, $0,1,2,\ldots,[\frac{n}{2}]$. Посчитать значение в них. Если существует $k$ такое, что $f(k)=0$, то $f(x)$ делится на $x-k$. Если таких точек нет, то мы можем рассмотреть все возможные наборы делителей $f(0),f(1),\ldots,f([\frac{n}{2}])$. Для каждого набора существует многочлен $f_1(x)$. Далее проверяем делится ли $f(x)$ на $f_1(x)$.
+
+Пусть $f(x_1,x_2,\ldots,x_n)\in\ZZ[x_1,x_2,\ldots,x_n]$. Для того, чтобы разложить $f(x_1,x_2,\ldots,x_n)$ в $\ZZ[x_1,x_2,\ldots,x_n]$ выберем достаточно большое $d$ (например большее степени $f(x_1,x_2,\ldots,x_n)$). Рассмотри $g(y)=f(y,y^d,y^{d^2},\ldots,y^{d^{n-1}})$. Разложим его на множители $g(y)=g_1(y)g_2(y)\cdots g_m(y)$. Рассмотрим всевозможные наборы $\{i_1,\ldots,i_k\}\subset\{1,2,\ldots,m\}$. Для каждого набора определим $$g_{i_1,\ldots,i_k}(y)=g_{i_1}(y)g_{i_2}(y)\cdots g_{i_k}(y).$$ Найдем $f_{i_1,\ldots,i_k}(x_1,x_2,\ldots,x_n)=S^{-1}(g_{i_1,\ldots,i_k}(y))$, где $S^{-1}$ определяется на
+одночленах по формуле $$S^{-1}(y^{a_1+a_2d+a_3d^2+\cdots+a_nd^{n-1}})=x_1^{a_1}x_2^{a_2}\cdots x_n^{a_n}.$$ Проверяем делится ли $f(x_1,x_2,\ldots,x_n)$ на $f_{i_1,\ldots,i_k}(x_1,x_2,\ldots,x_n)$.
+
+\section{Алгоритм Берлекэмпа}
+
+Пусть $F_q$ --- поле из $q=p^n$ элементов. Пусть $f(x)\in F_q[x]$ --- многочлен со старшим коэффициентом $1$. Рассмотрим алгоритм разложения $f(x)\in F_q[x]$ на неприводимые множители. Пусть $$f(x)=(p_1(x))^{k_1}(p_2(x))^{k_2}\cdots (p_m(x))^{k_m}$$ --- разложение $f(x)$ на различные неприводимые множители со старшим коэффициентом $1$. Сначала избавимся от кратностей. Рассмотрим производную $f'(x)$. Если $f'(x)=0$, то $f(x)=g(x^p)$. Отсюда, $f(x)=(g(x))^p$. Таким образом, мы можем считать, что $f'(x)\neq 0$. Тогда вычислим $h(x)=\gcd(f(x),f'(x))$. Очевидно, что $$h(x)=(p_1(x))^{j_1}(p_2(x))^{j_2}\cdots (p_m(x))^{j_m},$$ где $j_i=k_i-1$, если $k_i$ не делится на $p$, и $j_i=k_i$, если $k_i$ делится на $p$. Рассмотрим $\tilde{f}(x)=\frac{f(x)}{h(x)}$. Заметим, у $\tilde{f}(x)$ нет кратных неприводимых множителей. Если мы найдем разложение $\tilde{f}(x)$, то, последовательно поделив на неприводимые множители $f(x)$, мы найдем все множители $p_i(x)$, у которых $k_i$ не делится на $p$. Пусть $f_1(x)=\prod\limits_{k_i:p\nmid k_i}(p_i(x))^{k_i}$. Тогда многочлен $\frac{f(x)}{f_1(x)}$ имеет нулевую производную. Таким образом, мы можем считать, что $$f(x)=p_1(x)p_2(x)\cdots p_m(x).$$
+
+\begin{theorem}
+	\label{Ber1}
+	Пусть $h(x)\in F_q[x]$ и $\deg h(x)<\deg f(x)$. Предположим, что $(h(x))^q\equiv h(x) (\mod f(x))$. Тогда $$f(x)=\prod\limits_{a\in F_q}\gcd(f(x),h(x)-a).$$ Более того, правая часть этого равенства представляет собой
+	нетривиальное разложение $f(x)$ на взаимно простые множители.
+\end{theorem}
+
+\begin{proof}
+	Мы знаем, что $y^q-y=0$ для любого $y\in F_q$. Таким образом, $$y^q-y=\prod\limits_{a\in F_q}(y-a).$$ Следовательно, $$(h(x))^q-h(x)=\prod\limits_{a\in F_q}(h(x)-a)\equiv 0(\mod f(x)).$$
+	Заметим, что $h(x)-a_1$ и $h(x)-a_2$ взаимно просты при $a_1\neq a_2$. Следовательно, $$f(x)=\prod\limits_{a\in F_q}\gcd(f(x),h(x)-a)$$ и все множители $\prod\limits_{a\in F_q}\gcd(f(x),h(x)-a)$ взаимно просты. Поскольку $\deg(h(x)-a)<\deg f$, то это разложение нетривиально.
+\end{proof}
+
+\begin{definition}
+	Многочлен $h(x)\in F_q[x]$ такой, что $\deg h(x)<\deg f(x)$ и $(h(x))^q\equiv h(x) (\mod f(x))$ называется \emph{$f$-разлагающим} многочленом.
+\end{definition}
+
+Из теоремы \ref{Ber1} следует, что если мы найдем какой-нибудь $f$-разлагающий многочлен, то сможем с его помощью разложить $f(x)$
+на нетривиальные множители.
+
+\begin{theorem}
+	\label{Ber2}
+	Пусть $\deg f(x)=n$ и $$x^{iq}\equiv\sum\limits_{j=0}^{n-1}b_{ij}x^j(\mod f(x)),\quad i=0,1,\ldots,n-1.$$ Многочлен $$h(x)=a_0+a_1x+\cdots+a_{n-1}x^{n-1}\in F_q[x]$$ будет удовлетворять условию $(h(x))^q\equiv h(x) (\mod f(x))$ тогда и только тогда, когда $$(a_0,a_1,\ldots,a_{n-1})B=(a_0,a_1,\ldots,a_{n-1}),$$ где $$B=\begin{pmatrix} b_{0,0}   & b_{0,1}   & \cdots & b_{0,n-1}   \\
+                b_{1,0}   & b_{1,1}   & \cdots & b_{1,n-1}   \\
+                \cdots    & \cdots    & \cdots & \cdots      \\
+                b_{n-1,0} & b_{n-1,1} & \cdots & b_{n-1,n-1}\end{pmatrix}.$$
+\end{theorem}
+
+\begin{proof}
+	Заметим, что условие $$(h(x))^q\equiv h(x) (\mod f(x))$$ равносильно условию $$(a_0+a_1x+\cdots+a_{n-1}x^{n-1})^q=\sum_{i=0}^{n-1}a_ix^{iq}\equiv\sum_{i=0}^{n-1}a_ix^{i}(\mod f(x)).$$ Заметим, что  $$\sum_{i=0}^{n-1}a_ix^{iq}\equiv\sum_{i=0}^{n-1}a_i\left(\sum\limits_{j=0}^{n-1}b_{ij}x^j\right)=\sum\limits_{j=0}^{n-1}\left(\sum_{i=0}^{n-1}a_ib_{ij}\right)x^j(\mod f(x)).$$ Отсюда следует утверждение теоремы.
+\end{proof}
+
+\begin{remark}
+	Поскольку $x^0=1\equiv 1 (\mod f(x))$, то первая строчка матрицы $B$ равна $(1,0,0,\ldots,0)$.
+\end{remark}
+
+\begin{lemma}
+	\label{Ber3}
+	Пусть $\deg f(x)=n$ и $f(x)=p_1(x)p_2(x)\cdots p_m(x)$ --- разложение на неприводимые множители, $c_1,c_2,\ldots,c_m\in F_q$. Тогда существует единственный многочлен $h(x)$ такой, что $\deg h(x)<n$ и $h(x)\equiv c_i(\mod p_i(x))$ для всех $i=1,2,\ldots,m$.
+\end{lemma}
+
+\begin{proof}
+	Пусть $c_1,c_2,\ldots,c_m\in F_q$. Согласно китайской теореме об остатках существует $h(x)$ такой, что $h(x)\equiv c_i(\mod p_i(x))$ для всех $i=1,2,\ldots,m$. Если $\deg h(x)\geq n$, то применив алгоритм Евклида, получаем $h(x)=g(x)f(x)+\bar{h}(x)$, где $\deg(\bar{h}(x))<n$. При этом $h(x)\equiv\bar{h}(x)(\mod f(x))$. Следовательно, $h(x)\equiv\bar{h}(x)(\mod p_i(x))$ для всех $i=1,2,\ldots,m$. Заменив $h(x)$ на $\bar{h}(x)$, мы можем считать, что $\deg h(x)<n$. Осталось доказать единственность. Пусть есть два таких многочлена $h_1(x)$ и $h_2(x)$. Рассмотрим $h_1(x)-h_2(x)$. Заметим, что $\deg (h_1(x)-h_2(x))<n$ и $h_1(x)-h_2(x)\equiv 0(\mod p_i(x))$ для всех $i=1,2,\ldots,m$. Следовательно, $h_1(x)-h_2(x)\equiv 0(\mod f(x))$, т.е. $h_1(x)-h_2(x)$ делится на $f(x)$, но $\deg(f(x))=n>\deg (h_1(x)-h_2(x))$. Противоречие.
+\end{proof}
+
+\begin{theorem}
+	\label{Ber4}
+	Пусть $\deg f(x)=n$ и $f(x)=p_1(x)p_2(x)\cdots p_m(x)$ --- разложение на неприводимые множители, $B_1=(B-E)^T$, где $B$ --- матрица из теоремы \ref{Ber2}, $E$ --- единичная матрица. Тогда $m$ равно размерности ядра матрицы $B_1$, т.е. размерности подпространства векторов $v$ таких, что $B_1 v=0$.
+\end{theorem}
+
+\begin{proof}
+	Согласно теореме \ref{Ber1} $f(x)=\prod\limits_{a\in F_q}\gcd(f(x),h(x)-a).$ Заметим, что $p_i(x)$ делит $\prod\limits_{a\in F_q}\gcd(f(x),h(x)-a)$ тогда и только тогда, когда существует $c_i\in F_q$ такое, что $h(x)\equiv c_i(\mod p_i(x))$. Выберем $c_1,c_2,\dots, c_m\in F_q$. Согласно лемме \ref{Ber3} существует единственный многочлен $h(x)$ такой, что $\deg h(x)<n$ и $h(x)\equiv c_i(\mod p_i(x))$ для всех $i=1,2,\ldots,m$. Таким образом, мы получили взаимно однозначное соответствие между наборами $c_1,c_2,\dots, c_m\in F_q$ и $f$-разлагающими многочленами $h(x)$. Отсюда видно, что таких многочленов $q^m$ штук. С другой стороны, каждое решение системы $$B_1\begin{pmatrix} a_0    \\
+			a_1    \\
+			\cdots \\
+			a_{n-1}\end{pmatrix}=\begin{pmatrix} 0      \\
+			0      \\
+			\cdots \\
+			0\end{pmatrix}$$ также задает $f$-разлагающий многочлен. Таких многочленов $q^r$, где $r$ --- размерность подпространства векторов $v$ таких, что $B_1 v=0$. Следовательно, $r=m$.
+\end{proof}
+
+\begin{remark}
+	Заметим, что размерность ядра матрицы $B_1$ равна $n-s$, где $s$ --- ранг матрицы $B_1$.
+\end{remark}
+
+Таким образом, мы получили следующий критерий неразложимости.
+
+\begin{corollary}
+	\label{Ber5}
+	Многочлен $f(x)$ неприводим тогда и только тогда, когда $\gcd(f(x),f'(x))=1$ и ранг матрицы $B_1$ равен $n-1$.
+\end{corollary}
+
+Теперь перейдем к алгоритму Берлекемпа.
+
+\begin{enumerate}
+	\item Избавимся от кратностей в разложении многочлена $f(x)$.
+	\item Вычислим матрицу $B$.
+	\item Найдем базис ядра $B_1$. Пусть $e_1=(1,0,0,\ldots,0)$, $e_2,\ldots, e_k$ --- искомый базис.
+	\item Если $k=1$, многочлен $f(x)$ неприводим. Если $k>1$, то $e_2=(a_{2,0},a_{2,1},\ldots,a_{2,n-1})$. Тогда $$h_2(x)=a_{2,0}+a_{2,1}x+\cdots+a_{2,n-1}x^{n-1}$$ --- $f$-разлагающий многочлен. Рассмотрим $\gcd(f(x),h_2(x)-a)$ для всех $a\in F_q$. Найдем разложение $f(x)=g_1(x)g_2(x)\cdots g_l(x)$. Если $l=k$, то алгоритм останавливается. Если $l<k$, то берем $e_3=(a_{3,0},a_{3,1},\ldots,a_{3,n-1})$ и $$h_3(x)=a_{3,0}+a_{3,1}x+\cdots+a_{3,n-1}x^{n-1}.$$ Вычисляя $\gcd(g_i(x),h_3(x)-a)$ для всех $g_i(x)$ и $a\in F_q$, мы получаем дальнейшее разложение $f(x)$.
+\end{enumerate}
+
+\begin{theorem}
+	\label{Ber5}
+	Алгоритм Берлекэмпа разлагает $f(x)$ на неприводимые множители.
+\end{theorem}
+
+\begin{proof}
+	Пусть $f(x)=p_1(x)p_2(x)\cdots p_m(x)$, $h_1(x),h_2(x),\ldots, h_m(x)$ --- $f$-разлагающие многочлены, векторы коэффициентов
+	которых образуют базис пространства решений системы $$B_1\begin{pmatrix} a_0    \\
+			a_1    \\
+			\cdots \\
+			a_{n-1}\end{pmatrix}=\begin{pmatrix} 0      \\
+			0      \\
+			\cdots \\
+			0\end{pmatrix},$$ мы считаем, что $h_1(x)=1$. Нам нужно показать, что для любых двух $p_i(x)$ и $p_j(x)$ существуют $h_r(x)$ и $c\in F_q$ такие, что $h_r(x)\equiv c (\mod p_i(x))$, но $h_r(x)\not\equiv c (\mod p_j(x))$. Предположим противное, т.е. для всех $r=1,2,\ldots,m$ существуют $c_r\in F_q$ такие, что $h_r(x)\equiv c_r(\mod p_i(x))$ и $h_r(x)\equiv c_r(\mod p_j(x))$. Поскольку любой $f$-разлагающий многочлен $h(x)$ есть линейная комбинация $h_1(x),h_2(x),\ldots, h_m(x)$, то $h(x)\equiv c(\mod p_i(x))$ и $h(x)\equiv c(\mod p_j(x))$. С другой стороны, существует $f$-разлагающий многочлен $h(x)$ такой, что $h(x)\equiv 0(\mod p_i(x))$ и $h(x)\equiv 1(\mod p_j(x))$. Противоречие.
+\end{proof}
+
+
+%\section{Жорданова форма операторов}
+
+%Рассмотрим линейные операторы на конечномерном векторном пространстве $V$ над алгебраически замкнутым полем $k$.
+
+\section{Представление групп}
+
+Пусть $V$ --- конечномерное векторное пространство над полем $k$. Пусть $\GL(V)$ --- группа обратимых линейных операторов на пространстве $V$.
+
+\begin{definition}
+	Пусть $G$ --- группа. Всякий гомоморфизм $\varphi\colon G\rightarrow\GL(V)$ называется \emph{линейным представлением} группы $G$ в пространстве $V$.
+\end{definition}
+
+Таким образом, линейное представление это пара $(\varphi,V)$, состоящая из пространства $V$ и гомоморфизма $\varphi$. Очевидно, что всегда существует гомоморфизм $\varphi\colon G\rightarrow I$, где $I$ --- единичный оператор. Такое представление называется \emph{тривиальным}.
+
+\begin{definition}
+	Два линейных представления $(\varphi,V)$ и $(\psi,W)$ называются \emph{эквивалентными}(\emph{изоморфными}), если существует изоморфизм $f\colon V\rightarrow W$, делающий диаграмму $$\begin{CD}V@>f>> W\\
+			@V\varphi(g)VV @VV\psi(g)V\\
+			V@>f>>W\end{CD}$$ коммутативной для всех $g\in G$.
+\end{definition}
+
+Заметим, что если мы выберем базис в пространстве $V$, то любой обратимый оператор представляется невырожденной матрицей $A$. Таким образом, мы получили гомоморфизм из группы $G$ в группу невырожденных матриц, размера $n\times n$, где $n$ --- размерность пространства.
+
+\begin{definition}
+	Пусть $(\varphi,V)$ --- линейное представление группы $G$. Подпространство $U\subset V$ называется \emph{инвариантным} относительно $(\varphi,V)$, если $\varphi(g)u\in U$ для любых $g\in G$, $u\in U$. Очевидно, что $V$ и $\{0\}$ являются инвариантными. Если представление $(\varphi,V)$ не имеет других инвариантных подпространств, то оно называется \emph{неприводимым}. Представление $(\varphi,V)$ \emph{приводимо}, если у него есть нетривиальное (т.е. не равное $V$ и $\{0\}$) инвариантное подпространство.
+\end{definition}
+
+Пусть $(\varphi,V)$ --- линейное представление группы $G$ и $U\subset V$ --- нетривиальное инвариантное подпространство. Выберем базис $\{e_1,e_2,\ldots, e_n\}$ пространство $V$ так, что $\{e_1,e_2,\ldots, e_k\}$ будет базисом подпространства $U$. Пусть $A_g$ --- матрица линейного оператора $\varphi(g)$ в базисе $\{e_1,e_2,\ldots, e_n\}$. Тогда $$A_g=\begin{pmatrix} A'_g & B     \\
+                0    & A''_g\end{pmatrix}$$ для всех $g\in G$. Заметим, что $$A_{gh}=A_gA_h=\begin{pmatrix} A'_g & B     \\
+                0    & A''_g\end{pmatrix}\begin{pmatrix} A'_h & C     \\
+                0    & A''_h\end{pmatrix}=\begin{pmatrix} A'_gA'_h & D          \\
+                0        & A''_gA''_h\end{pmatrix}.$$ Таким образом, отображение $g\rightarrow A'_g$ определяет представление на пространстве $U$. Оно называется \emph{подпредставлением}. Отображение $g\rightarrow A''_g$ определяет представление на фаткорпространстве $V/U$. Оно называется \emph{факторпредставлением}. Если в $V$ можно выбрать базис так, что $$A_g=\begin{pmatrix} A'_g & 0     \\
+                0    & A''_g\end{pmatrix}$$ для всех $g\in G$, то $\varphi$ можно представить в виде прямой суммы представлений $\varphi=\varphi'+\varphi''$. Разложение в прямую сумму возможно тогда и только тогда, когда инвариантное подпространство $U\subset V$ имеет инвариантное дополнение $W$ такое, что $V=U\oplus W$. Линейное представление $(\varphi,V)$ называется \emph{неразложимым}, если его нельзя представить в виде суммы двух нетривиальных подпредставлений. Если линейное представление $(\varphi,V)$ можно разложить в прямую сумму неприводимых представлений, то это представление называется \emph{вполне приводимым}.
+
+Пусть теперь $k=\CC$. Группу $\GL(V)$ в этом случае мы будем обозначать $\GL_n(\CC)$, где $n=\dim V$. Пусть на $V$ задана функция $(\quad,\quad)\colon V\times V\rightarrow\CC$. Эта функция называется \emph{эрминтовой формой} (\emph{эрминтовым произведением}), если
+\begin{enumerate}
+	\item $(u,v)=\overline{(v,u)}$ для всех $u,v\in V$;
+	\item $(u_1+u_2,v)=(u_1,v)+(u_2,v)$ для всех $u_1,u_2,v\in V$;
+	\item $(\alpha u,v)=(u,\bar{\alpha}v)=\alpha(u,v)$ для всех $u,v\in V$, $\alpha\in\CC$;
+	\item $(u,u)\in\RR$ и $(u,u)>0$ для всех $u\in V$, $u\neq 0$.
+\end{enumerate}
+
+Пусть $(e_1,e_2,\ldots, e_n)$ --- базис пространства $V$. Пусть $$u=u_1e_1+u_2e_2+\cdots+u_ne_n,$$ $$v=v_1e_1+v_2e_2+\cdots+v_ne_n.$$ Тогда $$(u,v)=\sum\limits_{i,j=1}^n h_{ij}u_i\bar{v}_j.$$ Положим $$H=\begin{pmatrix} h_{11} & h_{12} & \cdots & h_{1n} \\
+                h_{21} & h_{22} & \cdots & h_{2n} \\
+                \cdots & \cdots & \cdots & \cdots \\
+                h_{n1} & h_{n2} & \cdots & h_{nn}\end{pmatrix}.$$ Заметим, что $h_{ij}=\bar{h}_{ji}$. Матрица $H$ называется \emph{эрминтовой}. У любой эрмитовой формы существует ортонормированный базис, т.е. базис $(e_1,e_2,\ldots, e_n)$  такой, что $(e_i,e_j)=0$ для всех $i\neq j$ и $(e_i,e_i)=1$. В этом базисе $$(u,v)=u_1\bar{v}_1+u_2\bar{v}_2+\cdots+u_n\bar{v}_n.$$
+
+Линейный оператор $A$ называется \emph{унитарным}, если $(Au,Av)=(u,v)$. Если матрица $A$ (мы опускаем различие между оператором и его матрицей) задана в ортонормированном базисе, то условие унитарности записывается в виде $A\bar{A}^T=E$. Заметим, что унитарные матрицы (операторы) образуют группу. Мы будем обозначать ее через $U(n)$. Ясно, что $U(n)\subset\GL_n(\CC)$. Представление $(\varphi,V)$ называется \emph{унитарным}, если $\varphi(g)\in U(n)$ для любого $g\in G$.
+
+\begin{theorem}
+	\label{PredGr1}
+	Любое линейное представление $(\varphi,V)$ конечной группы $G$ изоморфно унитарному представлению.
+\end{theorem}
+
+\begin{proof}
+	Выберем в пространстве $V$ эрмитову форму $H(u,v)$. Рассмотрим форму $$(u,v)=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)u,\varphi(g)v).$$ Заметим, что $$(u,v)=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)u,\varphi(g)v)=\frac{1}{|G|}\sum\limits_{g\in G} \overline{H(\varphi(g)v,\varphi(g)u)}=$$ $$=\overline{\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)v,\varphi(g)u)}=\overline{(v,u)}.$$ Таким образом, выполнено первое условие эрмитовости $(u,v)$. Аналогично, $$(u_1+u_2,v)=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)(u_1+u_2),\varphi(g)v)=$$ $$=\frac{1}{|G|}\sum\limits_{g\in G} (H(\varphi(g)u_1,v)+H(\varphi(g)u_2,\varphi(g)v))=$$ $$=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)u_1,\varphi(g)v)+\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)u_2,\varphi(g)v)=(u_1,v)+(u_2,v),$$ $$(\alpha u,v)=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)(\alpha u),\varphi(g)v)=\alpha\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)u,\varphi(g)v)=\alpha(u,v),$$ $$(u,u)=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)u,\varphi(g)u)>0.$$ Таким образом, $(u,v)$ --- эрмитова форма. С другой стороны, $$(\varphi(h)u,\varphi(h) v)=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(g)\varphi(h)u,\varphi(g)\varphi(h)v)=$$ $$=\frac{1}{|G|}\sum\limits_{g\in G} H(\varphi(gh)u,\varphi(gh)v)=\frac{1}{|G|}\sum\limits_{s\in G} H(\varphi(s)u,\varphi(s)v)=(u,v).$$ Таким образом, $\varphi(h)$ унитарен для любого $h\in G$.
+\end{proof}
+
+\begin{theorem}[теорема Машке]
+	\label{PredGr2}
+	Каждое линейное представление конечной группы $G$ над полем $\CC$ вполне приводимо.
+\end{theorem}
+
+\begin{proof}
+	Пусть $(\varphi,V)$ --- линейное представление над полем $\CC$. Согласно теореме \ref{PredGr1} существует эрмитова форма $(u,v)$ на пространстве $V$, инвариантная относительно линейных операторов $\varphi(g)$ для всех $g\in G$. Пусть $U$ --- инвариантное подпространство. Тогда существует ортогональное дополнение $$U^{\bot}=\{v\in V\mid (u,v)=0,\quad \forall u\in U\}.$$ Заметим, что $V=U\oplus U^{\bot}$. Поскольку $\varphi(g)$ автоморфизм подпространства $U$, то для любого $u\in U$ существует $u'\in U$ такой, что $u=\varphi(g)u'$. Тогда для любого $v\in U^{\bot}$ $$(u,\varphi(g)v)=(\varphi(g)u',\varphi(g)v)=(u',v)=0.$$ Таким образом, $U^{\bot}$ --- инвариантное подпространство, и мы получаем разложение $\varphi=\varphi'+\varphi''$.
+\end{proof}
+
+\begin{theorem}[лемма Шура]
+	\label{PredGr3}
+	Пусть $(\varphi,V)$ и $(\psi,W)$ --- два неприводимых представлений над полем $\CC$, и $f\colon V\rightarrow W$ --- линейное отображение такое, что $$\psi(g)f=f\varphi(g),\quad \forall g\in G.$$ Тогда \begin{enumerate}
+		\item если эти представления неизоморфны, то $f=0$;
+		\item если $V=W$ и $\varphi=\psi$, то $f=\lambda I$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Если $f=0$, то все доказано. Пусть $V_0=\ker f$ и $V_0\neq V$. Поскольку $$f(\varphi(g)v_0)=\psi(g)f(v_0)=0,$$ то $\varphi(g)v_0\in V_0$ для любого $g\in G$. Таким образом, $V_0$ --- инвариантное подпространство. Отсюда, $V_0=0$. Пусть $W_0=\Ime f$. Для любого $w_0\in W_0$ имеем $$\psi(g)w_0=\psi(g)f(u_0)=f(\varphi(g)u_0)=w'_0\in W_0,$$ для любого $g\in G$. Таким образом, $W_0$ --- инвариантное подпространство $W$. Поскольку $f\neq 0$ и $(\psi,W)$ неприводимо, то $W_0=W$. Отсюда, $f\colon V\rightarrow W$ --- изоморфизм пространств. Из условия $\psi(g)f=f\varphi(g),\quad \forall g\in G$ получаем, что $f$ определяет изоморфизм представлений. Таким образом, мы доказали (1).
+	
+	По условию $f\colon V\rightarrow V$ --- линейный оператор. Пусть $\lambda$ --- его собственное значение. Линейный оператор $f_0=f-\lambda I$ имеет нетривиальное ядро и $$\psi(g)f_0=\psi(g)(f-\lambda I)=\psi(g)f-\lambda\psi(g)=f\varphi(g)-\lambda\varphi(g)=f_0\varphi(g).$$ Из утверждения (1) следует, что $f_0=0$. Таким образом, $f=\lambda I$.
+\end{proof}
+
+Пусть $A$ --- матрица, размера $n\times n$. \emph{Следом} этой матрицы $\tr(A)$ мы будем называть сумму элементов, стоящих на главной диагонали, т.е. $$\tr(A)=a_{11}+a_{22}+\cdots+a_{nn}.$$
+
+\begin{claim}
+	\label{Tr1}
+	\begin{enumerate}
+		\item $\tr(A+B)=\tr A+\tr B$ для любых двух матриц $A$ и $B$;
+		\item $\tr(\alpha A)=\alpha\tr A$ для любого $\alpha\in\CC$ и $A$.
+	\end{enumerate}
+\end{claim}
+
+\begin{claim}
+	\label{Tr2}
+	Пусть $C$ --- невырожденная матрица. Тогда $\tr(C^{-1}AC)=\tr(A)$.
+\end{claim}
+
+\begin{proof}
+	Пусть $A$ --- матрица $n\times n$. Рассмотрим $A$, как линейный оператор. Его характеристический многочлен равен $$\det(A-\lambda E)=(-1)^n\lambda^n+(-1)^{n-1}\lambda^{n-1}+\cdots.$$ Поскольку характеристический многочлен не меняется при переходе к новому базису, то и след не изменяется (следует из того, что $$\det(C^{-1}AC-\lambda E)=\det(C^{-1}AC-\lambda C^{-1}EC)=$$ $$=\det(C^{-1}(A-\lambda E)C)=\det(C^{-1})\det(A-\lambda E)\det(C)=\det(A-\lambda E).)$$
+\end{proof}
+
+\begin{theorem}
+	\label{PredGr4}
+	Пусть $(\varphi,V)$ и $(\psi,W)$ --- два неприводимых представлений над полем $\CC$ конечной группы $G$ порядка $|G|$, и $f\colon V\rightarrow W$ --- линейное отображение. Пусть $$\tilde{f}=\frac{1}{|G|}\sum\limits_{g\in G}\psi(g)f\varphi(g)^{-1}.$$ Тогда \begin{enumerate}
+		\item если $(\varphi,V)$ и $(\psi,W)$ неизоморфны, то $\tilde{f}=0$;
+		\item если $V=W$ и $\varphi=\psi$, то $\tilde{f}=\lambda I$, $\lambda=\frac{\tr f}{\dim V}$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	Заметим, что $$\psi(g)\tilde{f}\varphi(g)^{-1}=\frac{1}{|G|}\sum\limits_{h\in G}\psi(g)\psi(h)f\varphi(h)^{-1}\varphi(g)^{-1}=$$ $$=\frac{1}{|G|}\sum\limits_{h\in G}\psi(gh)f\varphi(gh)^{-1}=\frac{1}{|G|}\sum\limits_{g'\in G}\psi(g')f\varphi(g')^{-1}=\tilde{f}.$$ Таким образом, $$\psi(g)\tilde{f}=\tilde{f}\varphi(g),\quad \forall g\in G.$$ Теперь утверждение теоремы следует из леммы Шура (см. \ref{PredGr3}). Осталось проверить выражение для $\lambda$. Заметим, что $$(\dim V)\lambda=\tr(\lambda E)=\tr\tilde{f}=\frac{1}{|G|}\sum\limits_{g\in G}\tr(\varphi(g)f\varphi(g)^{-1})=\frac{1}{|G|}\sum\limits_{g\in G}\tr f=\tr f.$$
+\end{proof}
+
+Выберем в пространствах $V$ и $W$ базисы $e_1,e_2,\ldots,e_n$ и $e'_1,e'_2,\ldots,e'_m$ соответственно. Запишем наши отображения в этих базисах. Получаем
+$$\varphi(g)=(\varphi_{ii'}(g)),\quad \psi(g)=(\psi_{jj'}(g)),\quad f=(f_{ji}),\quad \tilde{f}=(\tilde{f}_{ji}).$$ Тогда $$\tilde{f}_{ji}=\frac{1}{|G|}\sum\limits_{g\in G}\sum\limits_{i'=1}^n\sum\limits_{j'=1}^m\psi_{jj'}(g)f_{j'i'}\varphi_{i'i}(g^{-1}).$$ Пусть $f$ задается матричной единицей, т.е. $f_{ji}=0$, для всех $(j,i)\neq (j_0,i_0)$ и $f_{j_0i_0}=1$. Применим теорему \ref{PredGr4} (1), получаем $$\frac{1}{|G|}\sum\limits_{g\in G}\psi_{jj_0}(g)\varphi_{i_0i}(g^{-1})=0.\eqno(1)$$ Заметим, что это равенство выполнено для всех $i,i_0,j,j_0$. (Мы считаем, что представления $(\varphi,V)$ и $(\psi,W)$ неизоморфны).
+
+Пусть теперь $(\varphi,V)=(\psi,W)$. Заметим, что $$\tr f=\sum\limits_{i=1}^nf_{ii}=\sum\limits_{i',j'}\delta_{j'}^{i'}f_{j'i'},$$ где $$\delta_{j'}^{i'}=\begin{cases} 1,\quad j'=i' \\
+		0,\quad j'\neq i'\end{cases}$$ --- символ Кронекера. Поскольку $\tilde{f}=\frac{\tr f}{\dim V}$, то $$\tilde{f}_{ji}=\delta_{j}^{i}\frac{\tr f}{\dim V}=\frac{\delta_{j}^{i}}{\dim V}\sum\limits_{i',j'}\delta_{j'}^{i'}f_{j'i'}.$$ Отсюда, $$\frac{1}{|G|}\sum\limits_{g\in G}\sum\limits_{i'=1}^n\sum\limits_{j'=1}^n\varphi_{jj'}(g)f_{j'i'}\varphi_{i'i}(g^{-1})=\frac{1}{\dim V}\sum\limits_{i'=1}^n\sum\limits_{j'=1}^n\delta_{j}^{i}\delta_{j'}^{i'}f_{j'i'}.$$ Подставляя в качестве $f$ матричные единицы, получаем $$\frac{1}{|G|}\sum\limits_{g\in G}\varphi_{jj_0}(g)\varphi_{i_0i}(g^{-1})=\begin{cases} \frac{\delta_{j}^{i}}{\dim V},\quad j_0=i_0 \\
+		0,\quad j_0\neq i_0\end{cases}.\eqno(2)$$
+
+Пусть $(\varphi,V)$ --- представление группы $G$. Определим функцию $\chi_{\varphi}\colon G\rightarrow k$ соотношением $\chi_{\varphi}(g)=\tr\varphi(g)$. Эта функция называется \emph{характером представления}. Поскольку при переходе к новому базису матрица $\varphi(g)$ переходит в матрицу $C^{-1}\varphi(g) C$, то характер не зависит от выбора базиса.
+
+\begin{theorem}
+	\label{HarGr1}
+	Пусть $\chi_{\varphi}$ --- характер комплексного линейного представления $(\varphi,V)$ (т.е. $k=\CC$) группы $G$. Тогда
+	\begin{enumerate}
+		\item $\chi_{\varphi}(e)=\dim V$;
+		\item $\chi_{\varphi}(hgh^{-1})=\chi_{\varphi}(g)$ для любых $g,h\in G$;
+		\item если $g\in G$ имеет конечный порядок, то $\chi_{\varphi}(g^{-1})=\overline{\chi_{\varphi}(g)}$;
+		\item если $\varphi=\varphi'+\varphi''$, то $\chi_{\varphi}=\chi_{\varphi'}+\chi_{\varphi''}$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+	(1) $\chi_{\varphi}(e)=\tr\varphi(e)=\tr E=\dim V$.
+	
+	(2) $\chi_{\varphi}(hgh^{-1})=\tr\varphi(hgh^{-1})=\tr(\varphi(h)\varphi(g)\varphi(h)^{-1})=\tr\varphi(g)=\chi_{\varphi}(g)$.
+	
+	(3) Пусть $g$ имеет порядок $m$, т.е. $g^m=e$. Тогда $\varphi(g)^m=E$. Пусть $\lambda_1,\lambda_2,\ldots,\lambda_n$ --- собственные значения оператора $\varphi(g)$. Заметим, что $\lambda_i^m=1$. Отсюда, $|\lambda_i|=1$ и $\lambda_i^{-1}=\overline{\lambda_i}$. Тогда $$\chi_{\varphi}(g^{-1})=\tr\varphi(g^{-1})=\sum\limits_{i=1}^n\lambda_i^{-1}=\sum\limits_{i=1}^n\overline{\lambda_i}=\overline{\sum\limits_{i=1}^n\lambda_i}=\overline{\chi_{\varphi}(g)}.$$
+	
+	(4) Пусть $\varphi=\varphi'+\varphi''$. Тогда $$A_g=\begin{pmatrix} A'_g & 0     \\
+                0    & A''_g\end{pmatrix},$$ где $A_g,A'_g,A''_g$ --- матрицы операторов $\varphi(g),\varphi'(g),\varphi''(g)$ соответственно. Тогда $\tr A_g=\tr A'_g+\tr A''_g$. Отсюда, $\chi_{\varphi}=\chi_{\varphi'}+\chi_{\varphi''}$.
+\end{proof}
+
+Заметим, что если $\dim V=1$, то $\chi_{\varphi}(g)=\varphi(g)$.
+
+Рассмотрим множество функций $f\colon G\rightarrow\CC$ из группы $G$ в поле комплексных чисел. Очевидно, что мы можем определить суммы двух функций $f_1+f_2$ как $(f_1+f_2)(g)=f_1(g)+f_2(g)$. Аналогично, $(\alpha f)(g)=\alpha f(g)$. Таким образом, на этом множестве естественно определена структура линейного пространства. Функция $f\colon G\rightarrow\CC$ называется \emph{центральной}, если она постоянна на классах сопряженности. Заметим, что согласно теореме \ref{HarGr1} (2), характеры являются центральными функциями.
+
+Далее будем предполагать, что группа $G$ конечна. Тогда на пространстве функций мы можем задать эрмитово произведение $$(f_1,f_2)=\frac{1}{|G|}\sum\limits_{g\in G}f_1(g)\overline{f_2(g)}.$$
+
+\begin{theorem}
+	\label{HarGr2}
+	Пусть $\varphi$, $\psi$ --- неприводимые комплексные представления конечной группы $G$. Тогда $$(\chi_{\varphi},\chi_{\psi})=\begin{cases} 1,\quad \text{если $\varphi$ изоморфно $\psi$} \\
+			0,\quad \text{если $\varphi$ неизоморфно $\psi$}\end{cases}.$$
+\end{theorem}
+
+\begin{proof}
+	Предположим, что представления $\varphi$ и $\psi$ неизоморфны. Положим $$\chi_{\varphi}(g)=\sum\limits_{i=1}^n\varphi_{ii}(g),\quad\chi_{\psi}(g)=\sum\limits_{j=1}^m\psi_{ii}(g).$$ Подставив в (1) $j_0=j$, $i_0=i$, получим $$\frac{1}{|G|}\sum\limits_{g\in G}\psi_{jj}(g)\varphi_{ii}(g^{-1})=0.$$ Просуммируем это равенство по всем $i$ и $j$. Получаем $$\frac{1}{|G|}\sum\limits_{i=1}^n\sum\limits_{j=1}^m\sum\limits_{g\in G}\psi_{jj}(g)\varphi_{ii}(g^{-1})=0.$$ Поскольку группа конечна, то $\varphi_{ii}(g^{-1})=\overline{\varphi_{ii}(g)}$. Таким образом, $(\chi_{\varphi},\chi_{\psi})=0$, если представления неизоморфны.
+	
+	Пусть $\varphi=\psi$. Подставим в (2) $j_0=j$, $i_0=i$. Получаем $$\frac{1}{|G|}\sum\limits_{g\in G}\varphi_{jj}(g)\varphi_{ii}(g^{-1})=\frac{\delta_{j}^{i}}{\dim V}.$$ Просуммируем это равенство по всем $i$ и $j$. Получаем $$\frac{1}{|G|}\sum\limits_{i=1}^n\sum\limits_{j=1}^n\sum\limits_{g\in G}\varphi_{jj}(g)\varphi_{ii}(g^{-1})=\frac{\delta_{j}^{i}}{\dim V}=\sum\limits_{i=1}^n\sum\limits_{j=1}^n\frac{\delta_{j}^{i}}{\dim V}=1.$$ Используя $\varphi_{ii}(g^{-1})=\overline{\varphi_{ii}(g)}$, получаем $(\chi_{\varphi},\chi_{\psi})=1$, если представления изоморфны.
+\end{proof}
+
+\begin{corollary}
+	\label{HarGr3}
+	Пусть $(\varphi,V)$ --- комплексное представление конечной группы и $V=V_1\oplus V_2\oplus\cdots\oplus V_k$ --- разложение $V$ в прямую сумму неприводимых инвариантных подпространств. Пусть $\varphi_1,\varphi_2,\ldots,\varphi_k$ --- соответствующие представление на $V_1,V_2,\ldots,V_k$ (т.е. ограничения $\varphi$ на $V_1,V_2,\ldots,V_k$). Пусть $(\psi,W)$ --- неприводимое представление. Тогда число представлений $(\varphi_i,V_i)$ изоморфных $(\psi,W)$ равно $(\chi_{\varphi},\chi_{\psi})$.
+\end{corollary}
+
+\begin{proof}
+	Согласно теореме \ref{HarGr1} (4) $$\chi_{\varphi}=\chi_{\varphi_1}+\chi_{\varphi_2}+\cdots+\chi_{\varphi_k}.$$ Тогда $$(\chi_{\varphi},\chi_{\psi})=(\chi_{\varphi_1},\chi_{\psi})+(\chi_{\varphi_2},\chi_{\psi})+\cdots+(\chi_{\varphi_k},\chi_{\psi}).$$ Согласно теореме \ref{HarGr2} эта сумму состоит из нулей и единиц, причем число единиц совпадает с числом представлений $(\varphi_i,V_i)$ изоморфных $(\psi,W)$.
+\end{proof}
+
+\begin{corollary}
+	\label{HarGr4}
+	Два представления с одним и тем же характером изоморфны.
+\end{corollary}
+
+\begin{proof}
+	Пусть $(\varphi,V)$ и $(\psi,W)$ --- два представлений над полем $\CC$ конечной группы. Пусть $V=V_1\oplus V_2\oplus\cdots\oplus V_k$ и $W=W_1\oplus W_2\oplus\cdots\oplus W_l$ --- разложения $V$ и $W$ в прямую сумму неприводимых инвариантных подпространств. Рассмотрим представление $(\varphi_i,V_i)$. Заметим, что $(\chi_{\varphi},\chi_{\varphi_i})=s$, где $s$ --- число подпредставлений в $(\varphi,V)$, изоморфных $(\varphi_i,V_i)$. С другой стороны, $(\chi_{\psi},\chi_{\varphi_i})=s$. Таким образом, число подпредставлений в $(\psi,W)$, изоморфных $(\varphi_i,V_i)$ также равно $s$. Следовательно, представления $(\varphi,V)$ и $(\psi,W)$ изоморфны.
+\end{proof}
+
+Пусть $(\varphi,V)$ --- комплексное представление конечной группы. Тогда $$\chi_{\varphi}=m_1\chi_{\varphi_1}+m_2\chi_{\varphi_2}+\cdots+m_k\chi_{\varphi_k},$$ где $m_i$ --- кратность с которой входит неприводимое представление $(\varphi_i,V_i)$ в разложение $(\varphi,V)$. Тогда $$(\chi_{\varphi},\chi_{\varphi})=m_1^2+m_2^2+\cdots+m_k^2.$$
+
+\begin{definition}
+	Представление $(\varphi,V)$ называется \emph{точным}, если $\ker\varphi=e$.
+\end{definition}
+
+Рассмотрим один важный пример.
+
+\begin{example}
+	\label{PrPr}
+	Пусть $G$ --- конечная группа. Рассмотрим групповую алгебру $W=\CC G$ над полем $\CC$. Как векторное пространство $W$ порождено множеством $\{e_g\mid g\in G\}$. Таким образом, $\dim W=|G|$. Определим представление $\rho\colon G\rightarrow\GL(W)$ группы $G$, как $\rho(a)e_g=e_{ag}$ для любых $a,g\in G$. Такое представление называется \emph{регулярным}. Заметим, что регулярное представление является точным. Пусть $R_a$ --- матрица линейного оператора $\rho(a)$ в базисе $\{e_g\mid g\in G\}$. Заметим, что все матрицы $R_a$ состоят из нулей и единиц. Более того, для любого $a\neq e$ $\rho(a)e_g\neq e_{g}$, т.е. все диагональные элементы матрицы $R_a$ равны нулю. Таким образом, $\tr R_a=0$ для любого $a\in G$, $a\neq e$. Тогда $$\chi_{\rho}(e)=|G|,\quad \chi_{\rho}(g)=0,\quad \forall g\neq e.$$
+\end{example}
+
+Пусть $(\varphi,V)$ --- любое неприводимое представление конечной группы $G$ над $\CC$. Тогда $$(\chi_{\rho},\chi_{\varphi})=\frac{1}{|G|}\sum\limits_{g\in G}\chi_{\rho}(g)\overline{\chi_{\varphi}(g)}=\frac{1}{|G|}\chi_{\rho}(e)\overline{\chi_{\varphi}(e)}=\frac{1}{|G|}|G|\chi_{\varphi}(e)=\dim V.$$ Согласно следствию \ref{HarGr3}, аждое неприводимое представление входит в регулярное с кратностью равной своей размерности. В частности, число различных неприводимых представлений у конечной группы, конечно. Пусть $(\varphi_1,V_1), (\varphi_2,V_2),\ldots, (\varphi_s,V_s)$ --- попарно неизоморфные неприводимые представления. Пусть $\chi_1,\chi_2,\ldots,\chi_s$ --- их характеры. Тогда $$\chi_{\rho}=n_1\chi_1+n_2\chi_2+\cdots+n_s\chi_s,$$ где $n_i=\dim V_i$. Отсюда $$|G|=\chi_{\rho}(e)=n_1\chi_1(e)+n_2\chi_2(e)+\cdots+n_s\chi_s(e)=n_1^2+n_2^2+\cdots+n_s^2.$$ Таким образом, мы доказали следующую теорему.
+
+\begin{theorem}
+	\label{HarGr5}
+	Каждое неприводимое представление конечной группы $G$ входит в разложение регулярного представления с кратностью, равной размерности пространства этого представления. Порядок $|G|$ и размерности $n_1,n_2,\ldots,n_s$ пространств неприводимых линейных представлений связаны соотношением $$|G|=n_1^2+n_2^2+\cdots+n_s^2.$$
+\end{theorem}
+
+\begin{lemma}
+	\label{HarGrL1}
+	Пусть $\Gamma$ --- центральная функция на конечной группе $G$ и $(\varphi,V)$ --- неприводимое комплексное представление этой группы с характером $\chi_{\varphi}$. Рассмотрим линейный оператор $$\Phi_{\Gamma}=\sum\limits_{g\in G}\bar{\Gamma}(g)\varphi(g).$$ Тогда $\Phi_{\Gamma}=\lambda I$, где $\lambda=\frac{|G|}{\chi_{\varphi}(e)}(\chi_{\varphi},\Gamma)$.
+\end{lemma}
+
+\begin{proof}
+	Поскольку $\Gamma$ --- центральная функция, то $\Gamma(hgh^{-1})=\Gamma(g)$, а следовательно и $\bar{\Gamma}(hgh^{-1})=\bar{\Gamma}(g)$. Тогда $$\varphi(h)\Phi_{\Gamma}\varphi(h)^{-1}=\sum\limits_{g\in G}\bar{\Gamma}(g)\varphi(h)\varphi(g)\varphi(h)^{-1}=\sum\limits_{g\in G}\bar{\Gamma}(hgh^{-1})\varphi(hgh^{-1})=$$ $$=\sum\limits_{g'\in G}\bar{\Gamma}(g')\varphi(g')=\Phi_{\Gamma}.$$ Отсюда, $\varphi(h)\Phi_{\Gamma}=\Phi_{\Gamma}\varphi(h)$ для любого $h\in G$. Согласно лемме Шура (см. \ref{PredGr3}) $\Phi_{\Gamma}=\lambda I$. Вычислим след этих операторов. Получаем $$\lambda\chi_{\varphi}(e)=\lambda\dim V=\tr(\lambda I)=\sum\limits_{g\in G}\bar{\Gamma}(g)\tr\varphi(g)=$$ $$=|G|\left(\frac{1}{|G|}\sum\limits_{g\in G}\chi_{\varphi}(g)\bar{\Gamma}(g)\right)=|G|(\chi_{\varphi},\Gamma).$$
+	Отсюда, $\lambda=\frac{|G|}{\chi_{\varphi}(e)}(\chi_{\varphi},\Gamma)$.
+\end{proof}
+
+Заметим, что множество всех центральных функций образуют подпространство в множестве всех функций на группе $G$. Обозначим это подпространство через $X$.
+
+\begin{lemma}
+	\label{HarGrL2}
+	Характеры $\chi_1,\chi_2,\ldots,\chi_s$ всех попарно неизоморфных неприводимых представлений конечной группы $G$ образуют ортонормированный базис в $X$.
+\end{lemma}
+
+\begin{proof}
+	По теореме \ref{HarGr2} система $\chi_1,\chi_2,\ldots,\chi_s$ ортонормирована. Пусть $\Gamma$ --- центральная функция, ортогональная ко всем $\chi_1,\chi_2,\ldots,\chi_s$, т.е. $(\chi_i,\Gamma)=0$. Рассмотрим $$\Phi^i_{\Gamma}=\sum\limits_{g\in G}\bar{\Gamma}(g)\varphi_i(g),$$ где $\varphi_i$ --- представление с характером $\chi_i$. Согласно лемме \ref{HarGrL1} $\Phi^i_{\Gamma}=0$. Пусть $\varphi$ --- произвольное комплексное представление. Тогда по теореме Машке (см. \ref{PredGr2}) $$\varphi=m_1\varphi_1+m_2\varphi_2+\cdots+m_s\varphi_s.$$ Пусть $$\Phi_{\Gamma}=\sum\limits_{g\in G}\bar{\Gamma}(g)\varphi(g).$$ Тогда $$\Phi_{\Gamma}=m_1\Phi^1_{\Gamma}+m_2\Phi^2_{\Gamma}+\cdots+m_s\Phi^s_{\Gamma}=0.$$ Таким образом, $\Phi_{\Gamma}=0$ для любого представления $\varphi$. В частности и для регулярного представления $\rho$ имеем $\rho_{\Gamma}=0$. С другой стороны, применим $\rho_{\Gamma}$ к вектору $e_e$ (вектор, соответствующий единицы группы). Получаем $$0=\rho_{\Gamma}(e_e)=\sum\limits_{g\in G}\bar{\Gamma}(g)\rho(g)e_e=\sum\limits_{g\in G}\bar{\Gamma}(g)e_g.$$ Отсюда, $\bar{\Gamma}(g)=0$ для любого $g\in G$. Следовательно, $\Gamma=0$.
+\end{proof}
+
+\begin{theorem}
+	\label{HarGr6}
+	Число неприводимых попарно неизоморфных представлений конечной группы $G$ над полем $\CC$ равно числу ее классов сопряженности.
+\end{theorem}
+
+\begin{proof}
+	Согласно лемме \ref{HarGrL2} характеры всех попарно неизоморфных неприводимых представлений образуют базис в пространстве центральных функций. С другой стороны, каждому классу сопряженности $C_i\subset G$ мы можем сопоставить функцию $$f_i(g)=\begin{cases} 1,\quad g\in C_i \\
+			0,\quad g\not\in C_i\end{cases}.$$ Заметим, что $f_1,f_2,\ldots,f_r$ также образуют базис. По известной теореме из линейной алгебры, число векторов базиса инвариантно, т.е. $r=s$.
+\end{proof}
+
+
+
+\begin{thebibliography}{lll}
+	\bibitem{AM}
+	Атья М., Макдональд И. \emph{Введение в коммутативную алгебру}.
+	\bibitem{L}
+	Ленг С. \emph{Алгебра}.
+	\bibitem{KM}
+	Каргополов М.И., Мерзляков Ю.И. \emph{Основы теории групп}.
+	\bibitem{Ko}
+	Кострикин А.И. \emph{Основы алгебры}.
+	\bibitem{Ku}
+	Курош А.Г., \emph{Курс высшей алгебры}.
+	\bibitem{Pa}
+	Панкратьев Е.В., \emph{Элементы компьютерной алгебры}.
+	\bibitem{Pr}
+	Прасолов В.В., \emph{Многочлены}.
+\end{thebibliography}
+
+
+\end{document}
+\bibitem{KSB}
