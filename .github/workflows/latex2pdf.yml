@@ -26,6 +26,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           file_pattern: '*.pdf'
+          commit_message: "autogenerate PDFs"
 
       - name: generate PDF files as artifacts
         uses: actions/upload-artifact@v3
