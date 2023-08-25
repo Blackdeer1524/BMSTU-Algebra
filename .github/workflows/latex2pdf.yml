@@ -1,2 +1,12 @@
-- name: Github Action for LaTeX
-  uses: xu-cheng/latex-action@v2
+name: latex2pdf 
+on: [push]
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          node-version: '14'
+      - name: Github Action for LaTeX
+        uses: xu-cheng/latex-action@v2
+
