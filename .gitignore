@@ -3,7 +3,8 @@
 !.github/**
 
 # Файлы проекта: 
-!AlgebraLL3.tex
+!*.tex
+!*.pdf
 
 !README.md
 !.gitignore

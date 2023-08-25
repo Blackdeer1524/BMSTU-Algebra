@@ -7,6 +7,10 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v3
@@ -19,11 +23,8 @@ jobs:
 
       - name: Add & Commit
         if: github.event_name == 'push'
-        run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "github-actions"
-          git add -f "*.pdf"
-          git commit -m 'commit PDFs'
+        uses: stefanzweifel/git-auto-commit-action@v4
+        file_pattern: '*.pdf'
 
       - name: generate PDF files as artifacts
         uses: actions/upload-artifact@v3
