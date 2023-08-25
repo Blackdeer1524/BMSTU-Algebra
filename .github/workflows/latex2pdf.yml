@@ -22,7 +22,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
-          git add "*.pdf"
+          git add -f "*.pdf"
           git commit -m 'commit PDFs'
 
       - name: generate PDF files as artifacts
